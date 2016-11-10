@@ -30,6 +30,7 @@ public class Bill extends HttpServlet {
 	        float cost = Float.parseFloat(request.getParameter("cost"));
 	        
 	        // Add Product
+            JSONObject obj = new JSONObject();
 	        try {
 	            Class.forName("com.mysql.jdbc.Driver") ;
 	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "") ;
@@ -37,25 +38,27 @@ public class Bill extends HttpServlet {
 	            String query = "Insert into product value(" + productId + ", '" + name + "', " + cost +")";
 	            stmt.execute(query) ;
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	            obj.put("Message","Error");
+                response.getWriter().print(obj);
 	        }
 	    } else if (op.equals("getProduct")) {
 	        int pid = Integer.parseInt(request.getParameter("pid"));
-	        
+            JSONObject obj = new JSONObject();
+
 	        try {
                 Class.forName("com.mysql.jdbc.Driver") ;
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "") ;
                 Statement stmt = conn.createStatement() ;
                 String query = "select * from product where productId = " + pid;
                 ResultSet rs = stmt.executeQuery(query) ;
-                JSONObject obj = new JSONObject();
                 if (rs.next())  {
                     obj.put("name", rs.getString(2));
                     obj.put("cost", rs.getFloat(3));
                 }
                 response.getWriter().print(obj);
             } catch (Exception e) {
-                e.printStackTrace();
+                obj.put("Message","Error");
+                response.getWriter().print(obj);
             }
 	    }
 	    

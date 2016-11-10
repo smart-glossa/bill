@@ -1,18 +1,40 @@
 
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bill Soft</title>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/list.js"></script>
-        <script type="text/javascript" src="js/bill.js"></script>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-        <input type=text id="pId"><br>
-        <input type=text id="pName"><br>
-        <input type=text id="cost"><br>
-        <input type=submit value=submit id="submit">
-    </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Bill Soft</title>
+<link rel="stylesheet" href="css/bill.css">
+<script type="text/javascript" src="js/external/jquery.js"></script>
+<script type="text/javascript" src="js/list.js"></script>
+<script type="text/javascript" src="js/bill.js"></script>
+</head>
+<body>
+	<h1 class="h1">BILLING SOFTWARE</h1>
+	<div class="addProduct">
+		<h3 class="h2">Add Product</h3>
+		<label>ProductId:</label> <input type=text id="pId" class="add"><br>
+		<label>Product Name:</label> <input type=text id="pName" class="add"><br>
+		<label>Cost:</label> <input type=text id="cost" class="add"><br>
+		<input type=submit value=submit id="submit">
+	</div>
+	<h3 class="bill">Billing</h3>
+	<h4>
+		<label>ProductId
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			ProductName
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Quantity
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Cost
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</label>
+	</h4>
+	<div class="total">
+		<h1>Bill Total</h1>
+		<h2>0</h2>
+	</div>
+	<script>
+		calculateBillAmount()
+	</script>
+</body>
 </html>
