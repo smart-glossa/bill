@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	addNewLine();
+	displayProducts();
 	$(document).on("click", "#submit", function(){
 		var pId = $('#pId').val();
 		var pName = $('#pName').val();
@@ -41,6 +42,7 @@ $(document).ready(function(){
 		.fail(function(result){
 			console.log(result);
 		});
+		displayProducts();
 	});
 	
 	$(document).on("click", ".nextLine", function(){
@@ -151,6 +153,23 @@ $(document).ready(function(){
 		})
 		.fail(function(result){
 			console.log(result);
+		});
+		displayProducts();
+	})
+	
+	$(document).on("click",".productRow",function(){
+		var tag = $(this);
+		var pid = $(this).children(".productId")[0].innerHTML;
+		var url = "/bill/bill?operation=deleteProduct&pid=" + pid
+		$.ajax({
+			url: url,
+			type: 'POST'
+		})
+		.done(function(result) {
+			tag.remove();
+		})
+		.fail(function(result) {
+			console.log("")
 		});
 	})
 	
