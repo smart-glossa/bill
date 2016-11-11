@@ -64,14 +64,14 @@ public class Bill extends HttpServlet {
             }
 	    } else if(op.equals("updateProduct")){
 	    	    int productId = Integer.parseInt(request.getParameter("pid"));
-		        String name = request.getParameter("pname");
+		        String name = request.getParameter("name");
 		        float cost = Float.parseFloat(request.getParameter("cost"));
 		        JSONObject obj = new JSONObject();
 		        try {
 		            Class.forName("com.mysql.jdbc.Driver") ;
 		            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
 		            Statement stmt = conn.createStatement() ;
-		            String query = "Update product set name='" + name + "',cost= '" + cost + "',where productId= " + productId ;
+		            String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId ;
 		            stmt.execute(query) ;
 		        } catch (Exception e) {
 		            obj.put("Message","Error");
