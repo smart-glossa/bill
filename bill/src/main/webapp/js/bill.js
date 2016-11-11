@@ -126,6 +126,33 @@ $(document).ready(function(){
 			$("#submit").click();
 		}
 	})
+	$(document).on("click","#update",function(){
+		var pId = $('#pId').val();
+		var pName = $('#pName').val();
+		var cost = $('#cost').val();
+		var url = "http://localhost:8080/bill/bill?operation=updateProduct&pid="+ pId +"&name=" + pName +"&cost="+ cost ;
+		$.ajax({
+				url: url,
+				type:'POST'})
+		.done(function(result){
+			if(result==""){
+				alert("Updated SuccessFully");
+				$('#pId').val("");
+				$('#pName').val("");
+				$('#cost').val("");
+			}
+			else{
+				result = JSON.parse(result);
+				if(result.Message=="Error"){
+					alert("Error occurs");
+				}
+			}
+			
+		})
+		.fail(function(result){
+			console.log(result);
+		});
+	})
 	
 //	$(document).on("keypress",".lineProduct",function(key){
 //		if(key.which==13){
