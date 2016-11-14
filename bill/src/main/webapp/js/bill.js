@@ -7,17 +7,17 @@ $(document).ready(function(){
 		var cost = $('#cost').val();
 		if(pId==""){
 			alert("Please Enter ProductId");
-			$("#pId").focus();
+			$("#pId").focus().css("outline-color","#ff0000");
 			return;
 		}
 		if(pName==""){
 			alert("Please Enter Product Name");
-			$("#pName").focus();
+			$("#pName").focus().css("outline-color","#ff0000");
 			return;
 		}
 		if(cost==""){
 			alert("Please Enter cost");
-			$("#cost").focus();
+			$("#cost").focus().css("outline-color","ff0000");
 			return;
 		}
 		var url = "http://localhost:8080/bill/bill?operation=addProduct&pid=" + pId +"&pname="+ pName +"&cost="+ cost;
@@ -37,12 +37,12 @@ $(document).ready(function(){
 					alert("Error occurs");
 				}
 			}
-			
+			displayProducts();
+
 		})
 		.fail(function(result){
 			console.log(result);
 		});
-		displayProducts();
 	});
 	
 	$(document).on("click", ".nextLine", function(){
@@ -56,7 +56,11 @@ $(document).ready(function(){
 		
 	});
 	
-	$(document).on("keyup", ".pid", function() {
+	$(document).on("keyup", ".pid", function(key) {
+		if(key.which==39){
+			$(".quantity").focus();
+		}
+		
 		if ($(this).val()=="") {
 			var div = $(this).parent();
 			div.children(".pname").val("")
@@ -90,13 +94,26 @@ $(document).ready(function(){
 		})
 	});
 	
-	$(document).on("keyup", ".quantity", function() {
+	$(document).on("keyup", ".quantity", function(key) {
+		if(key.which==37){
+			$(".pid").focus();
+		}
 		var div = $(this).parent();
+		if(key.which==13){
+			div.children(".nextLine").click();
+		}
+		if(key.which==40){
+			div.next().children(".quantity").focus();
+		}
+		if(key.which==38){
+			div.prev().children(".quantity").focus();
+		}
 		var a = div.children(".quantity").val();
 		var b = div.children(".pcost").val();
 		var c = a * b;
 		div.children(".lineTotal").val(c);
 		calculateBillAmount();
+		
 	})
 	$(document).on("keyup", "#pId", function(){
 		var pId = $('#pId').val();
@@ -171,6 +188,9 @@ $(document).ready(function(){
 		.fail(function(result) {
 			console.log("")
 		});
+	})
+	$(document).on("keyup","#cash",function(){
+		balanceAmount();
 	})
 	
 //	$(document).on("keypress",".lineProduct",function(key){

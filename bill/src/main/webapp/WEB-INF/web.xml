@@ -8,9 +8,31 @@
     	<servlet-name>Bill</servlet-name>
     	<servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>ticket</display-name>
+    	<servlet-name>ticket</servlet-name>
+    	<servlet-class>com.smartglossa.bill.ticket</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Ticket</display-name>
+    	<servlet-name>Ticket</servlet-name>
+    	<servlet-class>com.smartglossa.bill.Ticket</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Bill</servlet-name>
     	<url-pattern>/bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Ticket</servlet-name>
+    	<url-pattern>/ticket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Ticket</servlet-name>
+    	<url-pattern>/Ticket</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

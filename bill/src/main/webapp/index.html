@@ -12,12 +12,17 @@
 <body>
 	<h1 class="h1">BILLING SOFTWARE</h1>
 	<div class="addProduct">
+	<center>
 		<h3 class="h2">Add Product</h3>
-		<label>ProductId:</label> <input type=text id="pId" class="add"><br>
-		<label>Product Name:</label> <input type=text id="pName" class="add"><br>
-		<label>Cost:</label> <input type=text id="cost" class="add"><br>
-		<input type=submit value=submit id="submit">
-		<input type=submit value=update id="update">
+		
+		<table class="Product">
+		<tr><td><label>ProductId:</label></td><td> <input type=text id="pId" class="add"></td></tr>
+		<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>
+		<tr><td><label>Cost:</label></td><td> <input type=text id="cost" class="add"></td></tr>
+		<tr><td><td><input type=submit value=submit id="submit">
+		<input type=submit value=update id="update"></td></tr>
+		</table>
+		</center>
 	</div>
 	<h3 class="bill">Billing</h3>
 	<h4>
@@ -33,6 +38,11 @@
 	<div class="total">
 		<h1>Bill Total</h1>
 		<h2>0</h2>
+		<h1>Payment</h1>
+	<table>
+		<tr><td><label>Cash:</label></td><td><input type=text id="cash"></td></tr>
+		<tr><td><label>Balance:</label></td><td><input type=text id="balance"></td></tr>
+		</table>
 	</div>
 	<script>
 		calculateBillAmount()

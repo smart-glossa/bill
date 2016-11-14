@@ -20,6 +20,15 @@ function calculateBillAmount() {
 		sum += parseInt($($("div.lineProduct")[i]).find(".lineTotal").val());
 	}
 	$("h2").text(sum);
+	return sum;
+}
+function balanceAmount(sum){
+	var sum = $("h2").text();
+	var balance=0;
+	var cash = $("#cash").val();
+	Balance = cash-sum;
+	$("#balance").val(Balance);
+	
 }
 
 function displayProducts() {
