@@ -24,7 +24,7 @@ public class Bill extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String op = request.getParameter("operation");
-	    String password = "";
+	    String password = "root";
 	    
 	    if (op.equals("addProduct")) {
 	        int productId = Integer.parseInt(request.getParameter("pid"));
