@@ -11,6 +11,7 @@ input[type=text]{
 .h1{
 	text-align:center;
 	background-color:crimson;
+	font-family:serif;
 }
 .Product{
 	align:center;
@@ -20,6 +21,7 @@ input[type=text]{
 }
 .total{
 	float:right;
+	background-color:crimson;
 }
 
 input[type=submit]{
