@@ -43,10 +43,12 @@ $(document).ready(function() {
         });
     });
     $(document).on("click", ".nextLine", function() {
-        if ($(this).attr("value") === "next") {
-            $(this).attr("value", "X");
+    	var deleteURL = "http://images.all-free-download.com/images/graphiclarge/round_red_close_button_5095.jpg";
+        if ($(this).attr("alt") === "next") {
+            $(this).attr("src", deleteURL);
+            $(this).attr("alt", "delete")
             addNewLine();
-        } else if ($(this).attr("value") === "X") {
+        } else if ($(this).attr("alt") === "delete") {
             $(this).parent().remove();
             calculateBillAmount();
             balanceAmount();
@@ -196,9 +198,9 @@ $(document).ready(function() {
 
     })
 
-    $(document).on("click", ".productRow", function() {
-        var tag = $(this);
-        var pid = $(this).children(".productId")[0].innerHTML;
+    $(document).on("click", ".deleteProduct", function() {
+        var tag = $(this).parent().parent();
+        var pid = tag.children(".productId")[0].innerHTML;
         var url = "/bill/bill?operation=deleteProduct&pid=" + pid;
         $.ajax({
             url: url,

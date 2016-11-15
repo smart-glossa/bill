@@ -1,4 +1,5 @@
 function addNewLine() {
+	var nextURL = "http://copasi.org/images/next.png";
 	var div = document.createElement("div");
 	div.className = 'lineProduct';
 	div.innerHTML = "<input type=text class='pid'>"
@@ -6,7 +7,7 @@ function addNewLine() {
 			+ "<input type=text class='quantity'>"
 			+ "<input type=text class='pcost' readonly>"
 			+ "<input type=text class='lineTotal' value=0 readonly>"
-			+ "<input type=submit value='next' class='nextLine'>";
+			+ "<img class='nextLine' alt='next' width='25px' height='25px' src='" + nextURL + "'/>";
 
 	$(".billing")[0].appendChild(div);
 	calculateBillAmount();
@@ -35,6 +36,7 @@ function balanceAmount() {
 }
 function displayProducts() {
 	var url = "/bill/bill?operation=getAllProduct";
+	var imgURL = "http://images.all-free-download.com/images/graphiclarge/round_red_close_button_5095.jpg";
 	$.ajax({
 				url : url,
 				type : 'POST'
@@ -49,6 +51,7 @@ function displayProducts() {
 									+ array[i].productId + "</td>";
 							query += "<td>" + array[i].name + "</td>";
 							query += "<td>" + array[i].cost + "</td>";
+							query += "<td> <img class='deleteProduct' src='" + imgURL + "' width='25px' height='25px'/></td></tr>"
 						}
 						query += "</table>"
 						$(".displayAll")[0].innerHTML = query;
