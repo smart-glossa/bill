@@ -206,7 +206,11 @@ $(document).ready(function() {
         });
     })
     $(document).on("keyup", "#cash", function() {
-        balanceAmount();
+    	if($(this).val().trim()===""){
+    		$("#balance").val("");
+    	} else {
+            balanceAmount();
+    	}
     })
 
     // $(document).on("keypress",".lineProduct",function(key){

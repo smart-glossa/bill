@@ -25,8 +25,8 @@ function balanceAmount() {
 	var sum = $("h2").text();
 	var balance = 0;
 	var cash = $("#cash").val();
-	Balance = cash - sum;
-	$("#balance").val(Balance);
+	balance = cash - sum;
+	$("#balance").val(balance);
 
 }
 function displayProducts() {
