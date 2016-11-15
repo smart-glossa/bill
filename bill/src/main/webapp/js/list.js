@@ -24,15 +24,18 @@ function calculateBillAmount() {
 function balanceAmount() {
 	var sum = $("h2").text();
 	var balance = 0;
+	if($("#cash").val().trim()==""){
+		$("#balance").val("");
+	}else{
 	var cash = $("#cash").val();
 	balance = cash - sum;
 	$("#balance").val(balance);
+	}
 
 }
 function displayProducts() {
 	var url = "/bill/bill?operation=getAllProduct";
-	$
-			.ajax({
+	$.ajax({
 				url : url,
 				type : 'POST'
 			})

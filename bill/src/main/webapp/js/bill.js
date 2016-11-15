@@ -66,6 +66,7 @@ $(document).ready(function() {
            div.children(".pcost").val("");
            div.children(".lineTotal").val(0);
            calculateBillAmount();
+           balanceAmount();
        }
        
        
@@ -82,6 +83,7 @@ $(document).ready(function() {
                     div.children(".pcost").val("");
                     div.children(".lineTotal").val(0);
                     calculateBillAmount();
+                    balanceAmount();
                     return false;
                 }else{
                 	 var pname = result.name;
@@ -94,6 +96,7 @@ $(document).ready(function() {
                      var c = a * b;
                      div.children(".lineTotal").val(c);
                      calculateBillAmount();
+                     balanceAmount();
                 }
                
             })
@@ -118,6 +121,7 @@ $(document).ready(function() {
         var c = a * b;
         div.children(".lineTotal").val(c);
         calculateBillAmount();
+        balanceAmount();
 
     })
     $(document).on("keyup", "#pId", function() {
