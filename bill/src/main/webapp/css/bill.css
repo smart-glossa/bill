@@ -61,10 +61,27 @@ input[type=text]{
 	  
 	
 }
+.pname,.quantity,.pcost,.linetotal,.nextline{
+	margin-left:10px;
+}
+.nextline{
+	margin-top:10px;
+}
+
+body{
+	background-color:crimson;
+}
+
 .nextline{
 	background-color:crimson;
-	color:black;
+	font-color:black;
 	border-radius:20px;
+ animation: m 1s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes m {
+    50% {box-shadow: 10px 10px 30px white;}
 }
 .total{
 	float:right;
@@ -76,7 +93,7 @@ input[type=text]{
 }
 .lineproduct{
 	background-color:crimson;
-	width:80%;
+	
 	border-radius:10px;
 }
 
