@@ -42,7 +42,6 @@ $(document).ready(function() {
             console.log(result);
         });
     });
-
     $(document).on("click", ".nextLine", function() {
         if ($(this).attr("value") === "next") {
             $(this).attr("value", "X");
@@ -50,25 +49,26 @@ $(document).ready(function() {
         } else if ($(this).attr("value") === "X") {
             $(this).parent().remove();
             calculateBillAmount();
+            balanceAmount();
         }
 
     });
+   
 
     $(document).on("keyup", ".pid", function(key) {
-        if (key.which == 39) {
+       if (key.which == 39) {
             $(".quantity").focus();
         }
-
-        if ($(this).val() == "") {
-            var div = $(this).parent();
-            div.children(".pname").val("")
-            div.children(".quantity").val("");
-            div.children(".pcost").val("");
-            div.children(".lineTotal").val(0);
-            calculateBillAmount();
-
-        }
-        var div = $(this).parent();
+       var div = $(this).parent();
+       if($(this).val()==""){
+    	   div.children(".pname").val("")
+           div.children(".quantity").val("");
+           div.children(".pcost").val("");
+           div.children(".lineTotal").val(0);
+           calculateBillAmount();
+       }
+       
+       
         var getProductUrl = "/bill/bill?operation=getProduct&pid=" + $(this).val();
         $.ajax({
                 url: getProductUrl,
@@ -77,18 +77,25 @@ $(document).ready(function() {
             .done(function(result) {
                 result = JSON.parse(result);
                 if (jQuery.isEmptyObject(result)) {
-                    return;
+                	div.children(".pname").val("")
+                    div.children(".quantity").val("");
+                    div.children(".pcost").val("");
+                    div.children(".lineTotal").val(0);
+                    calculateBillAmount();
+                    return false;
+                }else{
+                	 var pname = result.name;
+                     var pcost = result.cost;
+                     div.children(".pname").val(pname)
+                     div.children(".quantity").val(1);
+                     div.children(".pcost").val(pcost)
+                     var a = div.children(".quantity").val();
+                     var b = div.children(".pcost").val();
+                     var c = a * b;
+                     div.children(".lineTotal").val(c);
+                     calculateBillAmount();
                 }
-                var pname = result.name;
-                var pcost = result.cost;
-                div.children(".pname").val(pname)
-                div.children(".quantity").val(1);
-                div.children(".pcost").val(pcost)
-                var a = div.children(".quantity").val();
-                var b = div.children(".pcost").val();
-                var c = a * b;
-                div.children(".lineTotal").val(c);
-                calculateBillAmount();
+               
             })
     });
 
