@@ -6,22 +6,78 @@ input[type=text]{
     box-shadow: inset 1px 1px 2px 0 #707070;
     transition: box-shadow 0.3s;
     font-size: 20px;
-    
+    border-radius:20px;
+    margin-top:5px;
 }
 .h1{
 	text-align:center;
 	background-color:crimson;
 	font-family:serif;
+	font-size:40px;
+	border-radius:20px;
 }
 .Product{
 	align:center;
+	background-color:crimson;
 }
 .addProduct{
 	text-align:center;
+	background-color:crimson;
+	border-radius:20px;
+	width:500px;
+	height:270px;
+	margin-left:200px;
+}
+#submit{
+	background-color:crimson;
+	color:black;
+	border-radius:20px;
+	margin-top:15px;
+	  animation: mymove 1s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    50% {box-shadow: 10px 10px 30px white;}
+}
+
+#update{
+	background-color:crimson;
+	color:black;
+	border-radius:20px;
+	margin-top:15px;
+	margin-left:10px;
+	  animation: my 1s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes my {
+    50% {box-shadow: 10px 10px 30px white;}
+}
+.displayAll{
+	background-color:crimson;
+	width:270px;
+	margin-left:500px;
+	  
+	
+}
+.nextline{
+	background-color:crimson;
+	color:black;
+	border-radius:20px;
 }
 .total{
 	float:right;
 	background-color:crimson;
+	font-weight: bolder;
+  font-family: serif;
+  border-radius:10px;
+ 
+}
+.lineproduct{
+	background-color:crimson;
+	width:80%;
+	border-radius:10px;
 }
 
 input[type=submit]{
