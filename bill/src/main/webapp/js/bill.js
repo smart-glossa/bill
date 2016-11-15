@@ -45,6 +45,10 @@ $(document).ready(function() {
     $(document).on("click", ".nextLine", function() {
     	var deleteURL = "http://images.all-free-download.com/images/graphiclarge/round_red_close_button_5095.jpg";
         if ($(this).attr("alt") === "next") {
+        	if ($($(this).parent().children(".pid")[0]).val().trim()==="") {
+        		return;
+        	}
+        	//checkAndRemoveDuplicate($(this).parent());
             $(this).attr("src", deleteURL);
             $(this).attr("alt", "delete")
             addNewLine();
@@ -110,7 +114,7 @@ $(document).ready(function() {
         }
         var div = $(this).parent();
         if (key.which == 13) {
-            div.children(".nextLine").click();
+        	checkAndRemoveDuplicate(div);
         }
         if (key.which == 40) {
             div.next().children(".quantity").focus();
@@ -126,6 +130,7 @@ $(document).ready(function() {
         balanceAmount();
 
     })
+    
     $(document).on("keyup", "#pId", function() {
         var pId = $('#pId').val();
         if (pId != "") {

@@ -61,3 +61,40 @@ function displayProducts() {
 			});
 
 }
+
+
+function calculateLineTotal(div){
+	 var a = div.children(".quantity").val();
+    var b = div.children(".pcost").val();
+    var c = a * b;
+    div.children(".lineTotal").val(c);
+    calculateBillAmount();
+    balanceAmount();
+}
+
+function checkAndRemoveDuplicate(div) {
+	var duplicate = false;
+	var currentPidValue = div.children(".pid").val();
+	var currentQuantity = parseInt(div.children(".quantity").val());
+	var parentSiblings = div.siblings();
+	for (var i=0; i< parentSiblings.length; i++){
+		if(currentPidValue === $(parentSiblings[i]).children(".pid").val()) {
+			var siblingQuantity = parseInt($(parentSiblings[i]).children(".quantity").val());
+			var sum= currentQuantity + siblingQuantity;
+			$(parentSiblings[i]).children(".quantity").val(sum);
+			calculateLineTotal($(parentSiblings[i]));
+			duplicate = true;
+			break;
+		}
+	}
+	if (duplicate) {
+		if($(this).attr("class")!=="nextLine") {
+			 div.children(".nextLine").click();
+		}
+   	div.remove();
+	} else {
+		if($(this).attr("class")!=="nextLine") {
+       div.children(".nextLine").click();
+		}
+	}
+}
