@@ -87,14 +87,5 @@ function checkAndRemoveDuplicate(div) {
 			break;
 		}
 	}
-	if (duplicate) {
-		if($(this).attr("class")!=="nextLine") {
-			 div.children(".nextLine").click();
-		}
-   	div.remove();
-	} else {
-		if($(this).attr("class")!=="nextLine") {
-       div.children(".nextLine").click();
-		}
+	return duplicate;
 	}
-}

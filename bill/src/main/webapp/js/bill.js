@@ -48,10 +48,16 @@ $(document).ready(function() {
         	if ($($(this).parent().children(".pid")[0]).val().trim()==="") {
         		return;
         	}
-        	//checkAndRemoveDuplicate($(this).parent());
-            $(this).attr("src", deleteURL);
-            $(this).attr("alt", "delete")
-            addNewLine();
+        	var duplicate = checkAndRemoveDuplicate($(this).parent());
+        	if (duplicate){
+        		$(this).parent().remove();
+        		addNewLine();
+        	} else {
+        		$(this).attr("src", deleteURL);
+                $(this).attr("alt", "delete")
+                addNewLine();
+        	}
+            
         } else if ($(this).attr("alt") === "delete") {
             $(this).parent().remove();
             calculateBillAmount();
@@ -114,7 +120,7 @@ $(document).ready(function() {
         }
         var div = $(this).parent();
         if (key.which == 13) {
-        	checkAndRemoveDuplicate(div);
+               div.children(".nextLine").click();
         }
         if (key.which == 40) {
             div.next().children(".quantity").focus();
