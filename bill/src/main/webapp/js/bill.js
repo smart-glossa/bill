@@ -43,7 +43,7 @@ $(document).ready(function() {
         });
     });
     $(document).on("click", ".nextLine", function() {
-    	var deleteURL = "http://images.all-free-download.com/images/graphiclarge/round_red_close_button_5095.jpg";
+    	var deleteURL = "images/deleteButton.jpg";
         if ($(this).attr("alt") === "next") {
         	if ($($(this).parent().children(".pid")[0]).val().trim()==="") {
         		return;
@@ -68,9 +68,19 @@ $(document).ready(function() {
    
 
     $(document).on("keyup", ".pid", function(key) {
+    	var div = $(this).parent();
        if (key.which == 39) {
-            $(".quantity").focus();
+            div.children(".quantity").focus();
         }
+       if(key.which==13){
+    	   div.children(".nextLine").click();
+       }
+       if (key.which == 40) {
+           div.next().children(".pid").focus();
+       }
+       if (key.which == 38) {
+           div.prev().children(".pid").focus();
+       }
        var div = $(this).parent();
        if($(this).val()==""){
     	   div.children(".pname").val("")
@@ -115,10 +125,10 @@ $(document).ready(function() {
     });
 
     $(document).on("keyup", ".quantity", function(key) {
+    	var div = $(this).parent();
         if (key.which == 37) {
-            $(".pid").focus();
+            div.children(".pid").focus();
         }
-        var div = $(this).parent();
         if (key.which == 13) {
                div.children(".nextLine").click();
         }

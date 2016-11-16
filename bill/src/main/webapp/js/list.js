@@ -1,5 +1,5 @@
 function addNewLine() {
-	var nextURL = "http://copasi.org/images/next.png";
+	var nextURL = "images/nextButton.png";
 	var div = document.createElement("div");
 	div.className = 'lineProduct';
 	div.innerHTML = "<input type=text class='pid'>"
@@ -36,7 +36,7 @@ function balanceAmount() {
 }
 function displayProducts() {
 	var url = "/bill/bill?operation=getAllProduct";
-	var imgURL = "http://images.all-free-download.com/images/graphiclarge/round_red_close_button_5095.jpg";
+	var imgURL = "images/deleteButton.jpg";
 	$.ajax({
 				url : url,
 				type : 'POST'
