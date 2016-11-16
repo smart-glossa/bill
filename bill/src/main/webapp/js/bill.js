@@ -1,7 +1,7 @@
 $(document).ready(function() {
     addNewLine();
     displayProducts();
-    $(document).on("click", "#submit", function() {
+    $(document).on("click", "#submit", function(key) {
         var pId = $('#pId').val();
         var pName = $('#pName').val();
         var cost = $('#cost').val();
@@ -239,11 +239,31 @@ $(document).ready(function() {
             balanceAmount();
     	}
     })
-
-    // $(document).on("keypress",".lineProduct",function(key){
-    // if(key.which==13){
-    // $(".nextLine").click();
-    // }
-    // })
-
+    $(document).on("keyup","#pId",function(key){
+    	var td = $(this).parent();
+    	var tr = td.parent();
+    	if (key.which == 40) {
+            tr.next().children().children("#pName").focus();
+        }
+    })
+     $(document).on("keyup","#pName",function(key){
+    	var td = $(this).parent();
+    	var tr = td.parent();
+    	if (key.which == 40) {
+            tr.next().children().children("#cost").focus();
+        }
+    	if(key.which == 38){
+    		tr.prev().children().children("#pId").focus();
+    	}
+    })
+    $(document).on("keyup","#cost",function(key){
+    	var td = $(this).parent();
+    	var tr = td.parent();
+    	if (key.which == 38) {
+            tr.prev().children().children("#pName").focus();
+        }
+    	if (key.which == 40) {
+            tr.next().children().children("#submit").focus();
+        }
+    })
 });
