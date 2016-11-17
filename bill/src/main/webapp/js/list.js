@@ -72,6 +72,7 @@ function calculateLineTotal(div){
     balanceAmount();
 }
 
+
 function checkAndRemoveDuplicate(div) {
 	var duplicate = false;
 	var currentPidValue = div.children(".pid").val();
@@ -89,3 +90,19 @@ function checkAndRemoveDuplicate(div) {
 	}
 	return duplicate;
 	}
+function printPreview(){
+	var div = document.createElement("div");
+	div.className = 'printPreview';
+	var table = "<table>"
+	    table += "<tr><th>Serial Number</th><th>Product Name</th><th>Quantity</th><th>cost</th><th>Total<th></tr>"
+	    table += "</table>";	
+	$(".printPreview").innerHTML = table;
+	//body.appendchild(div);
+	 var printWindow = window.open('', '', 'height=400,width=800');
+     //printWindow.document.write('<html><head><title>BILLING</title>');
+     //printWindow.document.write('</head><body >');
+    // printWindow.document.write('<div class="printPreview"></div>');
+     //printWindow.document.write('</body></html>');
+     //printWindow.document.close();
+     $(".printPreview").print();
+}

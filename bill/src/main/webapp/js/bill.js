@@ -266,4 +266,7 @@ $(document).ready(function() {
             tr.next().children().children("#submit").focus();
         }
     })
+    $(document).on("click","#print",function(){
+    	printPreview();
+    })
 });
