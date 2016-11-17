@@ -93,15 +93,41 @@ function checkAndRemoveDuplicate(div) {
 	}
 	return duplicate;
 }
-function printPreview() {
+function previewBillReceipt() {
 	var printWindow = window.open('', '', 'height=400,width=800');
-	printWindow.document.write('<html><head><title>BILLING</title>');
-	printWindow.document.write('</head><body >');
-	printWindow.document.write('<div>');
-	printWindow.document.write("<table>");
-	printWindow.document.write("<tr><th>Serial Number</th><th>Product Name</th><th>Quantity</th><th>cost</th><th>Total<th></tr>");
-	printWindow.document.write("</table></div>");
-	printWindow.document.write('</body></html>');
+	printWindow.document.write(getBillDetails());
 	printWindow.document.close();
 	printWindow.focus();
+}
+
+function getBillDetails() {
+	var htmlFile = "";
+	htmlFile += '<html><head><title>RECEIPT</title>';
+	htmlFile += '</head><body >';
+	htmlFile += "<center><h3>SMARTGLOSSA RESTAURANT<br>Chennai<br>Website: www.smartglossa.com</h3> </center>";
+	htmlFile += '<center><div>';
+	htmlFile += "<table>";
+	htmlFile += "<tr><th>Serial Number</th><th>Product Name</th><th>Quantity</th><th>cost</th><th>Total<th></tr>";
+	var lineProducts = $(".billing")[0].children;
+	for (var i = 0; i < lineProducts.length; i++) {
+		var div = $(lineProducts[i]);
+		if ($(div.children(".pid")[0]).val().trim() !== "") {
+			var sno = i + 1;
+			var row = "<tr><td>" + sno + "</td>"
+			row += "<td>" + $(div.children(".pname")[0]).val() + "</td>";
+			row += "<td>" + $(div.children(".quantity")[0]).val() + "</td>";
+			row += "<td>" + $(div.children(".pcost")[0]).val() + "</td>";
+			row += "<td>" + $(div.children(".lineTotal")[0]).val() + "</td>";
+			row += "</tr>";
+			htmlFile += row;
+		}
+	}
+	row = "<td></td><td></td><td></td><td><b>Total</b></td><td>" + $("h2").text() + "</td>"
+    htmlFile += row;
+	htmlFile += "";
+	htmlFile += "</table></div></center>";
+	htmlFile += "<center><input type='submit' value='PRINT' onclick='window.print()'>";
+	htmlFile += "<input type='submit' value='CANCEL' onclick='window.close()'></center>";
+	htmlFile += '</body></html>';
+	return htmlFile;
 }
