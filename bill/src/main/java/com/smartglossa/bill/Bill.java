@@ -111,12 +111,52 @@ public class Bill extends HttpServlet {
                 obj.put("Message","Error");
                 response.getWriter().print(obj);
             }
+	    }else if (op.equals("addUser")) {
+	    	String name = request.getParameter("name");
+	        String uname = request.getParameter("uname");
+	        String pass = request.getParameter("pass");
+	        
+	        // Add Product
+            JSONObject obj = new JSONObject();
+	        try {
+	            Class.forName("com.mysql.jdbc.Driver") ;
+	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
+	            Statement stmt = conn.createStatement() ;
+	            String query = "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass +"')";
+	            stmt.execute(query) ;
+	        } catch (Exception e) {
+	            obj.put("Message","Error");
+                response.getWriter().print(obj);
+	        }
+	    }
+	    else if (op.equals("login")) {
+	        String uname = request.getParameter("user");
+	        String pass = request.getParameter("passw");
+	        
+	        // Add Product
+            JSONObject obj = new JSONObject();
+	        try {
+	            Class.forName("com.mysql.jdbc.Driver") ;
+	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
+	            Statement stmt = conn.createStatement() ;
+	            String query = "select name from user where uname='"+ uname +"'AND pass='"+ pass +"'";
+	            ResultSet rs = stmt.executeQuery(query) ;
+	            if(rs.next()){
+	            	obj.put("name", rs.getString(1));
+	            	obj.put("Status", "success");
+	            }
+	            response.getWriter().print(obj);
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	            obj.put("Message","Error");
+                response.getWriter().print(obj);
+	        }
 	    }
 	    
 	   
 	    
-	}
+	    }
 
-   
+	} 
 
-}
+

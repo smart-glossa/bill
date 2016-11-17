@@ -6,50 +6,22 @@
 <title>Bill Soft</title>
 <link rel="stylesheet" href="css/bill.css">
 <script type="text/javascript" src="js/external/jquery.js"></script>
-<script type="text/javascript" src="js/list.js"></script>
-<script type="text/javascript" src="js/bill.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
 </head>
 <body>
-	<h1 class="h1">BILLING SOFTWARE</h1>
-	<div class="addProduct">
-	<center>
-		<h3 class="h2">Add Product</h3>
-		
-		<table class="Product">
-		<tr><td><label>ProductId:</label></td><td> <input type=text id="pId" class="add"></td></tr>
-		<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>
-		<tr><td><label>Cost:</label></td><td> <input type=text id="cost" class="add"></td></tr>
-		<tr><td></td><td><input type=submit value=submit id="submit">
-		<input type=submit value=update id="update"></td></tr>
-		</table>
-		</center>
+	<div>
+	   <h2>SIGNUP</h2>
+	   <input type=text id=name class=input><br>
+	   <input type=text id=uname class=input><br>
+	   <input type=text id=pass class=input><br>
+	   <input type=submit value=signup id="signup">
 	</div>
-	<h3 class="bill">Billing</h3>
-	<h4>
-		<label>ProductId
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			ProductName
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			Quantity
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			Cost
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</label>
-	</h4>
-	<div class="total">
-		<h1>Bill Total</h1>
-		<h2>0</h2>
-		<h1>Payment</h1>
-	<table>
-		<tr><td><label>Cash:</label></td><td><input type=text id="cash"></td></tr>
-		<tr><td><label>Balance:</label></td><td><input type=text id="balance" readonly></td></tr>
-		</table>
+	<div> 
+	    <h2>SIGNIN</h2>
+	    <input type=text id=user class=input><br>
+	    <input type=text id=passw class=input><br>
+	    <input type=submit value=Login id="login">
+	    
 	</div>
-	<script>
-		calculateBillAmount()
-	</script>
-	<div class="billing"></div>
-	<input type=button value="print" id="print">
-	<h3 class="bill">Display Products</h3>
-	<div class="displayAll"></div>
 </body>
 </html>
