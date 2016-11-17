@@ -58,6 +58,7 @@ $(document).on("click", "#signup", function(key) {
             }).done(function(result) {
             	result = JSON.parse(result);
                 if (result.Status == "success") {
+                	document.cookie = "uname=" + user; 
                 	 window.location.href = 'home.html';
                 } else {
                     result = JSON.parse(result);
