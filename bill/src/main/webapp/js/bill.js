@@ -1,6 +1,9 @@
 $(document).ready(function() {
-    addNewLine();
-    displayProducts();
+    $(document).on("click", "#logout", function(){
+    	document.cookie = 'uname=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    	window.location.href = '/bill/';
+    });
+    
     $(document).on("click", "#submit", function(key) {
         var pId = $('#pId').val();
         var pName = $('#pName').val();
@@ -20,7 +23,7 @@ $(document).ready(function() {
             $("#cost").focus().css("outline-color", "ff0000");
             return;
         }
-        var url = "http://localhost:8080/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
+        var url = "/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
         $.ajax({
             url: url,
             type: 'POST'
@@ -36,8 +39,8 @@ $(document).ready(function() {
                     alert("Error occurs");
                 }
             }
-            displayProducts();
-
+            $(".displayAll").remove();
+            $("body")[0].appendChild(displayProducts());
         }).fail(function(result) {
             console.log(result);
         });
@@ -195,7 +198,7 @@ $(document).ready(function() {
             $("#cost").focus().css("outline-color", "ff0000");
             return;
         }
-        var url = "http://localhost:8080/bill/bill?operation=updateProduct&pid=" + pId + "&name=" + pName + "&cost=" + cost;
+        var url = "/bill/bill?operation=updateProduct&pid=" + pId + "&name=" + pName + "&cost=" + cost;
         $.ajax({
                 url: url,
                 type: 'POST'
@@ -212,10 +215,12 @@ $(document).ready(function() {
                         alert("Error occurs");
                     }
                 }
-                displayProducts();
+                $(".displayAll").remove();
+                $("body")[0].appendChild(displayProducts());
             }).fail(function(result) {
                 console.log(result);
             });
+       
 
     })
 
@@ -268,6 +273,24 @@ $(document).ready(function() {
     })
     $(document).on("click","#print",function(){
     	previewBillReceipt();
-    })
+    });
+    
+    $(document).on("click", "#billMenu", function(){
+    	var productMenu = $("#productMenu");
+    	productMenu.removeClass();
+    	$(this).addClass("active");
+    	$(".mainArea").empty();
+		$(".mainArea")[0].appendChild(billing());
+		addNewLine();
+    });
+    
+    $(document).on("click", "#productMenu", function(){
+    	var productMenu = $("#billMenu");
+    	productMenu.removeClass();
+    	$(this).addClass("active");
+    	$(".mainArea").empty();
+    	$(".mainArea")[0].appendChild(product());
+		$(".mainArea")[0].appendChild(displayProducts());
+    });
     
 });
