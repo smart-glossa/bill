@@ -40,7 +40,7 @@ $(document).ready(function() {
                 }
             }
             $(".displayAll").remove();
-            $("body")[0].appendChild(displayProducts());
+            $(".mainArea")[0].appendChild(displayProducts());
         }).fail(function(result) {
             console.log(result);
         });
@@ -216,7 +216,7 @@ $(document).ready(function() {
                     }
                 }
                 $(".displayAll").remove();
-                $("body")[0].appendChild(displayProducts());
+                $(".mainArea")[0].appendChild(displayProducts());
             }).fail(function(result) {
                 console.log(result);
             });

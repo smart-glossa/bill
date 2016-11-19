@@ -220,7 +220,7 @@ function menu() {
 	var div = document.createElement("div");
 	div.className = "menuBar";
 	var strVar="";
-	strVar += "<img src=\"http:\/\/levelpressink.com\/wp-content\/uploads\/2015\/08\/billing-icon-1000x1191-49295.png\" alt=\"logo\" style=\"float:left\" width=70px height=70px>";
+	strVar += "<img src='images/sample-logo.png' alt=\"logo\" style=\"float:left\" width=70px height=70px>";
 	strVar += "<br>";
 	strVar += "<ul>";
 	strVar += "  <li><a class=\"active\" id='productMenu'>Products<\/a><\/li>";
