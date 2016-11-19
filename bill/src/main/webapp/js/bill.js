@@ -89,9 +89,8 @@ $(document).ready(function() {
            div.children(".lineTotal").val(0);
            calculateBillAmount();
            balanceAmount();
+           return;
        }
-       
-       
         var getProductUrl = "/bill/bill?operation=getProduct&pid=" + $(this).val();
         $.ajax({
                 url: getProductUrl,
@@ -265,9 +264,6 @@ $(document).ready(function() {
     	if (key.which == 40) {
             tr.next().children().children("#submit").focus();
         }
-    })
-    $(document).on("click","#print",function(){
-    	previewBillReceipt();
     })
     
 });
