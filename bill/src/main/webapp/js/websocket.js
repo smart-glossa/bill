@@ -5,8 +5,10 @@ ws.onopen = function() {
 
 ws.onmessage = function(message) {
 	if (message.data === "product") {
-		$(".displayAll").remove();
-		$(".mainArea")[0].appendChild(displayProducts());
+		if ($(".displayAll").length > 0) {
+			$(".displayAll").remove();
+			$(".mainArea")[0].appendChild(displayProducts());
+		}
 	}
 };
 
