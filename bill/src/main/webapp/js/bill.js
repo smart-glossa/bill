@@ -33,14 +33,16 @@ $(document).ready(function() {
                 $('#pId').val("");
                 $('#pName').val("");
                 $('#cost').val("");
+                postToServer("product");
+                $(".displayAll").remove();
+                $(".mainArea")[0].appendChild(displayProducts());
             } else {
                 result = JSON.parse(result);
                 if (result.Message == "Error") {
                     alert("Error occurs");
                 }
             }
-            $(".displayAll").remove();
-            $(".mainArea")[0].appendChild(displayProducts());
+            
         }).fail(function(result) {
             console.log(result);
         });
@@ -209,14 +211,16 @@ $(document).ready(function() {
                     $('#pId').val("");
                     $('#pName').val("");
                     $('#cost').val("");
+                    postToServer("product");
+                    $(".displayAll").remove();
+                    $(".mainArea")[0].appendChild(displayProducts());
                 } else {
                     result = JSON.parse(result);
                     if (result.Message == "Error") {
                         alert("Error occurs");
                     }
                 }
-                $(".displayAll").remove();
-                $(".mainArea")[0].appendChild(displayProducts());
+                
             }).fail(function(result) {
                 console.log(result);
             });
@@ -233,6 +237,7 @@ $(document).ready(function() {
             type: 'POST'
         }).done(function(result) {
             tag.remove();
+            postToServer("product");
         }).fail(function(result) {
             console.log("")
         });
