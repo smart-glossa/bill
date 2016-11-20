@@ -75,11 +75,28 @@ $(document).ready(function() {
 
     $(document).on("keyup", ".pid", function(key) {
     	var div = $(this).parent();
+    	
+    	if($(this).val()==""){
+     	   div.children(".pname").val("")
+            div.children(".quantity").val("");
+            div.children(".pcost").val("");
+            div.children(".lineTotal").val(0);
+            calculateBillAmount();
+            balanceAmount();
+            return;
+        }
        if (key.which == 39) {
             div.children(".quantity").focus();
         }
        if(key.which==13){
-    	   div.children(".nextLine").click();
+    	   var name = div.children(".pname").val();
+       	   var cost = div.children(".pcost").val();
+    	   if(name==""||cost==""){
+    		   return;
+    	   }else{
+    		   div.children(".nextLine").click();
+    	   }
+    			   
        }
        if (key.which == 40) {
            div.next().children(".pid").focus();
@@ -87,17 +104,6 @@ $(document).ready(function() {
        if (key.which == 38) {
            div.prev().children(".pid").focus();
        }
-       var div = $(this).parent();
-       if($(this).val()==""){
-    	   div.children(".pname").val("")
-           div.children(".quantity").val("");
-           div.children(".pcost").val("");
-           div.children(".lineTotal").val(0);
-           calculateBillAmount();
-           balanceAmount();
-       }
-       
-       
         var getProductUrl = "/bill/bill?operation=getProduct&pid=" + $(this).val();
         $.ajax({
                 url: getProductUrl,
