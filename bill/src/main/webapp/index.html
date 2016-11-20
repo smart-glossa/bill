@@ -15,15 +15,21 @@
 <body>
 	<div class="mainArea">
 	   <h2>SIGNUP</h2>
-	   <input type=text id=name class=input><br>
-	   <input type=text id=uname class=input><br>
-	   <input type=text id=pass class=input><br>
-	   <input type=submit value=signup id="signup">
-
+	   <table>
+	   <tr><td><label> Name </label></td><td><input type=text id=name class=input></td></tr>
+	   <tr><td><label> UserName </label></td><td><input type=text id=uname class=input></td></tr>
+	   <tr><td><label> Password </label></td><td><input type=text id=pass class=input></td></tr>
+	   <tr><td><label> Profile Picture </label></td><td><input type=file id=profile class=input></td></tr>
+	   <tr><td></td><td><input type=submit value=signup id="signup"></td></tr>
+	   </table>
+	   
+	   
 	    <h2>SIGNIN</h2>
-	    <input type=text id=user class=input><br>
-	    <input type=text id=passw class=input><br>
-	    <input type=submit value=Login id="login">
+	    <table>
+	    <tr><td><label> UserName </label></td><td><input type=text id=user class=input></td></tr>
+	    <tr><td><label> Password </label></td><td><input type=text id=passw class=input></td></tr>
+	    <tr><td></td><td><input type=submit value=Login id="login"></td><td>
+	    </table>
 	    
 	</div>
 </body>

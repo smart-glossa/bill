@@ -2,6 +2,7 @@ $(document).ready(function() {
 	if (getCookie("uname") != undefined) {
 		$("body")[0].appendChild(menu());
 		applyUserDetails();
+		getProfilePicture(getCookie("uname"));
 		$($(".mainArea")[0]).remove();
 		var div = document.createElement("div");
 		div.className = "mainArea";
@@ -35,9 +36,14 @@ $(document).on(
 			}
 			var url = "/bill/bill?operation=addUser&name="
 					+ name + "&uname=" + uname + "&pass=" + pass;
+			var request = new FormData();                   
+			request.append('file', $('#profile')[0].files[0]);
 			$.ajax({
 				url : url,
-				type : 'POST'
+				type : 'POST',
+				data : request,
+				processData : false,
+				contentType : false
 			}).done(function(result) {
 				if (result == "") {
 					alert("Added SuccessFully");
@@ -82,6 +88,7 @@ $(document).on(
 					document.cookie = "uname=" + user;
 					$("body")[0].appendChild(menu());
 					applyUserDetails();
+					getProfilePicture(user);
 					$($(".mainArea")[0]).remove();
 					var div = document.createElement("div");
 					div.className = "mainArea";

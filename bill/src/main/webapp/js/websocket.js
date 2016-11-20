@@ -9,6 +9,8 @@ ws.onmessage = function(message) {
 			$(".displayAll").remove();
 			$(".mainArea")[0].appendChild(displayProducts());
 		}
+	} else if (message.data === "logout") {
+		$("#logout").click();
 	}
 };
 

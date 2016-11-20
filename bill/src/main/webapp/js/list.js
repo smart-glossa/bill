@@ -220,7 +220,7 @@ function menu() {
 	var div = document.createElement("div");
 	div.className = "menuBar";
 	var strVar="";
-	strVar += "<img src='images/sample-logo.png' alt=\"logo\" style=\"float:left\" width=70px height=70px>";
+	strVar += "<img src='images/sample-logo.png' alt=\"logo\" style=\"float:left\" width=70px height=70px id='menuLogo'>";
 	strVar += "<br>";
 	strVar += "<ul>";
 	strVar += "  <li><a class=\"active\" id='productMenu'>Products<\/a><\/li>";
@@ -231,4 +231,8 @@ function menu() {
 	strVar += "<\/ul>";
 	div.innerHTML = strVar;
 	return div;
+}
+
+function getProfilePicture(username) {
+	$("#menuLogo").attr("src", "/bill/bill?operation=getProfilePicture&uname=" + username);
 }
