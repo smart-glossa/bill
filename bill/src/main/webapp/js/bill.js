@@ -92,6 +92,7 @@ $(document).ready(function() {
            div.children(".lineTotal").val(0);
            calculateBillAmount();
            balanceAmount();
+           return;
        }
        
        
