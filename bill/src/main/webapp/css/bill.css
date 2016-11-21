@@ -1,4 +1,4 @@
-input[type=text]{
+input[type=text],input[type=password],input[type=number]{
 	width:200px;
 	height:40px;
 	padding: 10px;

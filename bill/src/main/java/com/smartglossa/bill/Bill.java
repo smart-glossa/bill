@@ -37,7 +37,7 @@ public class Bill extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload sfu = new ServletFileUpload(factory);
         String op = request.getParameter("operation");
-        String password = "";
+        String password = "root";
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -51,33 +51,24 @@ public class Bill extends HttpServlet {
                 // Add Product
                 JSONObject obj = new JSONObject();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "Insert into product value(" + productId + ", '" + name + "', " + cost + ")";
-                    stmt.execute(query);
+                	BillApplication bill = new BillApplication();
+                	bill.addProduct(productId, name, cost);
                 } catch (Exception e) {
                     obj.put("Message", "Error");
                     response.getWriter().print(obj);
                 }
             } else if (op.equals("getProduct")) {
                 int pid = Integer.parseInt(request.getParameter("pid"));
-                JSONObject obj = new JSONObject();
+                JSONObject result = new JSONObject();
 
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "select * from product where productId = " + pid;
-                    rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        obj.put("name", rs.getString(2));
-                        obj.put("cost", rs.getFloat(3));
-                    }
-                    response.getWriter().print(obj);
+                	BillApplication bill = new BillApplication();
+                	result = bill.getProduct(pid);
+                   
+                    response.getWriter().print(result);
                 } catch (Exception e) {
-                    obj.put("Message", "Error");
-                    response.getWriter().print(obj);
+                    result.put("Message", "Error");
+                    response.getWriter().print(result);
                 }
             } else if (op.equals("updateProduct")) {
                 int productId = Integer.parseInt(request.getParameter("pid"));
@@ -85,12 +76,8 @@ public class Bill extends HttpServlet {
                 float cost = Float.parseFloat(request.getParameter("cost"));
                 JSONObject obj = new JSONObject();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query =
-                            "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId;
-                    stmt.execute(query);
+                    BillApplication bill = new BillApplication();
+                    bill.updateProduct(productId, name, cost);
                 } catch (Exception e) {
                     obj.put("Message", "Error");
                     response.getWriter().print(obj);
@@ -99,11 +86,8 @@ public class Bill extends HttpServlet {
                 int productId = Integer.parseInt(request.getParameter("pid"));
                 JSONObject obj = new JSONObject();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "Delete from product where productId= " + productId;
-                    stmt.execute(query);
+                   BillApplication bill = new BillApplication();
+                   bill.deleteProduct(productId);
                 } catch (Exception e) {
                     obj.put("Message", "Error");
                     response.getWriter().print(obj);
@@ -111,18 +95,8 @@ public class Bill extends HttpServlet {
             } else if (op.equals("getAllProduct")) {
                 JSONArray res = new JSONArray();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "select * from product";
-                    rs = stmt.executeQuery(query);
-                    while (rs.next()) {
-                        JSONObject obj = new JSONObject();
-                        obj.put("productId", rs.getInt(1));
-                        obj.put("name", rs.getString(2));
-                        obj.put("cost", rs.getFloat(3));
-                        res.put(obj);
-                    }
+                    BillApplication bill = new BillApplication();
+                    res = bill.getAllProduct();
                     response.getWriter().print(res);
                 } catch (Exception e) {
                     JSONObject obj = new JSONObject();
@@ -133,28 +107,17 @@ public class Bill extends HttpServlet {
                 String name = request.getParameter("name");
                 String uname = request.getParameter("uname");
                 String pass = request.getParameter("pass");
+                
 
                 // Add Product
                 JSONObject obj = new JSONObject();
                 try {
-
-                    List items = sfu.parseRequest(request);
+                	List<FileItem> items = sfu.parseRequest(request);
                     FileItem file = (FileItem) items.get(0);
-                    // Store image
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    ps = conn.prepareStatement("insert into image(image,uname) values(?,?)");
-                    ps.setString(2, uname);
-                    // size must be converted to int otherwise it results in error
-                    ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
-                    ps.executeUpdate();
-                    
-                    // Store user other details
-                    Class.forName("com.mysql.jdbc.Driver");
-                    stmt = conn.createStatement();
-                    String query =
-                            "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass + "')";
-                    stmt.execute(query);
+                	BillApplication bill = new BillApplication();
+                	bill.addUser(name, uname, pass, file);
+
+                   
                 } catch (Exception e) {
                     obj.put("Message", "Error");
                     response.getWriter().print(obj);
@@ -164,37 +127,24 @@ public class Bill extends HttpServlet {
                 String pass = request.getParameter("passw");
 
                 // Add Product
-                JSONObject obj = new JSONObject();
+                JSONObject result = new JSONObject();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "select name from user where uname='" + uname + "'AND pass='" + pass + "'";
-                    rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        obj.put("name", rs.getString(1));
-                        obj.put("Status", "success");
-                    }
-                    response.getWriter().print(obj);
+                	BillApplication bill = new BillApplication();
+                	result = bill.login(uname, pass);
+                   
+                    response.getWriter().print(result);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    obj.put("Message", "Error");
-                    response.getWriter().print(obj);
+                   result.put("Message", "Error");
+                    response.getWriter().print(result);
                 }
             } else if (op.equals("getUserDetail")) {
                 String uname = request.getParameter("uname");
 
                 JSONObject obj = new JSONObject();
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password);
-                    stmt = conn.createStatement();
-                    String query = "select name from user where uname='" + uname + "'";
-                    rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        obj.put("name", rs.getString(1));
-                        obj.put("Status", "success");
-                    }
+                	BillApplication bill = new BillApplication();
+                	obj = bill.getUserDetail(uname);
                     response.getWriter().print(obj);
                 } catch (Exception e) {
                     e.printStackTrace();

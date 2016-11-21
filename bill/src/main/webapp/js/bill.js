@@ -142,7 +142,13 @@ $(document).ready(function() {
             div.children(".pid").focus();
         }
         if (key.which == 13) {
-               div.children(".nextLine").click();
+        	var name = div.children(".pname").val();
+        	   var cost = div.children(".pcost").val();
+     	   if(name==""||cost==""){
+     		   return;
+     	   }else{
+     		   div.children(".nextLine").click();
+     	   }
         }
         if (key.which == 40) {
             div.next().children(".quantity").focus();

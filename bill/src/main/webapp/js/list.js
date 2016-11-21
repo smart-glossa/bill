@@ -4,7 +4,7 @@ function addNewLine() {
 	div.className = 'lineProduct';
 	div.innerHTML = "<input type=text class='pid'>"
 			+ "<input type=text class='pname' readonly>"
-			+ "<input type=text class='quantity'>"
+			+ "<input type=number class='quantity'>"
 			+ "<input type=text class='pcost' readonly>"
 			+ "<input type=text class='lineTotal' value=0 readonly>"
 			+ "<img class='nextLine' alt='next' width='25px' height='25px' src='"
@@ -173,9 +173,9 @@ function product() {
 	div.className = "addProduct";
 	var html = '<h3>Add Product</h3>'
 		+ '<table class="Product">'
-		+ '<tr><td><label>ProductId:</label></td><td> <input type=text id="pId" class="add"></td></tr>'
+		+ '<tr><td><label>ProductId:</label></td><td> <input type=number id="pId" class="add"></td></tr>'
 		+ '<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>'
-		+ '<tr><td><label>Cost:</label></td><td> <input type=text id="cost" class="add"></td></tr>'
+		+ '<tr><td><label>Cost:</label></td><td> <input type=number id="cost" class="add"></td></tr>'
 		+ '<tr><td></td><td><input type=submit value="ADD" id="submit">'
 		+ '<input type=submit value="UPDATE" id="update"></td></tr>'
 		+'</table>';
@@ -203,7 +203,7 @@ function billing() {
 	strVar += "		<h3 class=\"billTotal\">0<\/h3>";
 	strVar += "		<h2>Payment<\/h2>";
 	strVar += "		<table>";
-	strVar += "		<tr><td><label>Cash:<\/label><\/td><td><input type=text id=\"cash\"><\/td><\/tr>";
+	strVar += "		<tr><td><label>Cash:<\/label><\/td><td><input type=number id=\"cash\"><\/td><\/tr>";
 	strVar += "		<tr><td><label>Balance:<\/label><\/td><td><input type=text id=\"balance\" readonly><\/td><\/tr>";
 	strVar += "		<\/table>";
 	strVar += "	<\/div>";
