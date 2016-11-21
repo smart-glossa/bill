@@ -50,10 +50,11 @@ function displayProducts() {
 						div.className = "displayAll";
 						var query = '<h3>Display Products</h3>'
 						     + "<table style='border: 1px solid black'>";
-						query += "<tr><th>ProductId</th> <th>ProductName</th>  <th>ProductCost</th><th>Delete</th></tr>"
+						query += "<tr><th>ProductId</th><th>Images</th> <th>ProductName</th>  <th>ProductCost</th><th>Delete</th></tr>"
 						for (var i = 0; i < array.length; i++) {
 							query += "<tr class='productRow'><td class='productId'>"
 									+ array[i].productId + "</td>";
+							query += "<td> <img src='/bill/bill?operation=getProductImage&productId=" + array[i].productId +"' width='40px' heigth='40px'></td>";
 							query += "<td>" + array[i].name + "</td>";
 							query += "<td>" + array[i].cost + "</td>";
 							query += "<td> <img class='deleteProduct' src='"
@@ -176,6 +177,7 @@ function product() {
 		+ '<tr><td><label>ProductId:</label></td><td> <input type=number id="pId" class="add"></td></tr>'
 		+ '<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>'
 		+ '<tr><td><label>Cost:</label></td><td> <input type=number id="cost" class="add"></td></tr>'
+		+ '<tr><td></td><td><input type=file id="profile" class="add"></td></tr>'
 		+ '<tr><td></td><td><input type=submit value="ADD" id="submit">'
 		+ '<input type=submit value="UPDATE" id="update"></td></tr>'
 		+'</table>';
@@ -221,6 +223,9 @@ function menu() {
 	div.className = "menuBar";
 	var strVar="";
 	strVar += "<img src='images/sample-logo.png' alt=\"logo\" style=\"float:left\" width=70px height=70px id='menuLogo'>";
+	strVar += "<div class=\"hiddenfile\">";
+	strVar += "	  <input name=\"upload\" type=\"file\" id=\"profileupload\"\/>";
+	strVar += "	<\/div>";
 	strVar += "<br>";
 	strVar += "<ul>";
 	strVar += "  <li><a class=\"active\" id='productMenu'>Products<\/a><\/li>";
@@ -235,4 +240,27 @@ function menu() {
 
 function getProfilePicture(username) {
 	$("#menuLogo").attr("src", "/bill/bill?operation=getProfilePicture&uname=" + username);
+}
+
+function updateProfile() {
+	var uname = getCookie("uname");
+	var url = "/bill/bill?operation=updateProfile&uname=" + uname;
+var request = new FormData();                   
+request.append('file', $('#profileupload')[0].files[0]);
+$.ajax({
+	url : url,
+	type : 'POST',
+	data : request,
+	processData : false,
+	contentType : false
+}).done(function(result) {
+	if (result === "success") {
+		getProfilePicture(uname);
+	} else {
+		alert("Fail to upload the image :(");
+	}
+
+}).fail(function(result) {
+	console.log(result);
+});
 }

@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:8080/bill/websocket");
+var ws = new WebSocket("ws://" + location.host + "/bill/websocket");
 
 ws.onopen = function() {
 };

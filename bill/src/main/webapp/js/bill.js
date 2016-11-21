@@ -5,10 +5,18 @@ $(document).ready(function() {
     	window.location.href = '/bill/';
     });
     
+    $(document).on('click', '#menuLogo', function(){
+    	$('#profileupload').click();
+    });
+    
+    $(document).on('change', '#profileupload', function(e) {
+    	updateProfile();
+    });
     $(document).on("click", "#submit", function(key) {
         var pId = $('#pId').val();
         var pName = $('#pName').val();
         var cost = $('#cost').val();
+        
         if (pId == "") {
             alert("Please Enter ProductId");
             $("#pId").focus().css("outline-color", "#ff0000");
@@ -25,9 +33,14 @@ $(document).ready(function() {
             return;
         }
         var url = "/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
+        var request = new FormData();                   
+		request.append('file', $('#profile')[0].files[0]);
         $.ajax({
             url: url,
-            type: 'POST'
+            type: 'POST',
+            data : request,
+			processData : false,
+			contentType : false
         }).done(function(result) {
             if (result == "") {
                 alert("Added SuccessFully");
@@ -214,9 +227,14 @@ $(document).ready(function() {
             return;
         }
         var url = "/bill/bill?operation=updateProduct&pid=" + pId + "&name=" + pName + "&cost=" + cost;
+        var request = new FormData();                   
+		request.append('file', $('#profile')[0].files[0]);
         $.ajax({
                 url: url,
-                type: 'POST'
+                type: 'POST',
+                data : request,
+    			processData : false,
+    			contentType : false
             })
             .done(function(result) {
                 if (result == "") {

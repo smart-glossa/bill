@@ -57,3 +57,9 @@ li a:hover:not(.active) {
 .active {
     background-color: #4CAF50;
 }
+
+.hiddenfile {
+ width: 0px;
+ height: 0px;
+ overflow: hidden;
+}
