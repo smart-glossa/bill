@@ -42,8 +42,6 @@ public class Bill extends HttpServlet {
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
                 bill.addProduct(productId, name, cost, file);
-
-                bill.addProduct(productId, name, cost, file);
             } catch (Exception e) {
                 obj.put("Message", "Error");
                 response.getWriter().print(obj);
@@ -112,7 +110,8 @@ public class Bill extends HttpServlet {
                 bill.addUser(name, uname, pass, file);
 
             } catch (Exception e) {
-                obj.put("Message", "Error");
+                e.printStackTrace();
+                obj.put("Message", "Error: " + e.getMessage());
                 response.getWriter().print(obj);
             }
         } else if (op.equals("login")) {
@@ -128,7 +127,8 @@ public class Bill extends HttpServlet {
                 response.getWriter().print(result);
             } catch (Exception e) {
                 e.printStackTrace();
-                result.put("Message", "Error");
+                result.put("status", 0);
+                result.put("message", "Error: " + e.getMessage());
                 response.getWriter().print(result);
             }
         } else if (op.equals("getUserDetail")) {

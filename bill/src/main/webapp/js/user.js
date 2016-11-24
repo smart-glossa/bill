@@ -96,9 +96,8 @@ $(document).on(
 					$(".mainArea")[0].appendChild(product());
 					$(".mainArea")[0].appendChild(displayProducts());	
 				} else {
-					result = JSON.parse(result);
-					if (result.Message == "Error") {
-						alert("Error occurs");
+					if (result.status == 0) {
+						alert(result.message);
 					}
 				}
 
