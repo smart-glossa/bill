@@ -1,10 +1,22 @@
 $(document).ready(function() {
-    addNewLine();
-    displayProducts();
+    $(document).on("click", "#logout", function(){
+    	postToServer("logout");
+    	document.cookie = 'uname=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    	window.location.href = '/bill/';
+    });
+    
+    $(document).on('click', '#menuLogo', function(){
+    	$('#profileupload').click();
+    });
+    
+    $(document).on('change', '#profileupload', function(e) {
+    	updateProfile();
+    });
     $(document).on("click", "#submit", function(key) {
         var pId = $('#pId').val();
         var pName = $('#pName').val();
         var cost = $('#cost').val();
+        
         if (pId == "") {
             alert("Please Enter ProductId");
             $("#pId").focus().css("outline-color", "#ff0000");
@@ -20,24 +32,31 @@ $(document).ready(function() {
             $("#cost").focus().css("outline-color", "ff0000");
             return;
         }
-        var url = "http://localhost:8080/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
+        var url = "/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
+        var request = new FormData();                   
+		request.append('file', $('#profile')[0].files[0]);
         $.ajax({
             url: url,
-            type: 'POST'
+            type: 'POST',
+            data : request,
+			processData : false,
+			contentType : false
         }).done(function(result) {
             if (result == "") {
                 alert("Added SuccessFully");
                 $('#pId').val("");
                 $('#pName').val("");
                 $('#cost').val("");
+                postToServer("product");
+                $(".displayAll").remove();
+                $(".mainArea")[0].appendChild(displayProducts());
             } else {
                 result = JSON.parse(result);
                 if (result.Message == "Error") {
                     alert("Error occurs");
                 }
             }
-            displayProducts();
-
+            
         }).fail(function(result) {
             console.log(result);
         });
@@ -69,27 +88,34 @@ $(document).ready(function() {
 
     $(document).on("keyup", ".pid", function(key) {
     	var div = $(this).parent();
+    	
+    	if($(this).val()==""){
+     	   div.children(".pname").val("")
+            div.children(".quantity").val("");
+            div.children(".pcost").val("");
+            div.children(".lineTotal").val(0);
+            calculateBillAmount();
+            balanceAmount();
+            return;
+        }
        if (key.which == 39) {
             div.children(".quantity").focus();
         }
        if(key.which==13){
-    	   div.children(".nextLine").click();
+    	   var name = div.children(".pname").val();
+       	   var cost = div.children(".pcost").val();
+    	   if(name==""||cost==""){
+    		   return;
+    	   }else{
+    		   div.children(".nextLine").click();
+    	   }
+    			   
        }
        if (key.which == 40) {
            div.next().children(".pid").focus();
        }
        if (key.which == 38) {
            div.prev().children(".pid").focus();
-       }
-       var div = $(this).parent();
-       if($(this).val()==""){
-    	   div.children(".pname").val("")
-           div.children(".quantity").val("");
-           div.children(".pcost").val("");
-           div.children(".lineTotal").val(0);
-           calculateBillAmount();
-           balanceAmount();
-           return;
        }
         var getProductUrl = "/bill/bill?operation=getProduct&pid=" + $(this).val();
         $.ajax({
@@ -129,7 +155,13 @@ $(document).ready(function() {
             div.children(".pid").focus();
         }
         if (key.which == 13) {
-               div.children(".nextLine").click();
+        	var name = div.children(".pname").val();
+        	   var cost = div.children(".pcost").val();
+     	   if(name==""||cost==""){
+     		   return;
+     	   }else{
+     		   div.children(".nextLine").click();
+     	   }
         }
         if (key.which == 40) {
             div.next().children(".quantity").focus();
@@ -194,10 +226,15 @@ $(document).ready(function() {
             $("#cost").focus().css("outline-color", "ff0000");
             return;
         }
-        var url = "http://localhost:8080/bill/bill?operation=updateProduct&pid=" + pId + "&name=" + pName + "&cost=" + cost;
+        var url = "/bill/bill?operation=updateProduct&pid=" + pId + "&name=" + pName + "&cost=" + cost;
+        var request = new FormData();                   
+		request.append('file', $('#profile')[0].files[0]);
         $.ajax({
                 url: url,
-                type: 'POST'
+                type: 'POST',
+                data : request,
+    			processData : false,
+    			contentType : false
             })
             .done(function(result) {
                 if (result == "") {
@@ -205,16 +242,20 @@ $(document).ready(function() {
                     $('#pId').val("");
                     $('#pName').val("");
                     $('#cost').val("");
+                    postToServer("product");
+                    $(".displayAll").remove();
+                    $(".mainArea")[0].appendChild(displayProducts());
                 } else {
                     result = JSON.parse(result);
                     if (result.Message == "Error") {
                         alert("Error occurs");
                     }
                 }
-                displayProducts();
+                
             }).fail(function(result) {
                 console.log(result);
             });
+       
 
     })
 
@@ -227,6 +268,7 @@ $(document).ready(function() {
             type: 'POST'
         }).done(function(result) {
             tag.remove();
+            postToServer("product");
         }).fail(function(result) {
             console.log("")
         });
@@ -265,5 +307,26 @@ $(document).ready(function() {
             tr.next().children().children("#submit").focus();
         }
     })
+    $(document).on("click","#print",function(){
+    	previewBillReceipt();
+    });
+    
+    $(document).on("click", "#billMenu", function(){
+    	var productMenu = $("#productMenu");
+    	productMenu.removeClass();
+    	$(this).addClass("active");
+    	$(".mainArea").empty();
+		$(".mainArea")[0].appendChild(billing());
+		addNewLine();
+    });
+    
+    $(document).on("click", "#productMenu", function(){
+    	var productMenu = $("#billMenu");
+    	productMenu.removeClass();
+    	$(this).addClass("active");
+    	$(".mainArea").empty();
+    	$(".mainArea")[0].appendChild(product());
+		$(".mainArea")[0].appendChild(displayProducts());
+    });
     
 });

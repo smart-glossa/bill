@@ -1,162 +1,205 @@
 package com.smartglossa.bill;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Bill extends HttpServlet {
     private static final long serialVersionUID = 1L;
-       
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload sfu = new ServletFileUpload(factory);
         String op = request.getParameter("operation");
-        String password = "root";
-        
         if (op.equals("addProduct")) {
             int productId = Integer.parseInt(request.getParameter("pid"));
             String name = request.getParameter("pname");
             float cost = Float.parseFloat(request.getParameter("cost"));
-            
+
             // Add Product
             JSONObject obj = new JSONObject();
             try {
-                Class.forName("com.mysql.jdbc.Driver") ;
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                Statement stmt = conn.createStatement() ;
-                String query = "Insert into product value(" + productId + ", '" + name + "', " + cost +")";
-                stmt.execute(query) ;
+                List<FileItem> items = sfu.parseRequest(request);
+                FileItem file = (FileItem) items.get(0);
+                BillApplication bill = new BillApplication();
+                bill.addProduct(productId, name, cost, file);
             } catch (Exception e) {
-                obj.put("Message","Error");
+                obj.put("Message", "Error");
                 response.getWriter().print(obj);
             }
         } else if (op.equals("getProduct")) {
             int pid = Integer.parseInt(request.getParameter("pid"));
-            JSONObject obj = new JSONObject();
+            JSONObject result = new JSONObject();
 
             try {
-                Class.forName("com.mysql.jdbc.Driver") ;
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                Statement stmt = conn.createStatement() ;
-                String query = "select * from product where productId = " + pid;
-                ResultSet rs = stmt.executeQuery(query) ;
-                if (rs.next())  {
-                    obj.put("name", rs.getString(2));
-                    obj.put("cost", rs.getFloat(3));
-                }
-                response.getWriter().print(obj);
+
+                BillApplication bill = new BillApplication();
+                result = bill.getProduct(pid);
+
+                response.getWriter().print(result);
             } catch (Exception e) {
-                obj.put("Message","Error");
+                result.put("Message", "Error");
+                response.getWriter().print(result);
+            }
+        } else if (op.equals("updateProduct")) {
+            int productId = Integer.parseInt(request.getParameter("pid"));
+            String name = request.getParameter("name");
+            float cost = Float.parseFloat(request.getParameter("cost"));
+            JSONObject obj = new JSONObject();
+            try {
+                List<FileItem> items = sfu.parseRequest(request);
+                FileItem file = (FileItem) items.get(0);
+                BillApplication bill = new BillApplication();
+                bill.updateProduct(productId, name, cost, file);
+            } catch (Exception e) {
+                e.printStackTrace();
+                obj.put("Message", "Error");
                 response.getWriter().print(obj);
             }
-        } else if(op.equals("updateProduct")){
-                int productId = Integer.parseInt(request.getParameter("pid"));
-                String name = request.getParameter("name");
-                float cost = Float.parseFloat(request.getParameter("cost"));
-                JSONObject obj = new JSONObject();
-                try {
-                    Class.forName("com.mysql.jdbc.Driver") ;
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                    Statement stmt = conn.createStatement() ;
-                    String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId ;
-                    stmt.execute(query) ;
-                } catch (Exception e) {
-                    obj.put("Message","Error");
-                    response.getWriter().print(obj);
-                }
-        }else if(op.equals("deleteProduct")){
-             int productId = Integer.parseInt(request.getParameter("pid"));
-             JSONObject obj = new JSONObject();
-             try {
-                    Class.forName("com.mysql.jdbc.Driver") ;
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                    Statement stmt = conn.createStatement() ;
-                    String query = "Delete from product where productId= " + productId ;
-                    stmt.execute(query) ;
-                } catch (Exception e) {
-                    obj.put("Message","Error");
-                    response.getWriter().print(obj);
-                }
-        } else if(op.equals("getAllProduct")){
+        } else if (op.equals("deleteProduct")) {
+            int productId = Integer.parseInt(request.getParameter("pid"));
+            JSONObject obj = new JSONObject();
+            try {
+                BillApplication bill = new BillApplication();
+                bill.deleteProduct(productId);
+            } catch (Exception e) {
+                obj.put("Message", "Error");
+                response.getWriter().print(obj);
+            }
+        } else if (op.equals("getAllProduct")) {
             JSONArray res = new JSONArray();
             try {
-                Class.forName("com.mysql.jdbc.Driver") ;
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                Statement stmt = conn.createStatement() ;
-                String query = "select * from product";
-                ResultSet rs = stmt.executeQuery(query) ;
-                while (rs.next())  {
-                    JSONObject obj = new JSONObject();
-                    obj.put("productId", rs.getInt(1));
-                    obj.put("name", rs.getString(2));
-                    obj.put("cost", rs.getFloat(3));
-                    res.put(obj);
-                }
+                BillApplication bill = new BillApplication();
+                res = bill.getAllProduct();
                 response.getWriter().print(res);
             } catch (Exception e) {
                 JSONObject obj = new JSONObject();
-                obj.put("Message","Error");
+                obj.put("Message", "Error");
                 response.getWriter().print(obj);
             }
-        }else if (op.equals("addUser")) {
+        } else if (op.equals("addUser")) {
             String name = request.getParameter("name");
             String uname = request.getParameter("uname");
             String pass = request.getParameter("pass");
-            
+
             // Add Product
             JSONObject obj = new JSONObject();
             try {
-                Class.forName("com.mysql.jdbc.Driver") ;
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                Statement stmt = conn.createStatement() ;
-                String query = "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass +"')";
-                stmt.execute(query) ;
+                List<FileItem> items = sfu.parseRequest(request);
+                FileItem file = (FileItem) items.get(0);
+                BillApplication bill = new BillApplication();
+                bill.addUser(name, uname, pass, file);
+
             } catch (Exception e) {
-                obj.put("Message","Error");
+                e.printStackTrace();
+                obj.put("Message", "Error: " + e.getMessage());
                 response.getWriter().print(obj);
             }
-        }
-        else if (op.equals("login")) {
+        } else if (op.equals("login")) {
             String uname = request.getParameter("user");
             String pass = request.getParameter("passw");
-            
+
             // Add Product
+            JSONObject result = new JSONObject();
+            try {
+                BillApplication bill = new BillApplication();
+                result = bill.login(uname, pass);
+
+                response.getWriter().print(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("status", 0);
+                result.put("message", "Error: " + e.getMessage());
+                response.getWriter().print(result);
+            }
+        } else if (op.equals("getUserDetail")) {
+            String uname = request.getParameter("uname");
+
             JSONObject obj = new JSONObject();
             try {
-                Class.forName("com.mysql.jdbc.Driver") ;
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", password) ;
-                Statement stmt = conn.createStatement() ;
-                String query = "select name from user where uname='"+ uname +"'AND pass='"+ pass +"'";
-                ResultSet rs = stmt.executeQuery(query) ;
-                if(rs.next()){
-                    obj.put("name", rs.getString(1));
-                    obj.put("Status", "success");
-                }
+                BillApplication bill = new BillApplication();
+                obj = bill.getUserDetail(uname);
                 response.getWriter().print(obj);
             } catch (Exception e) {
                 e.printStackTrace();
-                obj.put("Message","Error");
+                obj.put("Message", "Error");
                 response.getWriter().print(obj);
             }
+        } else if (op.equals("getProductImage")) {
+            int pid = Integer.parseInt(request.getParameter("productId"));
+
+            try {
+                BillApplication bill = new BillApplication();
+                Blob b = bill.getProductImage(pid);
+                if (b != null) {
+                    response.setContentType("image/png;base64;");
+                    response.setContentLength((int) b.length());
+                    InputStream is = b.getBinaryStream();
+                    OutputStream os = response.getOutputStream();
+                    byte buf[] = new byte[(int) b.length()];
+                    byte[] result = Base64.encodeBase64(buf);
+                    is.read(result);
+                    os.write(result);
+                    os.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (op.equals("getProfilePicture")) {
+            String uname = request.getParameter("uname");
+
+            try {
+                BillApplication bill = new BillApplication();
+                Blob b = bill.getProfilePicture(uname);
+                if (b != null) {
+                    response.setContentType("image/png;base64;");
+                    response.setContentLength((int) b.length());
+                    InputStream is = b.getBinaryStream();
+                    OutputStream os = response.getOutputStream();
+                    byte buf[] = new byte[(int) b.length()];
+                    byte[] result = Base64.encodeBase64(buf);
+                    is.read(result);
+                    os.write(result);
+                    os.close();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (op.equals("updateProfile")) {
+            String uname = request.getParameter("uname");
+            try {
+                List<FileItem> items = sfu.parseRequest(request);
+                FileItem file = (FileItem) items.get(0);
+                BillApplication object = new BillApplication();
+                object.updateProfile(uname, file);
+                response.getWriter().print("success");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                response.getWriter().print("failure");
+            }
+
         }
-        
-       
-        
-        }
 
-    } 
+    }
 
-
+}

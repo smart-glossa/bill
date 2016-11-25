@@ -4,7 +4,7 @@ function addNewLine() {
 	div.className = 'lineProduct';
 	div.innerHTML = "<input type=text class='pid'>"
 			+ "<input type=text class='pname' readonly>"
-			+ "<input type=text class='quantity'>"
+			+ "<input type=number class='quantity'>"
 			+ "<input type=text class='pcost' readonly>"
 			+ "<input type=text class='lineTotal' value=0 readonly>"
 			+ "<img class='nextLine' alt='next' width='25px' height='25px' src='"
@@ -21,10 +21,10 @@ function calculateBillAmount() {
 		var div = $("div.lineProduct")[i];
 		sum += parseInt($($("div.lineProduct")[i]).find(".lineTotal").val());
 	}
-	$("h2").text(sum);
+	$(".billTotal").text(sum);
 }
 function balanceAmount() {
-	var sum = $("h2").text();
+	var sum = $(".billTotal").text();
 	var balance = 0;
 	if ($("#cash").val().trim() == "") {
 		$("#balance").val("");
@@ -37,6 +37,7 @@ function balanceAmount() {
 }
 function displayProducts() {
 	var url = "/bill/bill?operation=getAllProduct";
+	var div= document.createElement("div");
 	var imgURL = "images/deleteButton.jpg";
 	$
 			.ajax({
@@ -46,11 +47,14 @@ function displayProducts() {
 			.done(
 					function(result) {
 						var array = JSON.parse(result);
-						var query = "<table style='border: 1px solid black'>"
-						query += "<tr><th>ProductId</th> <th>ProductName</th>  <th>ProductCost</th><th>Delete</th></tr>"
+						div.className = "displayAll";
+						var query = '<h3>Display Products</h3>'
+						     + "<table style='border: 1px solid black'>";
+						query += "<tr><th>ProductId</th><th>Images</th> <th>ProductName</th>  <th>ProductCost</th><th>Delete</th></tr>"
 						for (var i = 0; i < array.length; i++) {
 							query += "<tr class='productRow'><td class='productId'>"
 									+ array[i].productId + "</td>";
+							query += "<td> <img src='/bill/bill?operation=getProductImage&productId=" + array[i].productId +"' width='40px' heigth='40px'></td>";
 							query += "<td>" + array[i].name + "</td>";
 							query += "<td>" + array[i].cost + "</td>";
 							query += "<td> <img class='deleteProduct' src='"
@@ -58,12 +62,11 @@ function displayProducts() {
 									+ "' width='25px' height='25px'/></td></tr>"
 						}
 						query += "</table>"
-						$(".displayAll")[0].innerHTML = query;
-
+						div.innerHTML = query;
 					}).fail(function() {
 
 			});
-
+	return div;
 }
 
 function calculateLineTotal(div) {
@@ -122,7 +125,7 @@ function getBillDetails() {
 			htmlFile += row;
 		}
 	}
-	row = "<td></td><td></td><td></td><td><b>Total</b></td><td>" + $("h2").text() + "</td>"
+	row = "<td></td><td></td><td></td><td><b>Total</b></td><td>" + $(".billTotal").text() + "</td>"
     htmlFile += row;
 	htmlFile += "";
 	htmlFile += "</table></div></center>";
@@ -130,4 +133,134 @@ function getBillDetails() {
 	htmlFile += "<input type='submit' value='CANCEL' onclick='window.close()'></center>";
 	htmlFile += '</body></html>';
 	return htmlFile;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return undefined;
+}
+
+function applyUserDetails() {
+	var username = getCookie("uname");
+	
+	$.ajax({
+		url: "/bill/bill?operation=getUserDetail&uname=" + username,
+	    type: 'POST'
+	})
+	.done(function(result){
+		result = JSON.parse(result);
+		if (result.Status === "success") {
+			$(".UserDetails").text("Welcome Mr. " + result.name);
+		}
+	})
+	.fail(function(result){
+		
+	});
+	
+}
+
+function product() {
+	var div = document.createElement("div");
+	div.className = "addProduct";
+	var html = '<h3>Add Product</h3>'
+		+ '<table class="Product">'
+		+ '<tr><td><label>ProductId:</label></td><td> <input type=number id="pId" class="add"></td></tr>'
+		+ '<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>'
+		+ '<tr><td><label>Cost:</label></td><td> <input type=number id="cost" class="add"></td></tr>'
+		+ '<tr><td></td><td><input type=file id="profile" class="add"></td></tr>'
+		+ '<tr><td></td><td><input type=submit value="ADD" id="submit">'
+		+ '<input type=submit value="UPDATE" id="update"></td></tr>'
+		+'</table>';
+	 div.innerHTML = html;
+	return div;
+}
+
+function billing() {
+	var div = document.createElement("div");
+	div.className = "billSection";
+	var strVar="";
+	strVar += "<h3 class=\"bill\">Billing<\/h3>";
+	strVar += "	<h4>";
+	strVar += "		<label>ProductId";
+	strVar += "			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	strVar += "			ProductName";
+	strVar += "			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	strVar += "			Quantity";
+	strVar += "			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	strVar += "			Cost";
+	strVar += "			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total<\/label>";
+	strVar += "	<\/h4>";
+	strVar += "	<div class=\"total\">";
+	strVar += "		<h2>Bill Total<\/h2>";
+	strVar += "		<h3 class=\"billTotal\">0<\/h3>";
+	strVar += "		<h2>Payment<\/h2>";
+	strVar += "		<table>";
+	strVar += "		<tr><td><label>Cash:<\/label><\/td><td><input type=number id=\"cash\"><\/td><\/tr>";
+	strVar += "		<tr><td><label>Balance:<\/label><\/td><td><input type=text id=\"balance\" readonly><\/td><\/tr>";
+	strVar += "		<\/table>";
+	strVar += "	<\/div>";
+	strVar += "	<script>";
+	strVar += "		calculateBillAmount()";
+	strVar += "	<\/script>";
+	strVar += "	<div class=\"billing\"><\/div>";
+	strVar += "	<br><br><br><center><input type=button value=\"print\" id=\"print\"><center>";
+	div.innerHTML = strVar;
+	return div;
+}
+
+function menu() {
+	var div = document.createElement("div");
+	div.className = "menuBar";
+	var strVar="";
+	strVar += "<img src='images/sample-logo.png' alt=\"logo\" style=\"float:left\" width=70px height=70px id='menuLogo'>";
+	strVar += "<div class=\"hiddenfile\">";
+	strVar += "	  <input name=\"upload\" type=\"file\" id=\"profileupload\"\/>";
+	strVar += "	<\/div>";
+	strVar += "<br>";
+	strVar += "<ul>";
+	strVar += "  <li><a class=\"active\" id='productMenu'>Products<\/a><\/li>";
+	strVar += "  <li><a id='billMenu'>Billing<\/a><\/li>";
+	strVar += "  <li><a id='paymentMenu'>Payment<\/a><\/li>";
+	strVar += "  <li style=\"float:right\"><a id=\"logout\">Logout<\/a><\/li>";
+	strVar += "  <li style=\"float:right\"><a class=\"UserDetails\" href=\"#about\">About<\/a><\/li>";
+	strVar += "<\/ul>";
+	div.innerHTML = strVar;
+	return div;
+}
+
+function getProfilePicture(username) {
+	$("#menuLogo").attr("src", "/bill/bill?operation=getProfilePicture&uname=" + username);
+}
+
+function updateProfile() {
+	var uname = getCookie("uname");
+	var url = "/bill/bill?operation=updateProfile&uname=" + uname;
+var request = new FormData();                   
+request.append('file', $('#profileupload')[0].files[0]);
+$.ajax({
+	url : url,
+	type : 'POST',
+	data : request,
+	processData : false,
+	contentType : false
+}).done(function(result) {
+	if (result === "success") {
+		getProfilePicture(uname);
+	} else {
+		alert("Fail to upload the image :(");
+	}
+
+}).fail(function(result) {
+	console.log(result);
+});
 }
