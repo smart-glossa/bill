@@ -1,5 +1,6 @@
 <center><h1> SMARTGLOSSA BILL </h1> </center>
 <p>SmartGlossa contributing this Project and its open sourced.</p>
+<p> If you want to access this project online, go this link www.smartglossa.com/bill  </p>
 
 <h2>Languages Used:</h2>
 HTML, CSS, JS, JAVA and MySQL
