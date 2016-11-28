@@ -21,86 +21,83 @@ public class BillApplication {
     PreparedStatement ps = null;
 
     public BillApplication() throws ClassNotFoundException, SQLException, IOException {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
-                BillConstants.USERNAME, BillConstants.PASSWORD);
-        stmt = conn.createStatement();
+        openConnection();
     }
 
     public void addProduct(int productId, String name, float cost, FileItem file)
             throws SQLException, ClassNotFoundException, IOException {
-        try{
-        String query = "Insert into product value(" + productId + ", '" + name + "', " + cost + ")";
-        stmt.execute(query);
+        try {
+            String query = "Insert into product value(" + productId + ", '" + name + "', " + cost + ")";
+            stmt.execute(query);
 
-        ps = conn.prepareStatement("insert into productImage(pimage,pid) values(?,?)");
-        ps.setInt(2, productId);
-        // size must be converted to int otherwise it results in error
-        ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
-        ps.executeUpdate();
+            ps = conn.prepareStatement("insert into productImage(pimage,pid) values(?,?)");
+            ps.setInt(2, productId);
+            // size must be converted to int otherwise it results in error
+            ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
+            ps.executeUpdate();
         } finally {
-            closeConnections();
+            closeConnection();
         }
 
     }
 
     public JSONObject getProduct(int pid) throws ClassNotFoundException, SQLException {
-        try{
-        JSONObject obj = new JSONObject();
-        String query = "select * from product where productId = " + pid;
-        rs = stmt.executeQuery(query);
-        if (rs.next()) {
-            obj.put("name", rs.getString(2));
-            obj.put("cost", rs.getFloat(3));
-        }
-        return obj;
+        try {
+            JSONObject obj = new JSONObject();
+            String query = "select * from product where productId = " + pid;
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                obj.put("name", rs.getString(2));
+                obj.put("cost", rs.getFloat(3));
+            }
+            return obj;
         } finally {
-            closeConnections();
+            closeConnection();
         }
     }
 
     public void updateProduct(int productId, String name, float cost, FileItem file)
             throws ClassNotFoundException, SQLException, IOException {
         try {
-        String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId;
-        stmt.execute(query);
+            String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId;
+            stmt.execute(query);
 
-        ps = conn.prepareStatement(
-                "Insert into productImage(pimage,pid) values(?,?) ON DUPLICATE KEY update pimage = ?");
-        // size must be converted to int otherwise it results in error
-        ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
-        ps.setInt(2, productId);
-        ps.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
-        ps.executeUpdate();
+            ps = conn.prepareStatement(
+                    "Insert into productImage(pimage,pid) values(?,?) ON DUPLICATE KEY update pimage = ?");
+            // size must be converted to int otherwise it results in error
+            ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
+            ps.setInt(2, productId);
+            ps.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
+            ps.executeUpdate();
         } finally {
-            closeConnections();
+            closeConnection();
         }
     }
 
     public void deleteProduct(int productId) throws ClassNotFoundException, SQLException {
         try {
-        String query = "Delete from product where productId= " + productId;
-        stmt.execute(query);
+            String query = "Delete from product where productId= " + productId;
+            stmt.execute(query);
         } finally {
-            closeConnections();
+            closeConnection();
         }
     }
 
     public JSONArray getAllProduct() throws ClassNotFoundException, SQLException {
         try {
-        JSONArray res = new JSONArray();
-        String query = "select * from product";
-        rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            JSONObject obj = new JSONObject();
-            obj.put("productId", rs.getInt(1));
-            obj.put("name", rs.getString(2));
-            obj.put("cost", rs.getFloat(3));
-            res.put(obj);
-        }
-        return res;
+            JSONArray res = new JSONArray();
+            String query = "select * from product";
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                JSONObject obj = new JSONObject();
+                obj.put("productId", rs.getInt(1));
+                obj.put("name", rs.getString(2));
+                obj.put("cost", rs.getFloat(3));
+                res.put(obj);
+            }
+            return res;
         } finally {
-            closeConnections();
+            closeConnection();
         }
 
     }
@@ -108,90 +105,99 @@ public class BillApplication {
     public void addUser(String name, String uname, String pass, FileItem file)
             throws ClassNotFoundException, SQLException, IOException, FileUploadException {
         try {
-        String query = "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass + "')";
-        stmt.execute(query);
-        // Store image
-        ps = conn.prepareStatement("insert into image(image,uname) values(?,?)");
-        ps.setString(2, uname);
-        // size must be converted to int otherwise it results in error
-        ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
-        ps.executeUpdate();
+            String query = "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass + "')";
+            stmt.execute(query);
+            // Store image
+            ps = conn.prepareStatement("insert into image(image,uname) values(?,?)");
+            ps.setString(2, uname);
+            // size must be converted to int otherwise it results in error
+            ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
+            ps.executeUpdate();
         } finally {
-            closeConnections();
+            closeConnection();
         }
-        
+
     }
 
     public void updateProfile(String uname, FileItem file) throws ClassNotFoundException, SQLException, IOException {
         try {
-        ps = conn.prepareStatement("Update image set image = ? where uname = ?");
-        ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
-        ps.setString(2, uname);
-        ps.executeUpdate();
+            ps = conn.prepareStatement("Update image set image = ? where uname = ?");
+            ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
+            ps.setString(2, uname);
+            ps.executeUpdate();
         } finally {
-            closeConnections();
+            closeConnection();
         }
     }
 
     public JSONObject login(String uname, String pass) throws ClassNotFoundException, SQLException {
         try {
-        JSONObject obj = new JSONObject();
-        String query = "select name from user where uname='" + uname + "'AND pass='" + pass + "'";
-        rs = stmt.executeQuery(query);
-        if (rs.next()) {
-            obj.put("name", rs.getString(1));
-            obj.put("Status", "success");
-        }
-        return obj;
+            JSONObject obj = new JSONObject();
+            String query = "select name from user where uname='" + uname + "'AND pass='" + pass + "'";
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                obj.put("name", rs.getString(1));
+                obj.put("Status", "success");
+            }
+            return obj;
         } finally {
-            closeConnections();
+            closeConnection();
         }
 
     }
 
     public JSONObject getUserDetail(String uname) throws ClassNotFoundException, SQLException {
         try {
-        JSONObject obj = new JSONObject();
-        String query = "select name from user where uname='" + uname + "'";
-        rs = stmt.executeQuery(query);
-        if (rs.next()) {
-            obj.put("name", rs.getString(1));
-            obj.put("Status", "success");
-        }
-        return obj;
+            JSONObject obj = new JSONObject();
+            String query = "select name from user where uname='" + uname + "'";
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                obj.put("name", rs.getString(1));
+                obj.put("Status", "success");
+            }
+            return obj;
         } finally {
-            closeConnections();
+            closeConnection();
         }
 
     }
 
     public Blob getProfilePicture(String uname) throws ClassNotFoundException, SQLException {
         try {
-        String query = "select image from image where uname='" + uname + "'";
-        rs = stmt.executeQuery(query);
-        Blob b = null;
-        if (rs.next()) {
-            b = rs.getBlob("image");
-        }
-        return b;
+            String query = "select image from image where uname='" + uname + "'";
+            rs = stmt.executeQuery(query);
+            Blob b = null;
+            if (rs.next()) {
+                b = rs.getBlob("image");
+            }
+            return b;
         } finally {
-            closeConnections();
+            closeConnection();
         }
     }
 
     public Blob getProductImage(int pid) throws ClassNotFoundException, SQLException {
-
-        String query = "select pimage from productImage where pid=" + pid;
-        rs = stmt.executeQuery(query);
-        Blob b = null;
-        if (rs.next()) {
-            b = rs.getBlob("pimage");
+        try {
+            String query = "select pimage from productImage where pid=" + pid;
+            rs = stmt.executeQuery(query);
+            Blob b = null;
+            if (rs.next()) {
+                b = rs.getBlob("pimage");
+            }
+            return b;
+        } finally {
+            closeConnection();
         }
-
-        return b;
     }
 
-    private void closeConnections() throws SQLException {
+    private void openConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
+                BillConstants.USERNAME, BillConstants.PASSWORD);
+        stmt = conn.createStatement();
+    }
+
+    private void closeConnection() throws SQLException {
         if (conn != null) {
             conn.close();
         }
