@@ -21,11 +21,11 @@ Apache Tomcat
 <h2>Installation Steps:</h2>
 
 1. Create database "bill"
-2. Add the following as system properties in Tomcat configuration<
-i) bill.mysql=localhost<
-ii)bill.username=root
-iii)bill.password=root
-iv)bill.database=bill
+2. Add the following as system properties in Tomcat configuration
+<p>i) bill.mysql=localhost</p>
+<p>ii)bill.username=root</p>
+<p>iii)bill.password=root</p>
+<p>iv)bill.database=bill</p>
 3. Create the following tables in the "bill" database.
 
 CREATE TABLE `user` (
