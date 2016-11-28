@@ -22,14 +22,14 @@ public class BillApplication {
 
     public BillApplication() throws ClassNotFoundException, SQLException, IOException {
         Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.mysql + "/" + BillConstants.database,
-                BillConstants.username, BillConstants.password);
+        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
+                BillConstants.USERNAME, BillConstants.PASSWORD);
         stmt = conn.createStatement();
     }
 
     public void addProduct(int productId, String name, float cost, FileItem file)
             throws SQLException, ClassNotFoundException, IOException {
-
+        try{
         String query = "Insert into product value(" + productId + ", '" + name + "', " + cost + ")";
         stmt.execute(query);
 
@@ -38,12 +38,15 @@ public class BillApplication {
         // size must be converted to int otherwise it results in error
         ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
         ps.executeUpdate();
+        } finally {
+            closeConnections();
+        }
 
     }
 
     public JSONObject getProduct(int pid) throws ClassNotFoundException, SQLException {
+        try{
         JSONObject obj = new JSONObject();
-
         String query = "select * from product where productId = " + pid;
         rs = stmt.executeQuery(query);
         if (rs.next()) {
@@ -51,11 +54,14 @@ public class BillApplication {
             obj.put("cost", rs.getFloat(3));
         }
         return obj;
+        } finally {
+            closeConnections();
+        }
     }
 
     public void updateProduct(int productId, String name, float cost, FileItem file)
             throws ClassNotFoundException, SQLException, IOException {
-
+        try {
         String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId;
         stmt.execute(query);
 
@@ -66,17 +72,23 @@ public class BillApplication {
         ps.setInt(2, productId);
         ps.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
         ps.executeUpdate();
+        } finally {
+            closeConnections();
+        }
     }
 
     public void deleteProduct(int productId) throws ClassNotFoundException, SQLException {
-
+        try {
         String query = "Delete from product where productId= " + productId;
         stmt.execute(query);
+        } finally {
+            closeConnections();
+        }
     }
 
     public JSONArray getAllProduct() throws ClassNotFoundException, SQLException {
+        try {
         JSONArray res = new JSONArray();
-
         String query = "select * from product";
         rs = stmt.executeQuery(query);
         while (rs.next()) {
@@ -87,34 +99,43 @@ public class BillApplication {
             res.put(obj);
         }
         return res;
+        } finally {
+            closeConnections();
+        }
 
     }
 
     public void addUser(String name, String uname, String pass, FileItem file)
             throws ClassNotFoundException, SQLException, IOException, FileUploadException {
+        try {
         String query = "Insert into user(name,uname,pass) values('" + name + "', '" + uname + "', '" + pass + "')";
         stmt.execute(query);
-        
         // Store image
         ps = conn.prepareStatement("insert into image(image,uname) values(?,?)");
         ps.setString(2, uname);
         // size must be converted to int otherwise it results in error
         ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
         ps.executeUpdate();
-
+        } finally {
+            closeConnections();
+        }
         
     }
 
     public void updateProfile(String uname, FileItem file) throws ClassNotFoundException, SQLException, IOException {
+        try {
         ps = conn.prepareStatement("Update image set image = ? where uname = ?");
         ps.setBinaryStream(1, file.getInputStream(), (int) file.getSize());
         ps.setString(2, uname);
         ps.executeUpdate();
+        } finally {
+            closeConnections();
+        }
     }
 
     public JSONObject login(String uname, String pass) throws ClassNotFoundException, SQLException {
+        try {
         JSONObject obj = new JSONObject();
-
         String query = "select name from user where uname='" + uname + "'AND pass='" + pass + "'";
         rs = stmt.executeQuery(query);
         if (rs.next()) {
@@ -122,12 +143,15 @@ public class BillApplication {
             obj.put("Status", "success");
         }
         return obj;
+        } finally {
+            closeConnections();
+        }
 
     }
 
     public JSONObject getUserDetail(String uname) throws ClassNotFoundException, SQLException {
+        try {
         JSONObject obj = new JSONObject();
-
         String query = "select name from user where uname='" + uname + "'";
         rs = stmt.executeQuery(query);
         if (rs.next()) {
@@ -135,11 +159,14 @@ public class BillApplication {
             obj.put("Status", "success");
         }
         return obj;
+        } finally {
+            closeConnections();
+        }
 
     }
 
     public Blob getProfilePicture(String uname) throws ClassNotFoundException, SQLException {
-
+        try {
         String query = "select image from image where uname='" + uname + "'";
         rs = stmt.executeQuery(query);
         Blob b = null;
@@ -147,7 +174,9 @@ public class BillApplication {
             b = rs.getBlob("image");
         }
         return b;
-
+        } finally {
+            closeConnections();
+        }
     }
 
     public Blob getProductImage(int pid) throws ClassNotFoundException, SQLException {
@@ -162,4 +191,18 @@ public class BillApplication {
         return b;
     }
 
+    private void closeConnections() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+    }
 }

@@ -100,6 +100,7 @@ $(document).ready(function() {
         }
        if (key.which == 39) {
             div.children(".quantity").focus();
+            return;
         }
        if(key.which==13){
     	   var name = div.children(".pname").val();
@@ -108,14 +109,17 @@ $(document).ready(function() {
     		   return;
     	   }else{
     		   div.children(".nextLine").click();
+    		   return;
     	   }
     			   
        }
        if (key.which == 40) {
            div.next().children(".pid").focus();
+           return;
        }
        if (key.which == 38) {
            div.prev().children(".pid").focus();
+           return;
        }
         var getProductUrl = "/bill/bill?operation=getProduct&pid=" + $(this).val();
         $.ajax({

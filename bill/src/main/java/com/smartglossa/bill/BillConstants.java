@@ -2,8 +2,8 @@ package com.smartglossa.bill;
 
 public class BillConstants {
 
-    static String mysql = "localhost";
-    static String username = "root";
-    static String password = "root";
-    static String database = "bill";
+    final static String MYSQL_SERVER = System.getProperty("bill.mysql");
+    final static String USERNAME = System.getProperty("bill.username");
+    final static String PASSWORD = System.getProperty("bill.password");
+    final static String DATABASE = System.getProperty("bill.database");
 }
