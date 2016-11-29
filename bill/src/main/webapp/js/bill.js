@@ -42,7 +42,8 @@ $(document).ready(function() {
 			processData : false,
 			contentType : false
         }).done(function(result) {
-            if (result == "") {
+        	result = JSON.parse(result);
+            if (result.status == 1) {
                 alert("Added SuccessFully");
                 $('#pId').val("");
                 $('#pName').val("");
@@ -51,10 +52,7 @@ $(document).ready(function() {
                 $(".displayAll").remove();
                 $(".mainArea")[0].appendChild(displayProducts());
             } else {
-                result = JSON.parse(result);
-                if (result.Message == "Error") {
-                    alert("Error occurs");
-                }
+                alert("Error caused: " + result.message);
             }
             
         }).fail(function(result) {
@@ -128,7 +126,7 @@ $(document).ready(function() {
             })
             .done(function(result) {
                 result = JSON.parse(result);
-                if (jQuery.isEmptyObject(result)) {
+                if (result.status == 0) {
                 	div.children(".pname").val("")
                     div.children(".quantity").val("");
                     div.children(".pcost").val("");
@@ -137,8 +135,9 @@ $(document).ready(function() {
                     balanceAmount();
                     return false;
                 }else{
-                	 var pname = result.name;
-                     var pcost = result.cost;
+                	 var product = result.product;
+                	 var pname = product.name;
+                     var pcost = product.cost;
                      div.children(".pname").val(pname)
                      div.children(".quantity").val(1);
                      div.children(".pcost").val(pcost)
@@ -151,27 +150,34 @@ $(document).ready(function() {
                 }
                
             })
+            .fail(function(result) {
+            	console.log(result);
+            })
     });
 
     $(document).on("keyup", ".quantity", function(key) {
     	var div = $(this).parent();
         if (key.which == 37) {
             div.children(".pid").focus();
+            return;
         }
         if (key.which == 13) {
         	var name = div.children(".pname").val();
         	   var cost = div.children(".pcost").val();
      	   if(name==""||cost==""){
-     		   return;
+     		   // Dont need to do anything
      	   }else{
      		   div.children(".nextLine").click();
      	   }
+     	   return;
         }
         if (key.which == 40) {
             div.next().children(".quantity").focus();
+            return;
         }
         if (key.which == 38) {
             div.prev().children(".quantity").focus();
+            return;
         }
         var a = div.children(".quantity").val();
         var b = div.children(".pcost").val();
@@ -192,13 +198,19 @@ $(document).ready(function() {
                 })
                 .done(function(result) {
                     result = JSON.parse(result);
-                    var pName = result.name;
-                    var cost = result.cost;
-                    $("#pName").val(pName);
-                    $("#cost").val(cost);
+                    if (result.status == 1) {
+                    	var product = result.product;
+                    	var pName = product.name;
+                        var cost = product.cost;
+                        $("#pName").val(pName);
+                        $("#cost").val(cost);
+                    } else {
+                    	alert("Error caused: " + result.message);
+                    }
+                   
                 })
                 .fail(function(result) {
-                    alert("Some Errors Please Enter correct value");
+                    console.log(result);
                 });
         } else {
             $("#pName").val("");
@@ -241,7 +253,8 @@ $(document).ready(function() {
     			contentType : false
             })
             .done(function(result) {
-                if (result == "") {
+            	result = JSON.parse(result);
+            	if (result.status == 1) {
                     alert("Updated SuccessFully");
                     $('#pId').val("");
                     $('#pName').val("");
@@ -250,10 +263,7 @@ $(document).ready(function() {
                     $(".displayAll").remove();
                     $(".mainArea")[0].appendChild(displayProducts());
                 } else {
-                    result = JSON.parse(result);
-                    if (result.Message == "Error") {
-                        alert("Error occurs");
-                    }
+                    alert("Error caused: " + result.message);
                 }
                 
             }).fail(function(result) {
@@ -271,10 +281,16 @@ $(document).ready(function() {
             url: url,
             type: 'POST'
         }).done(function(result) {
-            tag.remove();
-            postToServer("product");
+        	result = JSON.parse(result);
+        	if (result.status == 1) {
+        		 tag.remove();
+                 postToServer("product");
+        	} else {
+        		alert("Error caused : "  + result.message)
+        	}
+           
         }).fail(function(result) {
-            console.log("")
+            console.log(result)
         });
     })
     $(document).on("keyup", "#cash", function() {

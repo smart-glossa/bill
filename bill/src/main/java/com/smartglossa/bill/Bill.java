@@ -35,31 +35,33 @@ public class Bill extends HttpServlet {
             String name = request.getParameter("pname");
             float cost = Float.parseFloat(request.getParameter("cost"));
 
-            // Add Product
             JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
                 bill.addProduct(productId, name, cost, file);
+                obj.put("status", 1);
             } catch (Exception e) {
-                obj.put("Message", "Error");
-                response.getWriter().print(obj);
+                e.printStackTrace();
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("getProduct")) {
             int pid = Integer.parseInt(request.getParameter("pid"));
-            JSONObject result = new JSONObject();
-
+            JSONObject obj = new JSONObject();
             try {
-
                 BillApplication bill = new BillApplication();
-                result = bill.getProduct(pid);
-
-                response.getWriter().print(result);
+                JSONObject product = bill.getProduct(pid);
+                obj.put("status", 1);
+                obj.put("product", product);
             } catch (Exception e) {
-                result.put("Message", "Error");
-                response.getWriter().print(result);
+                e.printStackTrace();
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("updateProduct")) {
             int productId = Integer.parseInt(request.getParameter("pid"));
             String name = request.getParameter("name");
@@ -70,80 +72,88 @@ public class Bill extends HttpServlet {
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
                 bill.updateProduct(productId, name, cost, file);
+                obj.put("status", 1);
             } catch (Exception e) {
                 e.printStackTrace();
-                obj.put("Message", "Error");
-                response.getWriter().print(obj);
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("deleteProduct")) {
             int productId = Integer.parseInt(request.getParameter("pid"));
             JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
                 bill.deleteProduct(productId);
+                obj.put("status", 1);
             } catch (Exception e) {
-                obj.put("Message", "Error");
-                response.getWriter().print(obj);
+                e.printStackTrace();
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("getAllProduct")) {
-            JSONArray res = new JSONArray();
+            JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
-                res = bill.getAllProduct();
-                response.getWriter().print(res);
+                JSONArray products = bill.getAllProduct();
+                obj.put("status", 1);
+                obj.put("products", products);
             } catch (Exception e) {
-                JSONObject obj = new JSONObject();
-                obj.put("Message", "Error");
-                response.getWriter().print(obj);
+                e.printStackTrace();
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("addUser")) {
             String name = request.getParameter("name");
             String uname = request.getParameter("uname");
             String pass = request.getParameter("pass");
 
-            // Add Product
             JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
                 bill.addUser(name, uname, pass, file);
-
+                obj.put("status", 1);
             } catch (Exception e) {
                 e.printStackTrace();
-                obj.put("Message", "Error: " + e.getMessage());
-                response.getWriter().print(obj);
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("login")) {
             String uname = request.getParameter("user");
             String pass = request.getParameter("passw");
 
-            // Add Product
-            JSONObject result = new JSONObject();
+            JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
-                result = bill.login(uname, pass);
-
-                response.getWriter().print(result);
+                JSONObject result = bill.login(uname, pass);
+                obj.put("status", 1);
+                obj.put("message", result);
             } catch (Exception e) {
                 e.printStackTrace();
-                result.put("status", 0);
-                result.put("message", "Error: " + e.getMessage());
-                response.getWriter().print(result);
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("getUserDetail")) {
             String uname = request.getParameter("uname");
 
             JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
-                obj = bill.getUserDetail(uname);
-                response.getWriter().print(obj);
+                JSONObject result = bill.getUserDetail(uname);
+                obj.put("status", 1);
+                obj.put("message", result);
             } catch (Exception e) {
                 e.printStackTrace();
-                obj.put("Message", "Error");
-                response.getWriter().print(obj);
+                obj.put("status", 0);
+                obj.put("message", e.getMessage());
             }
+            response.getWriter().print(obj);
         } else if (op.equals("getProductImage")) {
             int pid = Integer.parseInt(request.getParameter("productId"));
 
@@ -187,16 +197,20 @@ public class Bill extends HttpServlet {
             }
         } else if (op.equals("updateProfile")) {
             String uname = request.getParameter("uname");
+
+            JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication object = new BillApplication();
                 object.updateProfile(uname, file);
-                response.getWriter().print("success");
+                obj.put("status", 1);
             } catch (Exception ex) {
                 ex.printStackTrace();
-                response.getWriter().print("failure");
+                obj.put("status", 0);
+                obj.put("message", ex.getMessage());
             }
+            response.getWriter().print(obj);
 
         }
 

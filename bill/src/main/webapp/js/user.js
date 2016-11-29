@@ -12,10 +12,7 @@ $(document).ready(function() {
 	}
 });
 
-$(document).on(
-		"click",
-		"#signup",
-		function(key) {
+$(document).on("click","#signup",function(key) {
 			var name = $('#name').val();
 			var uname = $('#uname').val();
 			var pass = $('#pass').val();
@@ -45,26 +42,21 @@ $(document).on(
 				processData : false,
 				contentType : false
 			}).done(function(result) {
-				if (result == "") {
+				result = JSON.parse(result);
+				if (result.status == 1) {
 					alert("Added SuccessFully");
 					$('#name').val("");
 					$('#uname').val("");
 					$('#pass').val("");
 				} else {
-					result = JSON.parse(result);
-					if (result.Message == "Error") {
-						alert("Error occurs");
-					}
+					alert("Error caused: " + result.message);
 				}
 
 			}).fail(function(result) {
 				console.log(result);
 			});
 		});
-$(document).on(
-		"click",
-		"#login",
-		function(key) {
+$(document).on("click","#login",function(key) {
 			var user = $('#user').val();
 			var passw = $('#passw').val();
 
@@ -84,7 +76,7 @@ $(document).on(
 				type : 'POST'
 			}).done(function(result) {
 				result = JSON.parse(result);
-				if (result.Status == "success") {
+				if (result.status == 1) {
 					document.cookie = "uname=" + user;
 					$("body")[0].appendChild(menu());
 					applyUserDetails();
@@ -96,9 +88,7 @@ $(document).on(
 					$(".mainArea")[0].appendChild(product());
 					$(".mainArea")[0].appendChild(displayProducts());	
 				} else {
-					if (result.status == 0) {
-						alert(result.message);
-					}
+					alert("Error caused: " + result.message);
 				}
 
 			}).fail(function(result) {

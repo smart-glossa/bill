@@ -137,7 +137,6 @@ public class BillApplication {
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 obj.put("name", rs.getString(1));
-                obj.put("Status", "success");
             }
             return obj;
         } finally {
@@ -153,7 +152,6 @@ public class BillApplication {
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 obj.put("name", rs.getString(1));
-                obj.put("Status", "success");
             }
             return obj;
         } finally {
