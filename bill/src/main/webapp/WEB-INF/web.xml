@@ -2,37 +2,12 @@
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>bill</display-name>
     <servlet>
-    	<description>
-    	</description>
-    	<display-name>Bill</display-name>
     	<servlet-name>Bill</servlet-name>
     	<servlet-class>com.smartglossa.bill.Bill</servlet-class>
-    </servlet>
-    <servlet>
-    	<description>
-    	</description>
-    	<display-name>ticket</display-name>
-    	<servlet-name>ticket</servlet-name>
-    	<servlet-class>com.smartglossa.bill.ticket</servlet-class>
-    </servlet>
-    <servlet>
-    	<description>
-    	</description>
-    	<display-name>Ticket</display-name>
-    	<servlet-name>Ticket</servlet-name>
-    	<servlet-class>com.smartglossa.bill.Ticket</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>Bill</servlet-name>
     	<url-pattern>/bill</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Ticket</servlet-name>
-    	<url-pattern>/ticket</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Ticket</servlet-name>
-    	<url-pattern>/Ticket</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
