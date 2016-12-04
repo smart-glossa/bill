@@ -63,3 +63,7 @@ li a:hover:not(.active) {
  height: 0px;
  overflow: hidden;
 }
+
+#menuLogo {
+	border-radius: 50%;
+}
