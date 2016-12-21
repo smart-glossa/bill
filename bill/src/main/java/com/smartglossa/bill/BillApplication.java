@@ -15,19 +15,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class BillApplication {
-    Connection conn = null;
-    Statement stmt = null;
+    Connection conn = null; 
+    Statement stmt = null;       
     ResultSet rs = null;
-    PreparedStatement ps = null;
+    PreparedStatement ps = null; 
 
     public BillApplication() throws ClassNotFoundException, SQLException, IOException {
         openConnection();
     }
 
-    public void addProduct(int productId, String name, float cost, FileItem file)
+    public void addProduct(int productId, String pName, float buyPrice,float sellPrice,float quantity,FileItem file)
             throws SQLException, ClassNotFoundException, IOException {
         try {
-            String query = "Insert into product value(" + productId + ", '" + name + "', " + cost + ")";
+            String query = "Insert into product value(" + productId + ", '" + pName + "', " + buyPrice + "," +sellPrice+ ","+ quantity +")";
             stmt.execute(query);
 
             ps = conn.prepareStatement("insert into productImage(pimage,pid) values(?,?)");
@@ -37,14 +37,14 @@ public class BillApplication {
             ps.executeUpdate();
         } finally {
             closeConnection();
-        }
+        } 
 
     }
 
-    public JSONObject getProduct(int pid) throws ClassNotFoundException, SQLException {
+    public JSONObject getProduct(int pId) throws ClassNotFoundException, SQLException {
         try {
             JSONObject obj = new JSONObject();
-            String query = "select * from product where productId = " + pid;
+            String query = "select * from product where productId = " + pId;
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 obj.put("name", rs.getString(2));
@@ -56,10 +56,10 @@ public class BillApplication {
         }
     }
 
-    public void updateProduct(int productId, String name, float cost, FileItem file)
+    public void updateProduct(int productId, String pName, float buyPrice,float sellPrice,float quantity, FileItem file)
             throws ClassNotFoundException, SQLException, IOException {
         try {
-            String query = "Update product set name='" + name + "',cost= '" + cost + "'where productId= " + productId;
+            String query = "Update product set pName='" + pName + "',buyPrice= " +buyPrice  + ",sellPrice= "+ sellPrice +",quantity="+ quantity +",where productId= " + productId;
             stmt.execute(query);
 
             ps = conn.prepareStatement(
@@ -90,9 +90,11 @@ public class BillApplication {
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 JSONObject obj = new JSONObject();
-                obj.put("productId", rs.getInt(1));
-                obj.put("name", rs.getString(2));
-                obj.put("cost", rs.getFloat(3));
+				obj.put("productId", rs.getInt("productId"));
+                obj.put("pName", rs.getString("pName"));
+                obj.put("sellPrice", rs.getFloat("sellPrice"));
+                obj.put("buyPrice", rs.getFloat("buyPrice"));
+                obj.put("quantity", rs.getFloat("quantity"));
                 res.put(obj);
             }
             return res;

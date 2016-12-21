@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class Bill extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+ 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
@@ -31,16 +31,17 @@ public class Bill extends HttpServlet {
         ServletFileUpload sfu = new ServletFileUpload(factory);
         String op = request.getParameter("operation");
         if (op.equals("addProduct")) {
-            int productId = Integer.parseInt(request.getParameter("pid"));
-            String name = request.getParameter("pname");
-            float cost = Float.parseFloat(request.getParameter("cost"));
-
+            int productId = Integer.parseInt(request.getParameter("pId"));
+            String pName = request.getParameter("pName");
+            float sellPrice = Float.parseFloat(request.getParameter("sellPrice"));
+            float buyPrice = Float.parseFloat(request.getParameter("buyPrice"));
+            float quantity = Float.parseFloat(request.getParameter("quantity"));
             JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
-                bill.addProduct(productId, name, cost, file);
+                bill.addProduct(productId, pName, sellPrice, buyPrice,quantity,file);
                 obj.put("status", 1);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -49,7 +50,7 @@ public class Bill extends HttpServlet {
             }
             response.getWriter().print(obj);
         } else if (op.equals("getProduct")) {
-            int pid = Integer.parseInt(request.getParameter("pid"));
+            int pid = Integer.parseInt(request.getParameter("pId"));
             JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
@@ -63,15 +64,17 @@ public class Bill extends HttpServlet {
             }
             response.getWriter().print(obj);
         } else if (op.equals("updateProduct")) {
-            int productId = Integer.parseInt(request.getParameter("pid"));
-            String name = request.getParameter("name");
-            float cost = Float.parseFloat(request.getParameter("cost"));
-            JSONObject obj = new JSONObject();
+            int productId = Integer.parseInt(request.getParameter("pId"));
+            String pName = request.getParameter("pName");
+            float sellPrice = Float.parseFloat(request.getParameter("sellPrie"));
+            float buyPrice = Float.parseFloat(request.getParameter("buyPrice"));
+            float quantity = Float.parseFloat(request.getParameter("quantity"));
+                        JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
-                bill.updateProduct(productId, name, cost, file);
+                bill.updateProduct(productId, pName, buyPrice, sellPrice, quantity, file);
                 obj.put("status", 1);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -80,7 +83,7 @@ public class Bill extends HttpServlet {
             }
             response.getWriter().print(obj);
         } else if (op.equals("deleteProduct")) {
-            int productId = Integer.parseInt(request.getParameter("pid"));
+            int productId = Integer.parseInt(request.getParameter("pId"));
             JSONObject obj = new JSONObject();
             try {
                 BillApplication bill = new BillApplication();
