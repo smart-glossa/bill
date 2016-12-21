@@ -62,3 +62,12 @@ CREATE TABLE `productImage` (
   CONSTRAINT `productimage_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`productId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
 
+
+CREATE TABLE `customer` (
+  `customerId` int(11) NOT NULL,
+  `name` varchar(100) default NULL,
+  `address` varchar(100) default NULL,
+  `phonenumber` bigint(20) default NULL,
+  PRIMARY KEY  (`customerId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
