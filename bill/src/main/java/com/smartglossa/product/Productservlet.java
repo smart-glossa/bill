@@ -31,7 +31,7 @@ public class Productservlet extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if (operation.equals("addproducts")) {
 			JSONObject obj = new JSONObject();
-			int pId = Integer.parseInt(request.getParameter("productId"));
+			int pId = Integer.parseInt(request.getParameter("pId"));
 			String pname = request.getParameter("pName");
 			float buyprice = Float.parseFloat(request.getParameter("buyPrice"));
 			float sellprice = Float.parseFloat(request.getParameter("sellPrice"));
