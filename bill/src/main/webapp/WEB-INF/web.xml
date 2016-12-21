@@ -5,9 +5,17 @@
         <servlet-name>Bill</servlet-name>
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
+    <servlet>
+    	<servlet-name>CustomerServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.CustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>CustomerServlet</servlet-name>
+    	<url-pattern>/customer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
