@@ -86,3 +86,11 @@ CREATE TABLE `customer` (
  purchaseMetaData | CREATE TABLE purchaseMetaData ( purchaseId int(11) NOT NULL, billDate date DEFAULT NULL, vat float DEFAULT NULL, discount float DEFAULT NULL, billTotal float DEFAULT NULL, PRIMARY KEY (purchaseId) )
  
  3.purchasePayment | CREATE TABLE purchasePayment ( purchaseId int(11) DEFAULT NULL, payId int(11) NOT NULL AUTO_INCREMENT, payDate date DEFAULT NULL, paidAmount float DEFAULT NULL, PRIMARY KEY (payId), KEY purchaseId (purchaseId), CONSTRAINT purchasePayment_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE )
+ 
+ 
+ 
+CREATE TABLE `expense` (
+  `catid` int(11) NOT NULL,
+  `catname` varchar(100) default NULL,
+  PRIMARY KEY  USING BTREE (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
