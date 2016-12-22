@@ -120,3 +120,12 @@ CREATE TABLE `expense` (
   `catname` varchar(100) default NULL,
   PRIMARY KEY  USING BTREE (`catid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `dealer` (
+  `dealerId` int(11) NOT NULL,
+  `name` varchar(50) default NULL,
+  `address` varchar(100) default NULL,
+  `phoneNumber` varchar(100) default NULL,
+  `TINNumber` varchar(20) default NULL,
+  PRIMARY KEY  (`dealerId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
