@@ -134,3 +134,9 @@ CREATE TABLE `dealer` (
   PRIMARY KEY  (`dealerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+
+CREATE TABLE `expensecategory` (
+  `categoryId` int(11) NOT NULL,
+  `categoryName` varchar(100) default NULL,
+  PRIMARY KEY  (`categoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
