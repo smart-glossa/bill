@@ -80,3 +80,5 @@ CREATE TABLE `customer` (
   `billTotal` float default NULL,
   PRIMARY KEY  (`saleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+ purchaseLineItem | CREATE TABLE purchaseLineItem ( purchaseId int(11) DEFAULT NULL, productId int(11) DEFAULT NULL, purchaseLineId int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (purchaseLineId), KEY purchaseId (purchaseId), KEY productId (productId), CONSTRAINT purchaseLineItem_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE, CONSTRAINT purchaseLineItem_ibfk_2 FOREIGN KEY (productId) REFERENCES product (productId) ON DELETE CASCADE
