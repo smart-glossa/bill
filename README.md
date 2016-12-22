@@ -71,6 +71,15 @@ CREATE TABLE `customer` (
   PRIMARY KEY  (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+CREATE TABLE `customerbill` (
+  `customerId` int(11) default NULL,
+  `saleId` int(11) default NULL,
+  KEY `customerId` (`customerId`),
+  KEY `saleId` (`saleId`),
+  CONSTRAINT `customerbill_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE CASCADE,
+  CONSTRAINT `customerbill_ibfk_2` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
 
  CREATE TABLE `salemetadata` (
   `saleId` int(11) NOT NULL,
@@ -129,3 +138,4 @@ CREATE TABLE `dealer` (
   `TINNumber` varchar(20) default NULL,
   PRIMARY KEY  (`dealerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
