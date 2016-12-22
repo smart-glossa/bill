@@ -124,11 +124,6 @@ a` (`saleId`) ON DELETE CASCADE
  
  
  
-CREATE TABLE `expense` (
-  `catid` int(11) NOT NULL,
-  `catname` varchar(100) default NULL,
-  PRIMARY KEY  USING BTREE (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `dealer` (
   `dealerId` int(11) NOT NULL,
