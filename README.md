@@ -71,3 +71,12 @@ CREATE TABLE `customer` (
   PRIMARY KEY  (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+
+ CREATE TABLE `salemetadata` (
+  `saleId` int(11) NOT NULL,
+  `billDate` varchar(50) default NULL,
+  `vat` float default NULL,
+  `discount` float default NULL,
+  `billTotal` float default NULL,
+  PRIMARY KEY  (`saleId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
