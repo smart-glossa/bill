@@ -83,7 +83,7 @@ CREATE TABLE `customerbill` (
 
  CREATE TABLE `salemetadata` (
   `saleId` int(11) NOT NULL,
-  `billDate` varchar(50) default NULL,
+  `billDate` date default NULL,
   `vat` float default NULL,
   `discount` float default NULL,
   `billTotal` float default NULL,
@@ -99,21 +99,18 @@ CREATE TABLE `customerbill` (
   PRIMARY KEY  (`saleLineId`),
   KEY `saleId` (`saleId`),
   KEY `productId` (`productId`),
-  CONSTRAINT `salelineitems_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetad
-ata` (`saleId`) ON DELETE CASCADE,
-  CONSTRAINT `salelineitems_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `produc
-t` (`productId`)
+  CONSTRAINT `salelineitems_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE,
+  CONSTRAINT `salelineitems_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 
 
 CREATE TABLE `salepayment` (
   `payId` int(11) NOT NULL auto_increment,
   `saleId` int(11) default NULL,
-  `payDate` varchar(50) default NULL,
+  `payDate` date default NULL,
   `paidAmount` float default NULL,
   PRIMARY KEY  (`payId`),
   KEY `saleId` (`saleId`),
-  CONSTRAINT `salepayment_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadat
-a` (`saleId`) ON DELETE CASCADE
+  CONSTRAINT `salepayment_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 
 
  purchaseLineItem | CREATE TABLE purchaseLineItem ( purchaseId int(11) DEFAULT NULL, productId int(11) DEFAULT NULL, purchaseLineId int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (purchaseLineId), KEY purchaseId (purchaseId), KEY productId (productId), CONSTRAINT purchaseLineItem_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE, CONSTRAINT purchaseLineItem_ibfk_2 FOREIGN KEY (productId) REFERENCES product (productId) ON DELETE CASCADE
