@@ -145,3 +145,17 @@ CREATE TABLE `expensecategory` (
   `cname` varchar(100) default NULL,
   PRIMARY KEY  (`catid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `expenses` (
+  `expId` int(11) NOT NULL auto_increment,
+  `catid` int(11) default NULL,
+  `expDate` date default NULL,
+  `description` varchar(100) default NULL,
+  `amount` float default NULL,
+  PRIMARY KEY  (`expId`),
+  KEY `catid` (`catid`),
+  CONSTRAINT `expenses_ibfk_1` FOREIGN KEY (`catid`) REFERENCES `expensecategory` (`catid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+
+
+
