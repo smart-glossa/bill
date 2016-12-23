@@ -154,7 +154,7 @@ public class CustomerServlet extends HttpServlet {
 						result.put(obj);
 
 					}
-				}
+				} 
 
 			} catch (Exception e) {
 				JSONObject error = new JSONObject();
