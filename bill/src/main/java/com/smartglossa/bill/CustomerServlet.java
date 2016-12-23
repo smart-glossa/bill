@@ -143,7 +143,8 @@ public class CustomerServlet extends HttpServlet {
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
 					Statement state = conn.createStatement();
-					String queryy = "select * from salemetadata,salelineitems,salepayment where salemetadata.saleId="+saleId+" AND salelineitems.saleId =" +saleId+" AND salepayment.saleId ="+ saleId;
+					String queryy = "select * from salemetadata,salelineitems,salepayment where salemetadata.saleId="
+							+ saleId + " AND salelineitems.saleId =" + saleId + " AND salepayment.saleId =" + saleId;
 					ResultSet res = state.executeQuery(queryy);
 					while (res.next()) {
 						JSONObject obj = new JSONObject();
@@ -151,13 +152,13 @@ public class CustomerServlet extends HttpServlet {
 						obj.put("vat", res.getFloat("vat"));
 						obj.put("discount", res.getFloat("discount"));
 						obj.put("billTotal", res.getFloat("billTotal"));
-						obj.put("saleLineId",res.getInt("saleLineId"));
-						obj.put("productId",res.getInt("productId"));
-						obj.put("quantity",res.getFloat("quantity"));
-						obj.put("cost",res.getFloat("cost"));
-						obj.put("payId",res.getInt("payId"));
-						obj.put("payDate",res.getDate("payDate"));
-						obj.put("paidAmount",res.getFloat("paidAmount"));
+						obj.put("saleLineId", res.getInt("saleLineId"));
+						obj.put("productId", res.getInt("productId"));
+						obj.put("quantity", res.getFloat("quantity"));
+						obj.put("cost", res.getFloat("cost"));
+						obj.put("payId", res.getInt("payId"));
+						obj.put("payDate", res.getDate("payDate"));
+						obj.put("paidAmount", res.getFloat("paidAmount"));
 						result.put(obj);
 
 					}
