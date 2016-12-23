@@ -134,6 +134,15 @@ CREATE TABLE `dealer` (
   PRIMARY KEY  (`dealerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+CREATE TABLE `dealerbill` (
+  `dealerId` int(11) default NULL,
+  `purchaseId` int(11) default NULL,
+  KEY `dealerId` (`dealerId`),
+  KEY `purchaseId` (`purchaseId`),
+  CONSTRAINT `dealerbill_ibfk_1` FOREIGN KEY (`dealerId`) REFERENCES `dealer` (`dealerId`) ON DELETE CASCADE,
+  CONSTRAINT `dealerbill_ibfk_2` FOREIGN KEY (`purchaseId`) REFERENCES `purchasemetadata` (`purchaseId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
 
 CREATE TABLE `expensecategory` (
   `categoryId` int(11) NOT NULL,
