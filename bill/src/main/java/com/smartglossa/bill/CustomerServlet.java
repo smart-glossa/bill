@@ -129,7 +129,7 @@ public class CustomerServlet extends HttpServlet {
 			}
 			response.getWriter().print(call);
 		} else if (operation.equals("cusale")) {
-			int cuid = Integer.parseInt(request.getParameter("cuid"));
+			int cuid = Integer.parseInt(request.getParameter("customerId"));
 			JSONArray result = new JSONArray();
 
 			try {
@@ -143,29 +143,35 @@ public class CustomerServlet extends HttpServlet {
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
 					Statement state = conn.createStatement();
-					String queryy = "Select *from saleMetaData where saleId=" + saleId;
+					String queryy = "select * from salemetadata,salelineitems,salepayment where salemetadata.saleId="+saleId+" AND salelineitems.saleId =" +saleId+" AND salepayment.saleId ="+ saleId;
 					ResultSet res = state.executeQuery(queryy);
 					while (res.next()) {
 						JSONObject obj = new JSONObject();
-						obj.put("billDate", res.getDate(2));
-						obj.put("vat", res.getFloat(3));
-						obj.put("discount", res.getFloat(4));
-						obj.put("billTotal", res.getFloat(5));
+						obj.put("billDate", res.getDate("billDate"));
+						obj.put("vat", res.getFloat("vat"));
+						obj.put("discount", res.getFloat("discount"));
+						obj.put("billTotal", res.getFloat("billTotal"));
+						obj.put("saleLineId",res.getInt("saleLineId"));
+						obj.put("productId",res.getInt("productId"));
+						obj.put("quantity",res.getFloat("quantity"));
+						obj.put("cost",res.getFloat("cost"));
+						obj.put("payId",res.getInt("payId"));
+						obj.put("payDate",res.getDate("payDate"));
+						obj.put("paidAmount",res.getFloat("paidAmount"));
 						result.put(obj);
 
 					}
-				} 
+				}
 
 			} catch (Exception e) {
-				JSONObject error = new JSONObject();
-				error.put("status", 0);
-                 e.printStackTrace();
+				JSONObject obj = new JSONObject();
+				obj.put("status", "0");
+				result.put(obj);
+				e.printStackTrace();
 
 			}
 			response.getWriter().print(result);
 
 		}
-
 	}
-
 }
