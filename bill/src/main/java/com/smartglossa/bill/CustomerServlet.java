@@ -1,3 +1,4 @@
+
 package com.smartglossa.bill;
 
 import java.io.IOException;
@@ -127,8 +128,44 @@ public class CustomerServlet extends HttpServlet {
 
 			}
 			response.getWriter().print(call);
+		} else if (operation.equals("cusale")) {
+			int cuid = Integer.parseInt(request.getParameter("cuid"));
+			JSONArray result = new JSONArray();
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
+				Statement stat = con.createStatement();
+				String query = "select saleId from customerbill where customerId=" + cuid;
+				ResultSet rs = stat.executeQuery(query);
+				while (rs.next()) {
+					int saleId = rs.getInt("saleId");
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
+					Statement state = conn.createStatement();
+					String queryy = "Select *from saleMetaData where saleId=" + saleId;
+					ResultSet res = state.executeQuery(queryy);
+					while (res.next()) {
+						JSONObject obj = new JSONObject();
+						obj.put("billDate", res.getDate(2));
+						obj.put("vat", res.getFloat(3));
+						obj.put("discount", res.getFloat(4));
+						obj.put("billTotal", res.getFloat(5));
+						result.put(obj);
+
+					}
+				}
+
+			} catch (Exception e) {
+				JSONObject error = new JSONObject();
+				error.put("status", 0);
+                 e.printStackTrace();
+
+			}
+			response.getWriter().print(result);
+
 		}
-		
+
 	}
 
 }
