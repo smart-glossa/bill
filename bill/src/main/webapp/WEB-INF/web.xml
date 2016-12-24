@@ -5,11 +5,79 @@
         <servlet-name>Bill</servlet-name>
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SaleLineItems</display-name>
+    	<servlet-name>SaleLineItems</servlet-name>
+    	<servlet-class>salelineitems.SaleLineItems</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SaleLineItem</display-name>
+    	<servlet-name>SaleLineItem</servlet-name>
+    	<servlet-class>com.smartglossa.salelineitems.SaleLineItem</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SaleMetaData</display-name>
+    	<servlet-name>SaleMetaData</servlet-name>
+    	<servlet-class>com.smartglossa.salemetadata.SaleMetaData</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SalePayment</display-name>
+    	<servlet-name>SalePayment</servlet-name>
+    	<servlet-class>com.smartglossa.salepayment.SalePayment</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>KaniServlet</display-name>
+    	<servlet-name>KaniServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.KaniServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>KkServlet</display-name>
+    	<servlet-name>KkServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.KkServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>PurchaseLineServlet</display-name>
+    	<servlet-name>PurchaseLineServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.PurchaseLineServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>PurchasePayment</display-name>
+    	<servlet-name>PurchasePayment</servlet-name>
+    	<servlet-class>com.smartglossa.bill.PurchasePayment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/bill</url-pattern>
     </servlet-mapping>
-    <session-config>
+    <servlet-mapping>
+    	<servlet-name>SaleLineItem</servlet-name>
+    	<url-pattern>/SaleLineItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>SaleMetaData</servlet-name>
+    	<url-pattern>/SaleMetaData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>SalePayment</servlet-name>
+    	<url-pattern>/SalePayment</url-pattern>
+    </servlet-mapping>
+       <session-config>
         <session-timeout>
             30
         </session-timeout>

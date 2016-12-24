@@ -185,7 +185,8 @@ function product() {
         '<table class="Product">' +
         '<tr><td><label>ProductId:</label></td><td> <input type=number id="pId" class="add"></td></tr>' +
         '<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>' +
-        '<tr><td><label>Cost:</label></td><td> <input type=number id="cost" class="add"></td></tr>' +
+        '<tr><td><label>SellPrice:</label></td><td> <input type=number id="sellPrice" class="add"></td></tr>' +
+        '<tr><td><label>Quantity:</label></td><td> <input type=number id="quantity" class="add"></td></tr>' +
         '<tr><td></td><td><input type=file id="profile" class="add"></td></tr>' +
         '<tr><td></td><td><input type=submit value="ADD" id="submit">' +
         '<input type=submit value="UPDATE" id="update"></td></tr>' +

@@ -15,7 +15,8 @@ $(document).ready(function() {
     $(document).on("click", "#submit", function(key) {
         var pId = $('#pId').val();
         var pName = $('#pName').val();
-        var cost = $('#cost').val();
+        var sellPrice = $('#sellPrice').val();
+        var quantity = $('#quantity').val();
 
         if (pId == "") {
             alert("Please Enter ProductId");
@@ -27,10 +28,15 @@ $(document).ready(function() {
             $("#pName").focus().css("outline-color", "#ff0000");
             return;
         }
-        if (cost == "") {
-            alert("Please Enter cost");
-            $("#cost").focus().css("outline-color", "ff0000");
+        if (sellPrice == "") {
+            alert("Please Enter SellPrice");
+            $("#sellPrice").focus().css("outline-color", "ff0000");
             return;
+        }
+        if(quantity == ""){
+        	alert("Please Enter Quantity");
+        	$("#quantity").focus().css("outline-color","ff0000");
+        	return;
         }
         var url = "/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
         var request = new FormData();
