@@ -6,15 +6,24 @@
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
     <servlet>
-    	<servlet-name>categoryServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.categoryServlet</servlet-class>
+    	<servlet-name>ExpensesServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.ExpensesServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<display-name>CatServlet</display-name>
+    	<servlet-name>CatServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.CatServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/bill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>categoryServlet</servlet-name>
+    	<servlet-name>ExpensesServlet</servlet-name>
+    	<url-pattern>/Expense</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>CatServlet</servlet-name>
     	<url-pattern>/cat</url-pattern>
     </servlet-mapping>
     <session-config>
