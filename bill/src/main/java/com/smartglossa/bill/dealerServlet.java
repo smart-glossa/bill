@@ -19,11 +19,6 @@ import org.json.JSONObject;
 public class dealerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public dealerServlet() {
-		super();
-
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -135,6 +130,48 @@ public class dealerServlet extends HttpServlet {
 			}
 			response.getWriter().println(up);
 
+		} else if (operation.equals("billadd")) {
+			int dId = Integer.parseInt(request.getParameter("dealerId"));
+			JSONArray result = new JSONArray();
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
+				Statement statement = connection.createStatement();
+				String query = "select purchaseId from dealerBill where dealerId=" + dId;
+				ResultSet re = statement.executeQuery(query);
+				while (re.next()) {
+					int pId = re.getInt("purchaseId");
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
+					Statement stat = conn.createStatement();
+					String queryy = "select * from purchasemetadata,purchaselineitem,purchasepayment where purchasemetadata.purchaseId="+ pId + " AND purchaselineitem.purchaseId=" + pId + " AND purchasepayment.purchaseId="+ pId;
+					ResultSet res = stat.executeQuery(queryy);
+					while (res.next()) {
+						JSONObject all = new JSONObject();
+						all.put("billDate", res.getDate("billDate"));
+						all.put("vat", res.getFloat("vat"));
+						all.put("discount", res.getFloat("discount"));
+						all.put("billTotal", res.getFloat("billTotal"));
+						all.put("productId", res.getInt("productId"));
+						all.put("purchaseLineId", res.getInt("purchaseLineId"));
+						all.put("quantity", res.getFloat("quantity"));
+						all.put("payId", res.getInt("payId"));
+						all.put("payDate", res.getDate("payDate"));
+						all.put("paidAmount", res.getFloat("paidAmount"));
+						result.put(all);
+					}
+
+				}
+			} catch (Exception e) {
+				JSONObject all = new JSONObject();
+				all.put("status", "0");
+				result.put(all);
+				e.printStackTrace();
+			}
+			response.getWriter().println(result);
+
 		}
+
 	}
 }
