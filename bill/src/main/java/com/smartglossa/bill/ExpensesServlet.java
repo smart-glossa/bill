@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -96,7 +99,7 @@ public class ExpensesServlet extends HttpServlet {
 				ResultSet rs = stateme.executeQuery(query);
 
 				if (rs.next()) {
-					resul.put("expId",rs.getString ( "expId"));
+					resul.put("expId", rs.getString("expId"));
 					resul.put("catid", rs.getString("catid"));
 					resul.put("expDate", rs.getString("expDate"));
 					resul.put("description", rs.getString("description"));
@@ -134,44 +137,26 @@ public class ExpensesServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().println(exp);
-		} else if (operation.equals("expense")) {
-			String date = request.getParameter("expDate");
-			JSONArray obj = new JSONArray();
+		} else if(operation.equals("expense")){
+			String date=request.getParameter("expDate");
+        	JSONObject obj=new JSONObject();
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "select * from expenses where expDate=" + date;
-				ResultSet res = stat.executeQuery(query);
-				while (res.next()) {
-					JSONObject object = new JSONObject();
-					object.put("description", res.getString("description"));
-					object.put("amount", res.getString("amount"));
-					obj.put(object);
-					int catid = res.getInt("catid");
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-					Statement state = conn.createStatement();
-					String queryy = "select * from expensecategory,expenses where expensecategory.catid=" + catid
-							+ "AND expenses.catid=" + catid;
-					ResultSet result = state.executeQuery(queryy);
-					while (result.next()) {
-						JSONObject object1 = new JSONObject();
-						object1.put("catname", res.getString("catname"));
-						
-						obj.put(object1);
-					}
-				}
-
+				Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bill","root","root");
+				Statement state=connection.createStatement();
+				String queryy="select * from expenses where expDate="+date;
+				ResultSet res=state.executeQuery(queryy);
+                if(res.next()){
+                	obj.put("catid",res.getString("catid"));
+                	obj.put("description",res.getString("description"));
+                	obj.put("amount",res.getString("amount"));
+                }
 			} catch (Exception e) {
-				JSONObject object = new JSONObject();
-				object.put("status", 0);
-				obj.put(object);
 				e.printStackTrace();
-
+				
 			}
 			response.getWriter().print(obj);
-
 		}
+		
 	}
 }
