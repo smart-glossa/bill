@@ -27,19 +27,15 @@ public class CustomerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String operation = request.getParameter("operation");
-		if (operation.equals("cusadd")) {
+		if (operation.equals("cusAdd")) {
 			int cid = Integer.parseInt(request.getParameter("cid"));
 			String cname = request.getParameter("cname");
 			String caddr = request.getParameter("caddr");
 			int cphno = Integer.parseInt(request.getParameter("cphno"));
 			JSONObject result = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = connection.createStatement();
-				String query = "insert into customer(customerId,name,address,phonenumber)values(" + cid + ",'" + cname
-						+ "','" + caddr + "'," + cphno + ")";
-				stat.execute(query);
+				CustomerClass cus = new CustomerClass();
+				cus.cusAdd(cid, cname, caddr, cphno);
 				result.put("status", 1);
 			} catch (Exception e) {
 				result.put("status", 0);
@@ -47,87 +43,66 @@ public class CustomerServlet extends HttpServlet {
 
 			}
 			response.getWriter().print(result);
-		} else if (operation.equals("cusupdate")) {
+		} else if (operation.equals("cusUpdate")) {
 			int cid = Integer.parseInt(request.getParameter("cid"));
 			String cname = request.getParameter("cname");
 			String caddr = request.getParameter("caddr");
 			int cphno = Integer.parseInt(request.getParameter("cphno"));
-			JSONObject cupdate = new JSONObject();
+			JSONObject result = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "update customer set name=' " + cname + " ',address=' " + caddr + " ',phonenumber="
-						+ cphno + " where customerId=" + cid;
-				stat.execute(query);
-				cupdate.put("status", 1);
+				CustomerClass cus = new CustomerClass();
+				cus.cusUpdate(cid, cname, caddr, cphno);
+				result.put("status", 1);
 			} catch (Exception e) {
-				cupdate.put("status", 0);
+				result.put("status", 0);
 				e.printStackTrace();
 
 			}
-			response.getWriter().print(cupdate);
-		} else if (operation.equals("cusdelete")) {
+			response.getWriter().print(result);
+		} else if (operation.equals("cusDelete")) {
 			int cid = Integer.parseInt(request.getParameter("cid"));
-			JSONObject cdelete = new JSONObject();
+			JSONObject result = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "delete from customer where customerId=" + cid;
-				stat.execute(query);
-				cdelete.put("status", 1);
+				CustomerClass cus = new CustomerClass();
+				cus.cusDelete(cid);
+				result.put("status", 1);
 			} catch (Exception e) {
-				cdelete.put("status", 0);
+				result.put("status", 0);
 				e.printStackTrace();
 
 			}
-			response.getWriter().print(cdelete);
-		} else if (operation.equals("cusone")) {
+			response.getWriter().print(result);
+		} else if (operation.equals("cusOne")) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			JSONObject cone = new JSONObject();
+			JSONObject result = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "select * from customer where customerId=" + id;
-				ResultSet rs = stat.executeQuery(query);
-				if (rs.next()) {
-					cone.put("name", rs.getString(2));
-					cone.put("address", rs.getString(3));
-					cone.put("phonenumber", rs.getInt(4));
-				}
+				CustomerClass cus = new CustomerClass();
+				cus.cusOne(id);
 
-			} catch (Exception e) {
-				cone.put("status", 0);
+			}
+
+			catch (Exception e) {
+				result.put("status", 0);
 				e.printStackTrace();
 
 			}
-			response.getWriter().print(cone);
+			response.getWriter().print(result);
 		} else if (operation.equals("cusAll")) {
-			JSONArray call = new JSONArray();
+			JSONArray result= new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "select * from customer";
-				ResultSet res = stat.executeQuery(query);
-				while (res.next()) {
-					JSONObject get = new JSONObject();
-					get.put("name", res.getString(2));
-					get.put("address", res.getString(3));
-					get.put("phonenumber", res.getInt(4));
-					call.put(get);
-				}
-
+				CustomerClass cus=new CustomerClass();
+				cus.cusAll();
+				
+				
 			} catch (Exception e) {
-				JSONObject error = new JSONObject();
-				error.put("status", 0);
-				call.put(error);
+				JSONObject get=new JSONObject();
+				get.put("status", 0);
+				result.put(get);
+				
 				e.printStackTrace();
 
 			}
-			response.getWriter().print(call);
+			response.getWriter().print(result);
 		} else if (operation.equals("cusale")) {
 			int cuid = Integer.parseInt(request.getParameter("customerId"));
 			JSONArray result = new JSONArray();
