@@ -1,10 +1,7 @@
-package com.smartglossa.salelineitems;
+package com.smartglossa.bill;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,12 +29,9 @@ public class SaleLineItem extends HttpServlet {
 		  float quantity = Float.parseFloat(request.getParameter("quantity"));
 		  float cost = Float.parseFloat(request.getParameter("cost"));
 		  try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-			Statement stmt = conn.createStatement();
-			String query = "insert into salelineitems(saleId,productId,quantity,cost)values("+ saleId +","+ productId +","+ quantity +","+ cost +")";
-			stmt.execute(query);
-			obj.put("status","success");
+			  SaleLineItemClass Saleline = new SaleLineItemClass();
+			  Saleline.addSaleLine(saleId, productId, quantity, cost);
+			  obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status","failure");
 				e.printStackTrace();
@@ -46,44 +40,20 @@ public class SaleLineItem extends HttpServlet {
 	  }else if (operation.equals("getSaleLineItem")) {
           JSONArray result = new JSONArray();
           try {
-              Class.forName("com.mysql.jdbc.Driver");
-              Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-              Statement stmt = conn.createStatement();
-              String query = "select *from salelineitems";
-              ResultSet rs = stmt.executeQuery(query);
-              while (rs.next()) {
-                  JSONObject obj = new JSONObject();
-                  obj.put("saleLineId",rs.getInt("salelineid"));
-                  obj.put("saleId", rs.getInt("saleid"));
-                  obj.put("productId", rs.getInt("productid"));
-                  obj.put("quantity", rs.getFloat("quantity"));
-                  obj.put("cost",rs.getFloat("cost"));
-                  result.put(obj);
+        	  SaleLineItemClass Saleline = new SaleLineItemClass();
+              result = Saleline.getSaleLineItem();
               }
-          } catch (Exception e) {
-              JSONObject obj = new JSONObject();
-              obj.put("status", "0");
-              result.put(obj);
+           catch (Exception e) {
               e.printStackTrace();
           }
           response.getWriter().print(result);
       }else if(operation.equals("getOneSaleLineItem")){
           JSONObject obj = new JSONObject();
-          String saleLineId = request.getParameter("salelineid");
+          int saleLineId = Integer.parseInt(request.getParameter("salelineid"));
           try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-	          Statement stmt = conn.createStatement();
-	          String query = "select * from salelineitems where saleLineId="+ saleLineId;
-	          ResultSet rs = stmt.executeQuery(query);
-	          if (rs.next()) {
-	        	  obj.put("saleId", rs.getInt("saleid"));
-                  obj.put("productId", rs.getInt("productid"));
-                  obj.put("quantity", rs.getFloat("quantity"));
-                  obj.put("cost",rs.getFloat("cost"));
-	          }
+        	  SaleLineItemClass Saleline = new SaleLineItemClass();
+        	  obj = Saleline.getOneSaleLineItem(saleLineId);
 		} catch (Exception e) {
-			obj.put("status","0");
 			e.printStackTrace();
 		}
           response.getWriter().print(obj);
@@ -91,14 +61,11 @@ public class SaleLineItem extends HttpServlet {
     	  int saleLineId = Integer.parseInt(request.getParameter("salelineid"));
     	  JSONObject obj= new JSONObject();
     	  try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-                Statement stmt = conn.createStatement();
-                String query = "Delete from salelineitems where saleLineId=" + saleLineId;
-                stmt.execute(query);
-                obj.put("status", "1");
+               SaleLineItemClass Saleline = new SaleLineItemClass();
+               Saleline.deleteSaleLineItem(saleLineId);
+                obj.put("status", "Success");
             } catch (Exception e) {
-                obj.put("status", "0");
+                obj.put("status", "Failure");
                 e.printStackTrace();
             }
             response.getWriter().print(obj);
@@ -110,11 +77,8 @@ public class SaleLineItem extends HttpServlet {
 			  float quantity = Float.parseFloat(request.getParameter("quantity"));
 			  float cost = Float.parseFloat(request.getParameter("cost"));
 			try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-					Statement stmt = conn.createStatement();
+					
 			        String query = "update salelineitems set saleId=" + saleId +",productId="+ productId +",quantity=" + quantity +",cost="+ cost+" where saleLineId=" +saleLineId ;
-				 stmt.execute(query);
 				 obj.put("status","Success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");

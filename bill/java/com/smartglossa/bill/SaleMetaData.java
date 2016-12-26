@@ -1,4 +1,4 @@
-package com.smartglossa.salemetadata;
+package com.smartglossa.bill;
 
 import java.io.IOException;
 import java.sql.Connection;

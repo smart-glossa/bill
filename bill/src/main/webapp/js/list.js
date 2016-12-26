@@ -183,7 +183,7 @@ function product() {
     div.className = "addProduct";
     var html = '<h3>Add Product</h3>' +
         '<table class="Product">' +
-        '<tr><td><label>ProductId:</label></td><td> <input type=number id="pId" class="add"></td></tr>' +
+        '<tr><td><label>ProductId:</label></td><td> <input type=number id="productId" class="add"></td></tr>' +
         '<tr><td><label>Product Name:</label></td> <td><input type=text id="pName" class="add"></td></tr>' +
         '<tr><td><label>SellPrice:</label></td><td> <input type=number id="sellPrice" class="add"></td></tr>' +
         '<tr><td><label>Quantity:</label></td><td> <input type=number id="quantity" class="add"></td></tr>' +
