@@ -165,7 +165,7 @@ public class dealerServlet extends HttpServlet {
 				}
 			} catch (Exception e) {
 				JSONObject all = new JSONObject();
-				all.put("status", "0");
+				all.put("status","0");
 				result.put(all);
 				e.printStackTrace();
 			}
