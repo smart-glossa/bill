@@ -94,7 +94,7 @@ public class PurchaseMetaServlet extends HttpServlet {
 			int productId = Integer.parseInt(request.getParameter("productId"));
 			JSONObject obj = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.jdbc.Driver"); 
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
 				Statement stmt = conn.createStatement();
 				String query = "select * from purchaseLineItem,product where purchaseLineItem.productId=product.productId";

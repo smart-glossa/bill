@@ -18,7 +18,7 @@ public class PurchasePaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public PurchasePaymentServlet() {
-		super();
+		super(); 
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
