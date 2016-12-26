@@ -53,7 +53,7 @@ public class PurchaseServlet extends HttpServlet {
 				} catch (Exception e) {
 				    JSONObject obj=new JSONObject();
 				    obj.put("status",0);
-				    set.put(obj);
+				    set.put(obj);      
 					e.printStackTrace();
 			}
 			response.getWriter().println(set);

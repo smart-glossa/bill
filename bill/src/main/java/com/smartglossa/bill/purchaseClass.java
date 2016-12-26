@@ -67,7 +67,7 @@ public class purchaseClass {
 		finally {
 			closeConnection();
 			
-		}
+		}          
 		return obj;
 		
 	}
