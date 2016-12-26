@@ -23,7 +23,6 @@ public class PurchaseServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		doPost(request, response);      
 	}
 
@@ -38,12 +37,8 @@ public class PurchaseServlet extends HttpServlet {
 			float discount = Float.parseFloat(request.getParameter("discount"));
 			float billTotal = Float.parseFloat(request.getParameter("billTotal"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "insert into purchaseMetaData(purchaseId,billDate,vat,discount,billTotal) values("
-						+ purchaseId + ",'" + billDate + "'," + vat + "," + discount + "," + billTotal + ")";
-				stmt.execute(query);
+				purchaseClass pur = new purchaseClass();
+				pur.addPurchase(purchaseId, billDate, vat, discount, billTotal);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -53,23 +48,13 @@ public class PurchaseServlet extends HttpServlet {
 		} else if (operation.equals("getAll")) {
 			JSONArray set = new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from purchaseMetaData";
-				ResultSet rs = stmt.executeQuery(query);
-				while (rs.next()) {
-					JSONObject obj = new JSONObject();
-					obj.put("purchaseId", rs.getInt("purchaseId"));
-					obj.put("billDate", rs.getString("billDate"));
-					obj.put("vat", rs.getString("vat"));
-					obj.put("discount", rs.getString("discount"));
-					obj.put("billTotal", rs.getInt("billTotal"));
-					set.put(obj);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			      purchaseClass pur=new purchaseClass();
+			      pur.getAll();
+				} catch (Exception e) {
+				    JSONObject obj=new JSONObject();
+				    obj.put("status",0);
+				    set.put(obj);
+					e.printStackTrace();
 			}
 			response.getWriter().println(set);
 
@@ -77,18 +62,10 @@ public class PurchaseServlet extends HttpServlet {
 			int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 			JSONObject obj = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from purchaseMetaData where purchaseId=" + purchaseId;
-				ResultSet rs = stmt.executeQuery(query);
-				if(rs.next()){
-					obj.put("billDate",rs.getString("billDate"));
-					obj.put("vat",rs.getString("vat"));
-					obj.put("discount",rs.getString("discount"));
-					obj.put("billTotal",rs.getString("billTotal"));
-				}
+				purchaseClass pur=new purchaseClass();
+				pur.getOne(purchaseId);
 			} catch (Exception e) {
+				obj.put("status",0);
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -101,11 +78,9 @@ public class PurchaseServlet extends HttpServlet {
 			float discount = Float.parseFloat(request.getParameter("discount"));
 			float billTotal = Float.parseFloat(request.getParameter("billTotal"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "update purchaseMetaData set billDate='"+ billDate +"',vat="+ vat +",discount="+discount+",billTotal="+billTotal+" where purchaseId="+purchaseId;
-                stmt.execute(query);
+			     purchaseClass pur=new purchaseClass();
+			     pur.update(purchaseId, billDate, vat, discount, billTotal);
+				
                 obj.put("status", "success");
                 } catch (Exception e) {
 				// TODO Auto-generated catch block
