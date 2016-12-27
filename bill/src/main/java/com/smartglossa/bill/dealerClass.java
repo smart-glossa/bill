@@ -37,7 +37,7 @@ public  JSONArray getall() throws SQLException, ClassNotFoundException {
 	JSONArray result = new JSONArray();
 	try  {
 		String query = "select * from dealer";
-		rs = stmt.executeQuery(query);
+		rs = stmt.executeQuery(query);                                
 		while(rs.next()){
 			JSONObject get = new JSONObject();
 			get.put("dealerId", rs.getInt("dealerId"));

@@ -28,7 +28,7 @@ public class dealerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		JSONObject objec = new JSONObject();
 		String operation = request.getParameter("operation");
-		if (operation.equals("deaadd")) {
+		if (operation.equals("deaadd")){
 			int dealerId = Integer.parseInt(request.getParameter("dealerId"));
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
