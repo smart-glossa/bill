@@ -30,29 +30,22 @@ public class CatServlet extends HttpServlet {
 		if (operation.equals("add")) {
 			int cid = Integer.parseInt(request.getParameter("catid"));
 			String cname = request.getParameter("cname");
-			JSONObject result = new JSONObject();
+			JSONObject obj = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = con.createStatement();
-				String query = "insert into expensecategory(catid,cname) values(" + cid + ",'" + cname + "')";
-				stat.execute(query);
-				result.put("status", 1);
+				CategoryClass cat=new CategoryClass();
+				cat.add(cid, cname);
+				obj.put("status", "success");
 			} catch (Exception e) {
-				result.put("status", 0);
 				e.printStackTrace();
 			}
-			response.getWriter().println(result);
+			response.getWriter().println(obj);
 		} else if (operation.equals("update")) {
-			int id = Integer.parseInt(request.getParameter("catid"));
-			String name = request.getParameter("cname");
+			int cid = Integer.parseInt(request.getParameter("catid"));
+			String cname = request.getParameter("cname");
 			JSONObject res = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stat = conn.createStatement();
-				String query = "update expensecategory set cname='" + name + "' where catid=" + id;
-				stat.execute(query);
+				CategoryClass cate=new CategoryClass();
+				cate.update(cid, cname);
 				res.put("status", 1);
 
 			} catch (Exception e) {
