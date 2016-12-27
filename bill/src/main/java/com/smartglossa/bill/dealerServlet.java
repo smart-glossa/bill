@@ -1,7 +1,6 @@
 package com.smartglossa.bill;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -36,12 +35,8 @@ public class dealerServlet extends HttpServlet {
 			String phoneNumber = request.getParameter("phoneNumber");
 			String TINNumber = request.getParameter("TINNumber");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "insert into dealer(dealerId,name,address,phoneNumber,TINNumber)values(" + dealerId
-						+ ",'" + name + "','" + address + "','" + phoneNumber + "','" + TINNumber + "')";
-				statement.execute(query);
+				dealerClass dealer = new dealerClass();
+				dealer.adddealer(dealerId, name, address, phoneNumber, TINNumber);
 				objec.put("status1", "1");
 			} catch (Exception e) {
 				objec.put("status", "0");
@@ -49,65 +44,38 @@ public class dealerServlet extends HttpServlet {
 			}
 			response.getWriter().println(objec);
 		} else if (operation.equals("getall")) {
-			JSONArray all = new JSONArray();
+		    JSONArray result=new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "select * from dealer";
-				ResultSet result = statement.executeQuery(query);
-				while (result.next()) {
-					JSONObject get = new JSONObject();
-					get.put("dealerId", result.getInt(1));
-					get.put("name", result.getString(2));
-					get.put("address", result.getString(3));
-					get.put("phoneNumber", result.getString(4));
-					get.put("TINNumber", result.getString(5));
-					all.put(get);
-
-				}
-
-			} catch (Exception e) {
-
-				e.printStackTrace();
+				dealerClass dealer = new dealerClass();
+				result=dealer.getall();
+                }catch (Exception e) {
+						JSONObject get=new JSONObject();
+						get.put("status",0);
+						result.put(get);
+                       e.printStackTrace();
 			}
-			response.getWriter().println(all);
-		} else if (operation.equals("get")) {
+			response.getWriter().println(result);
+		} else if (operation.equals("getone")) {
 			int dealerId = Integer.parseInt(request.getParameter("dealerId"));
-			JSONObject ob = new JSONObject();
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "select * from dealer where dealerId=" + dealerId;
-				ResultSet re = statement.executeQuery(query);
-				if (re.next()) {
-					ob.put("name", re.getString(2));
-					ob.put("address", re.getString(3));
-					ob.put("phoneNumber", re.getString(4));
-					ob.put("TINNumber", re.getString(5));
-
-				}
+			JSONObject one = new JSONObject();
+			try{
+				dealerClass dealer = new dealerClass();
+				one = dealer.getone(dealerId);
 			} catch (Exception e) {
-
 				e.printStackTrace();
 			}
-			response.getWriter().println(ob);
+			response.getWriter().println(one);
 		} else if (operation.equals("delete")) {
 			int dealerId = Integer.parseInt(request.getParameter("dealerId"));
-			JSONObject obj = new JSONObject();
+			JSONObject delete = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "delete from dealer where dealerId=" + dealerId;
-				statement.execute(query);
-				obj.put("status", "1");
+				dealerClass dealer = new dealerClass();
+				dealer.deletedealer(dealerId);
 			} catch (Exception e) {
-				obj.put("status", "0");
+				delete.put("status", "0");
 				e.printStackTrace();
 			}
-			response.getWriter().println(obj);
+			response.getWriter().println(delete);
 
 		} else if (operation.equals("update")) {
 			int dealerId = Integer.parseInt(request.getParameter("dealerId"));
@@ -115,61 +83,30 @@ public class dealerServlet extends HttpServlet {
 			String address = request.getParameter("address");
 			String phoneNumber = request.getParameter("phoneNumber");
 			String TINNumber = request.getParameter("TINNUmber");
-			JSONObject up = new JSONObject();
+			JSONObject update = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "update dealer set name='" + name + "',address='" + address + "',phoneNumber='"
-						+ phoneNumber + "',TINNumber='" + TINNumber + "' where dealerId=" + dealerId;
-				statement.execute(query);
-				up.put("status", "1");
+				dealerClass dealer = new dealerClass();
+				dealer.updatedealer(dealerId, name, address, phoneNumber, TINNumber);
+				update.put("status", "1");
 			} catch (Exception e) {
-				up.put("message", "error");
+				update.put("message", "error");
 				e.printStackTrace();
 			}
-			response.getWriter().println(up);
+			response.getWriter().println(update);
 
 		} else if (operation.equals("billadd")) {
 			int dId = Integer.parseInt(request.getParameter("dealerId"));
-			JSONArray result = new JSONArray();
-
+			JSONArray bill = new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statement = connection.createStatement();
-				String query = "select purchaseId from dealerBill where dealerId=" + dId;
-				ResultSet re = statement.executeQuery(query);
-				while (re.next()) {
-					int pId = re.getInt("purchaseId");
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-					Statement stat = conn.createStatement();
-					String queryy = "select * from purchasemetadata,purchaselineitem,purchasepayment where purchasemetadata.purchaseId="+ pId + " AND purchaselineitem.purchaseId=" + pId + " AND purchasepayment.purchaseId="+ pId;
-					ResultSet res = stat.executeQuery(queryy);
-					while (res.next()) {
-						JSONObject all = new JSONObject();
-						all.put("billDate", res.getDate("billDate"));
-						all.put("vat", res.getFloat("vat"));
-						all.put("discount", res.getFloat("discount"));
-						all.put("billTotal", res.getFloat("billTotal"));
-						all.put("productId", res.getInt("productId"));
-						all.put("purchaseLineId", res.getInt("purchaseLineId"));
-						all.put("quantity", res.getFloat("quantity"));
-						all.put("payId", res.getInt("payId"));
-						all.put("payDate", res.getDate("payDate"));
-						all.put("paidAmount", res.getFloat("paidAmount"));
-						result.put(all);
-					}
-
-				}
+				dealerClass dealer = new dealerClass();
+				bill=dealer.dealerbill(dId);
 			} catch (Exception e) {
 				JSONObject all = new JSONObject();
 				all.put("status","0");
-				result.put(all);
+				bill.put(all);
 				e.printStackTrace();
 			}
-			response.getWriter().println(result);
+			response.getWriter().println(bill);
 
 		}
 
