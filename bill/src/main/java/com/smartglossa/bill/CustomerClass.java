@@ -51,7 +51,7 @@ public class CustomerClass {
 		JSONObject result = new JSONObject();
 		try {
 			String query = "select * from customer where customerId=" + id;
-			ResultSet rs = stat.executeQuery(query);
+			rs = stat.executeQuery(query);
 			if (rs.next()) {
 				result.put("name", rs.getString(2));
 				result.put("address", rs.getString(3));
@@ -67,12 +67,12 @@ public class CustomerClass {
 		JSONArray result = new JSONArray();
 		try {
 			String query = "select * from customer";
-			ResultSet res = stat.executeQuery(query);
-			while (res.next()) {
+			rs = stat.executeQuery(query);
+			while (rs.next()) {
 				JSONObject get = new JSONObject();
-				get.put("name", res.getString(2));
-				get.put("address", res.getString(3));
-				get.put("phonenumber", res.getInt(4));
+				get.put("name", rs.getString(2));
+				get.put("address", rs.getString(3));
+				get.put("phonenumber", rs.getInt(4));
 				result.put(get);
 			}
 
