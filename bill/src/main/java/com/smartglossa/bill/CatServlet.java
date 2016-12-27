@@ -59,11 +59,8 @@ public class CatServlet extends HttpServlet {
 			int cid = Integer.parseInt(request.getParameter("catid"));
 			JSONObject ress = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conne = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement state = conne.createStatement();
-				String query = "delete from expensecategory where catid=" + cid;
-				state.execute(query);
+				CategoryClass catego=new CategoryClass();
+				catego.delete(cid);
 				ress.put("status", 1);
 
 			} catch (Exception e) {
@@ -74,47 +71,33 @@ public class CatServlet extends HttpServlet {
 			response.getWriter().println(ress);
 
 		} else if (operation.equals("getOne")) {
-			int caid = Integer.parseInt(request.getParameter("catid"));
-			JSONObject resu = new JSONObject();
+			int cid = Integer.parseInt(request.getParameter("catid"));
+			JSONObject obj = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connec = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement statem = connec.createStatement();
-				String query = "select * from expensecategory where catid=" + caid;
-				ResultSet rs = statem.executeQuery(query);
-				if (rs.next()) {
-					resu.put("catname", rs.getString(2));
-				}
+				
+				CategoryClass categ=new CategoryClass();
+				obj = categ.getOne(cid);
+				
 
 			} catch (Exception e) {
-				resu.put("status", 0);
+				obj.put("status", 0);
 				e.printStackTrace();
 
 			}
-			response.getWriter().println(resu);
+			response.getWriter().println(obj);
 
 		} else if (operation.equals("getAll")) {
-			JSONArray cat = new JSONArray();
+			JSONArray resu = new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stateme = connect.createStatement();
-				String query = "select * from expensecategory";
-				ResultSet res = stateme.executeQuery(query);
-				while (res.next()) {
-					JSONObject get = new JSONObject();
-					get.put("catid", res.getString(1));
-					get.put("catname", res.getString(2));
-					cat.put(get);
-				}
-
+				CategoryClass category=new CategoryClass();
+				resu = category.getAll();
 			} catch (Exception e) {
 				JSONObject error = new JSONObject();
 				error.put("status", 0);
-				cat.put(error);
+				resu.put(error);
 				e.printStackTrace();
 			}
-			response.getWriter().println(cat);
+			response.getWriter().println(resu);
 		}
 
 	}

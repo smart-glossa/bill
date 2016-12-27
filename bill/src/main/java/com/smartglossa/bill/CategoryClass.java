@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -41,14 +41,56 @@ public class CategoryClass {
 			} finally{
 				closeConnection();
 			}
+	    	 
 	    	
 	    	 
 	     
 	     };
+	     public JSONObject getOne( int cid)throws SQLException,ClassNotFoundException{
+	    	 try{
+	    		 JSONObject obj = new JSONObject();
+	             String query = "select * from expensecategory where catid =" +cid;
+	            rs = stat.executeQuery(query);
+	             if (rs.next()) {
+	                 obj.put("cname", rs.getString(2));
+	                 
+	    	 }
+	             return obj;
+	    	 
+	     } finally{
+	    	 closeConnection();
+	     }
+	     }
+	     public void delete(int cid) throws SQLException,ClassNotFoundException{
+	    	 try {
+	    		 String query="delete from expensecategory where catid="+cid;
+	    		 stat.execute(query);
+				
+			} finally{
+				closeConnection();
+			}
+			
+		}
+	     public JSONArray getAll()throws SQLException,ClassNotFoundException {
+	    	 JSONArray resu=new JSONArray();
+	    	 try {
+	    		 String query = "select * from expensecategory";
+    	           rs = stat.executeQuery(query);
+	             while (rs.next()) {
+	                 JSONObject objec = new JSONObject();
+	                 objec.put("catid", rs.getInt("catid"));
+	                 objec.put("cname", rs.getString("cname"));
+	                resu.put(objec);
+	             }
+			} finally {
+				closeConnection();
+			}
+			return resu;
+			
+		}
 	     private void openConnection() throws SQLException, ClassNotFoundException {
 	         Class.forName("com.mysql.jdbc.Driver");
 	         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill","root","root");
-	                 
 	         stat = conn.createStatement();
 	     }
 
@@ -66,6 +108,7 @@ public class CategoryClass {
 			
 			
 		}
+		
 		}
 
 
