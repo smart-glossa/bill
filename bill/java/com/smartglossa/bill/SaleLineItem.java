@@ -77,9 +77,9 @@ public class SaleLineItem extends HttpServlet {
 			  float quantity = Float.parseFloat(request.getParameter("quantity"));
 			  float cost = Float.parseFloat(request.getParameter("cost"));
 			try {
-					
-			        String query = "update salelineitems set saleId=" + saleId +",productId="+ productId +",quantity=" + quantity +",cost="+ cost+" where saleLineId=" +saleLineId ;
-				 obj.put("status","Success");
+					SaleLineItemClass Saleline = new SaleLineItemClass();
+ 			        Saleline.updateSaleLineItem(saleLineId, saleId, productId, quantity, cost);
+				      obj.put("status","Success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");
 				e.printStackTrace();

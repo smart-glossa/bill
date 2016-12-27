@@ -1,10 +1,6 @@
 package com.smartglossa.bill;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +31,8 @@ public class SalePayment extends HttpServlet {
 	          String payDate = request.getParameter("paydate");
 			  float paidAmount = Float.parseFloat(request.getParameter("paidAmount"));
 			  try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "insert into salepayment(saleId,payDate,paidAmount)values("+ saleId +",'"+ payDate +"',"+ paidAmount +")";
-				stmt.execute(query);
+				SalePaymentClass payment = new SalePaymentClass();
+				payment.addSalePayment(saleId, payDate, paidAmount);
 				obj.put("status","success");
 				} catch (Exception e) {
 					obj.put("status","failure");
@@ -49,23 +42,9 @@ public class SalePayment extends HttpServlet {
 		  }else if (operation.equals("getSalePayment")) {
 	          JSONArray result = new JSONArray();
 	          try {
-	              Class.forName("com.mysql.jdbc.Driver");
-	              Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-	              Statement stmt = conn.createStatement();
-	              String query = "select *from salepayment";
-	              ResultSet rs = stmt.executeQuery(query);
-	              while (rs.next()) {
-	                  JSONObject obj = new JSONObject();
-	                  obj.put("payId",rs.getInt("payid"));
-	                  obj.put("saleId", rs.getInt("saleid"));
-	                  obj.put("payDate", rs.getString("paydate"));
-	                  obj.put("paidAmount", rs.getFloat("paidAmount"));
-	                  result.put(obj);
-	              }
+	        	  SalePaymentClass payment = new SalePaymentClass();
+	        	  result= payment.getSalePayment();
 	          } catch (Exception e) {
-	              JSONObject obj = new JSONObject();
-	              obj.put("status", "0");
-	              result.put(obj);
 	              e.printStackTrace();
 	          }
 	          response.getWriter().print(result);
@@ -73,18 +52,9 @@ public class SalePayment extends HttpServlet {
 	          JSONObject obj = new JSONObject();
 	          int payId = Integer.parseInt(request.getParameter("payid"));
 	          try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-		          Statement stmt = conn.createStatement();
-		          String query = "select * from salepayment where payId="+ payId;
-		          ResultSet rs = stmt.executeQuery(query);
-		          if (rs.next()) {
-		        	  obj.put("saleId", rs.getInt("saleid"));
-	                  obj.put("payDate", rs.getString("paydate"));
-	                  obj.put("paidAmount",rs.getFloat("paidamount"));
-		          }
+	        	  SalePaymentClass payment = new SalePaymentClass();
+	        	  obj = payment.getOneSalePayment(payId);
 			} catch (Exception e) {
-				obj.put("status","0");
 				e.printStackTrace();
 			}
 	          response.getWriter().print(obj);
@@ -92,15 +62,12 @@ public class SalePayment extends HttpServlet {
 	    	  int payId = Integer.parseInt(request.getParameter("payid"));
 	    	  JSONObject obj= new JSONObject();
 	    	  try {
-	                Class.forName("com.mysql.jdbc.Driver");
-	                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-	                Statement stmt = conn.createStatement();
-	                String query = "Delete from salepayment where payId=" + payId;
-	                stmt.execute(query);
-	                obj.put("status", "1");
+	               SalePaymentClass  payment = new SalePaymentClass();
+	     payment.deleteSalePayment(payId);
+	               obj.put("status", "Success");
 	            } catch (Exception e) {
-	                obj.put("status", "0");
-	                e.printStackTrace();
+	            	 obj.put("status","Failure");
+	            	e.printStackTrace();
 	            }
 	            response.getWriter().print(obj);
 	        }else if (operation.equals("updateSalePayment")) {
@@ -110,20 +77,16 @@ public class SalePayment extends HttpServlet {
 		          String payDate = request.getParameter("paydate");
 				  float paidAmount = Float.parseFloat(request.getParameter("paidAmount"));
 				try {
-						Class.forName("com.mysql.jdbc.Driver");
-						Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-						Statement stmt = conn.createStatement();
-				        String query = "update salepayment set saleId=" + saleId +",payDate='"+ payDate +"',paidAmount=" + paidAmount +" where payId=" +payId ;
-					 stmt.execute(query);
+					  SalePaymentClass  payment = new SalePaymentClass();
+					  payment.updateSalePayment(payId, saleId, payDate, paidAmount);
 					 obj.put("status","Success");
 				} catch (Exception e) {
 					obj.put("status", "Failure");
 					e.printStackTrace();
 				}
 				response.getWriter().print(obj);
-
-			}
-	      }
+	        }
+	}
 	}
 
 
