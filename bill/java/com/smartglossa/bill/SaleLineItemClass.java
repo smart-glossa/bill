@@ -80,7 +80,7 @@ public class SaleLineItemClass {
 		}finally{
 			closeConnection();
 		}
-	}
+	} 
 	private void openConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		  conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,

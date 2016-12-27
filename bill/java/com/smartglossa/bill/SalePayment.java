@@ -57,7 +57,7 @@ public class SalePayment extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	          response.getWriter().print(obj);
+	          response.getWriter().print(obj); 
 	      }else if(operation.equals("deleteSalePayment")){
 	    	  int payId = Integer.parseInt(request.getParameter("payid"));
 	    	  JSONObject obj= new JSONObject();

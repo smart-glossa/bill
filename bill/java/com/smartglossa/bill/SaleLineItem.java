@@ -63,7 +63,7 @@ public class SaleLineItem extends HttpServlet {
     	  try {
                SaleLineItemClass Saleline = new SaleLineItemClass();
                Saleline.deleteSaleLineItem(saleLineId);
-                obj.put("status", "Success");
+                obj.put("status", "Success"); 
             } catch (Exception e) {
                 obj.put("status", "Failure");
                 e.printStackTrace();

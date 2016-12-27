@@ -87,7 +87,7 @@ public class SalePaymentClass {
 		stmt = conn.createStatement();
 	}
 
-	private void closeConnection() throws SQLException {
+	private void closeConnection() throws SQLException { 
 		if (conn != null) {
 			conn.close();
 		}

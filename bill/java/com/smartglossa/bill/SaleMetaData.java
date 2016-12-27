@@ -44,7 +44,7 @@ public class SaleMetaData extends HttpServlet {
 	            	SaleMetaDataClass meta = new SaleMetaDataClass();
 	            	result = meta.getSaleMetaData();
 	            } catch (Exception e) {
-	                e.printStackTrace();
+	                e.printStackTrace(); 
 	            }
 	            response.getWriter().print(result);
 	        }else if(operation.equals("getOneSaleMetaData")){

@@ -25,7 +25,7 @@ public class SaleMetaDataClass {
 		String query = "insert into salemetadata(saleId,billDate,vat,discount,billTotal)values("+ saleId +",'"+ billDate +"',"+ vat +","+ discount +","+ billTotal +")";
 		stmt.execute(query);
 		obj.put("status","success");
-	}finally{
+	}finally{ 
 		closeConnection();
 	}
 	}
