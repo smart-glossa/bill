@@ -48,8 +48,7 @@
     	<url-pattern>/purchasemeta</url-pattern>
     </servlet-mapping>
     <servlet>
-    	<description>
-    	</description>
+    	
     	<display-name>dealerServlet</display-name>
     	<servlet-name>dealerServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.dealerServlet</servlet-class>
@@ -64,22 +63,16 @@
     	<url-pattern>/dealer</url-pattern>
     </servlet-mapping>
     <servlet>
-    	<description>
-    	</description>
     	<display-name>SaleLineItem</display-name>
     	<servlet-name>SaleLineItem</servlet-name>
     	<servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
     </servlet>
     <servlet>
-    	<description>
-    	</description>
     	<display-name>SaleMetaData</display-name>
     	<servlet-name>SaleMetaData</servlet-name>
     	<servlet-class>com.smartglossa.bill.SaleMetaData</servlet-class>
     </servlet>
     <servlet>
-    	<description>
-    	</description>
     	<display-name>SalePayment</display-name>
     	<servlet-name>SalePayment</servlet-name>
     	<servlet-class>com.smartglossa.bill.SalePayment</servlet-class>
