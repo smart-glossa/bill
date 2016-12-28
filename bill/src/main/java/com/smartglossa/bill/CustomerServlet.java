@@ -87,7 +87,7 @@ public class CustomerServlet extends HttpServlet {
             }
             response.getWriter().print(result);
         } else if (operation.equals("cusale")) {
-            int cuid = Integer.parseInt(request.getParameter("customerId"));
+            int cuid = Integer.parseInt(request.getParameter("cId"));
             JSONArray result = new JSONArray();
             try {
                 CustomerClass cus = new CustomerClass();

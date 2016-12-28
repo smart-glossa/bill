@@ -56,7 +56,7 @@ public class CustomerClass {
             if (rs.next()) {
                 result.put("name", rs.getString(2));
                 result.put("address", rs.getString(3));
-                result.put("phonenumber", rs.getInt(4));
+                result.put("phonenumber", rs.getString(4));
             }
         } finally {
             closeConnection();
@@ -73,7 +73,7 @@ public class CustomerClass {
                 JSONObject get = new JSONObject();
                 get.put("name", rs.getString(2));
                 get.put("address", rs.getString(3));
-                get.put("phonenumber", rs.getInt(4));
+                get.put("phonenumber", rs.getString(4));
                 result.put(get);
             }
 
