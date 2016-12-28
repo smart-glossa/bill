@@ -13,7 +13,13 @@
     	<servlet-name>PurchaseServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.PurchaseServlet</servlet-class>
     </servlet>
+      <servlet-mapping>
+    	<servlet-name>PurchaseServlet</servlet-name>
+    	<url-pattern>/purchase</url-pattern>
+    </servlet-mapping>
     <servlet>
+    	<description>
+    	</description>
     	<display-name>PurchaseMetaServlet</display-name>
     	<servlet-name>PurchaseMetaServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.PurchaseMetaServlet</servlet-class>
@@ -22,10 +28,7 @@
     	<servlet-name>CustomerServlet</servlet-name>
     	<url-pattern>/customer</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>purchaseServlet</servlet-name>
-    	<url-pattern>/purchase</url-pattern>
-    </servlet-mapping>
+    
      <servlet>
     	<servlet-name>ExpensesServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.ExpensesServlet</servlet-class>
@@ -45,10 +48,11 @@
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PurchaseMetaServlet</servlet-name>
-    	<url-pattern>/purchasemeta</url-pattern>
+    	<url-pattern>/PurchaseMetaServlet</url-pattern>
     </servlet-mapping>
     <servlet>
-    	
+    	<description>
+    	</description>
     	<display-name>dealerServlet</display-name>
     	<servlet-name>dealerServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.dealerServlet</servlet-class>
@@ -63,16 +67,22 @@
     	<url-pattern>/dealer</url-pattern>
     </servlet-mapping>
     <servlet>
+    	<description>
+    	</description>
     	<display-name>SaleLineItem</display-name>
     	<servlet-name>SaleLineItem</servlet-name>
     	<servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
     </servlet>
     <servlet>
+    	<description>
+    	</description>
     	<display-name>SaleMetaData</display-name>
     	<servlet-name>SaleMetaData</servlet-name>
     	<servlet-class>com.smartglossa.bill.SaleMetaData</servlet-class>
     </servlet>
     <servlet>
+    	<description>
+    	</description>
     	<display-name>SalePayment</display-name>
     	<servlet-name>SalePayment</servlet-name>
     	<servlet-class>com.smartglossa.bill.SalePayment</servlet-class>
