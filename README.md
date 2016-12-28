@@ -66,7 +66,7 @@ CREATE TABLE `customer` (
   `customerId` int(11) NOT NULL,
   `name` varchar(100) default NULL,
   `address` varchar(100) default NULL,
-  `phonenumber` varchar(10) default NULL,
+  `phonenumber` varchar(50) default NULL,
   PRIMARY KEY  (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 

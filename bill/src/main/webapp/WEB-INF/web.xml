@@ -9,6 +9,14 @@
     	<servlet-name>CustomerServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.CustomerServlet</servlet-class>
     </servlet>
+     <servlet>
+    	<servlet-name>PurchaseServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.PurchaseServlet</servlet-class>
+    </servlet>
+      <servlet-mapping>
+    	<servlet-name>PurchaseServlet</servlet-name>
+    	<url-pattern>/purchase</url-pattern>
+    </servlet-mapping>
     <servlet>
     	<description>
     	</description>
@@ -20,6 +28,7 @@
     	<servlet-name>CustomerServlet</servlet-name>
     	<url-pattern>/customer</url-pattern>
     </servlet-mapping>
+    
      <servlet>
     	<servlet-name>ExpensesServlet</servlet-name>
     	<servlet-class>com.smartglossa.bill.ExpensesServlet</servlet-class>
