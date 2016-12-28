@@ -81,7 +81,7 @@ public class CustomerServlet extends HttpServlet {
                 result = cus.cusAll();
             } catch (Exception e) {
                 JSONObject get = new JSONObject();
-                get.put("status", 0);
+                get.put("status", 0);  
                 result.put(get);
                 e.printStackTrace();
             }
