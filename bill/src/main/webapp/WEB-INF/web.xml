@@ -57,6 +57,39 @@
     	<servlet-name>dealerServlet</servlet-name>
     	<url-pattern>/dealer</url-pattern>
     </servlet-mapping>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SaleLineItem</display-name>
+    	<servlet-name>SaleLineItem</servlet-name>
+    	<servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SaleMetaData</display-name>
+    	<servlet-name>SaleMetaData</servlet-name>
+    	<servlet-class>com.smartglossa.bill.SaleMetaData</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>SalePayment</display-name>
+    	<servlet-name>SalePayment</servlet-name>
+    	<servlet-class>com.smartglossa.bill.SalePayment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>SaleLineItem</servlet-name>
+    	<url-pattern>/SaleLineItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>SaleMetaData</servlet-name>
+    	<url-pattern>/SaleMetaData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>SalePayment</servlet-name>
+    	<url-pattern>/SalePayment</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

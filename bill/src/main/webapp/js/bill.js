@@ -13,13 +13,14 @@ $(document).ready(function() {
         updateProfile();
     });
     $(document).on("click", "#submit", function(key) {
-        var pId = $('#pId').val();
+        var productId = $('#productId').val();
         var pName = $('#pName').val();
-        var cost = $('#cost').val();
+        var sellPrice = $('#sellPrice').val();
+        var quantity = $('#quantity').val();
 
-        if (pId == "") {
+        if (productId == "") {
             alert("Please Enter ProductId");
-            $("#pId").focus().css("outline-color", "#ff0000");
+            $("#productId").focus().css("outline-color", "#ff0000");
             return;
         }
         if (pName == "") {
@@ -27,12 +28,17 @@ $(document).ready(function() {
             $("#pName").focus().css("outline-color", "#ff0000");
             return;
         }
-        if (cost == "") {
-            alert("Please Enter cost");
-            $("#cost").focus().css("outline-color", "ff0000");
+        if (sellPrice == "") {
+            alert("Please Enter SellPrice");
+            $("#sellPrice").focus().css("outline-color", "ff0000");
             return;
         }
-        var url = "/bill/bill?operation=addProduct&pid=" + pId + "&pname=" + pName + "&cost=" + cost;
+        if(quantity == ""){
+        	alert("Please Enter Quantity");
+        	$("#quantity").focus().css("outline-color","ff0000");
+        	return;
+        }
+        var url = "/bill/bill?operation=addProduct&productId=" + productId + "&pName=" + pName + "&sellPrice=" + sellPrice + "&quantity=" + quantity;
         var request = new FormData();
         request.append('file', $('#profile')[0].files[0]);
         $.ajax({
@@ -45,9 +51,10 @@ $(document).ready(function() {
             result = JSON.parse(result);
             if (result.status == 1) {
                 alert("Added SuccessFully");
-                $('#pId').val("");
+                $('#productId').val("");
                 $('#pName').val("");
-                $('#cost').val("");
+                $('#sellPrice').val("");
+                $('#quantity').val("");
                 postToServer("product");
                 $(".displayAll").remove();
                 $(".mainArea")[0].appendChild(displayProducts());
