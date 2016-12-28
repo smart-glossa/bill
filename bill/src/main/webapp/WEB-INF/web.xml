@@ -5,7 +5,25 @@
         <servlet-name>Bill</servlet-name>
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
-    
+    <servlet>
+    	<servlet-name>CustomerServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.CustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>PurchaseMetaServlet</display-name>
+    	<servlet-name>PurchaseMetaServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.PurchaseMetaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>CustomerServlet</servlet-name>
+    	<url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>PurchaseMetaServlet</servlet-name>
+    	<url-pattern>/PurchaseMetaServlet</url-pattern>
+    </servlet-mapping>
     <servlet>
     	<description>
     	</description>
