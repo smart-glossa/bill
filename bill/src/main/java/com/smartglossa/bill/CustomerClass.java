@@ -81,7 +81,7 @@ public class CustomerClass {
 		}
 		return result;
 
-	}
+	}  
 
 	public JSONArray cusale(int cuid) throws ClassNotFoundException, SQLException {
 		JSONArray result = new JSONArray();
