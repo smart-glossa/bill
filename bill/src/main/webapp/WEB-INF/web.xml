@@ -8,13 +8,6 @@
     <servlet>
     	<description>
     	</description>
-    	<display-name>SaleLineItems</display-name>
-    	<servlet-name>SaleLineItems</servlet-name>
-    	<servlet-class>salelineitems.SaleLineItems</servlet-class>
-    </servlet>
-    <servlet>
-    	<description>
-    	</description>
     	<display-name>SaleLineItem</display-name>
     	<servlet-name>SaleLineItem</servlet-name>
     	<servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
