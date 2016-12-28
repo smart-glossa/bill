@@ -1,0 +1,17 @@
+.menu
+{
+
+	background-color:black;
+	color:white;
+	width:300px;
+	height:300px;
+}
+.menu ul
+{
+	list-style-type: none;
+}
+.menu li
+{
+	padding-top: 30px;
+	font-size: 22px;
+}

@@ -5,9 +5,42 @@
         <servlet-name>Bill</servlet-name>
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>kkk</display-name>
+    	<servlet-name>kkk</servlet-name>
+    	<servlet-class>com.smartglossa.bill.kkk</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>kaniServlet</display-name>
+    	<servlet-name>kaniServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.kaniServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>dealerServlet</display-name>
+    	<servlet-name>dealerServlet</servlet-name>
+    	<servlet-class>com.smartglossa.bill.dealerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>kkk</servlet-name>
+    	<url-pattern>/kkk</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>kaniServlet</servlet-name>
+    	<url-pattern>/kaniServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>dealerServlet</servlet-name>
+    	<url-pattern>/dealer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
