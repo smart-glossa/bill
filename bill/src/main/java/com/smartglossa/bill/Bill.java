@@ -1,4 +1,4 @@
-  package com.smartglossa.bill;
+package com.smartglossa.bill;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class Bill extends HttpServlet {
     private static final long serialVersionUID = 1L;
- 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
@@ -41,7 +41,7 @@ public class Bill extends HttpServlet {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
                 BillApplication bill = new BillApplication();
-                bill.addProduct(productId, pName, sellPrice, buyPrice,quantity,file);
+                bill.addProduct(productId, pName, sellPrice, buyPrice, quantity, file);
                 obj.put("status", 1);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -69,7 +69,7 @@ public class Bill extends HttpServlet {
             float sellPrice = Float.parseFloat(request.getParameter("sellPrie"));
             float buyPrice = Float.parseFloat(request.getParameter("buyPrice"));
             float quantity = Float.parseFloat(request.getParameter("quantity"));
-                        JSONObject obj = new JSONObject();
+            JSONObject obj = new JSONObject();
             try {
                 List<FileItem> items = sfu.parseRequest(request);
                 FileItem file = (FileItem) items.get(0);
