@@ -6,4 +6,5 @@ public class BillConstants {
     final static String USERNAME = System.getProperty("bill.username");
     final static String PASSWORD = System.getProperty("bill.password");
     final static String DATABASE = System.getProperty("bill.database");
+
 }
