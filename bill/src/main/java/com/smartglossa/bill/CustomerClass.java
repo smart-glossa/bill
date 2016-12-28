@@ -18,7 +18,7 @@ public class CustomerClass {
 
 	}
 
-	public void cusAdd(int cid, String cname, String caddr, int cphno) throws ClassNotFoundException, SQLException {
+	public void cusAdd(int cid, String cname, String caddr, String cphno) throws ClassNotFoundException, SQLException {
 		try {
 			String query = "insert into customer(customerId,name,address,phonenumber)values(" + cid + ",'" + cname
 					+ "','" + caddr + "'," + cphno + ")";
@@ -28,7 +28,7 @@ public class CustomerClass {
 		}
 	}
 
-	public void cusUpdate(int cid, String cname, String caddr, int cphno) throws ClassNotFoundException, SQLException {
+	public void cusUpdate(int cid, String cname, String caddr, String cphno) throws ClassNotFoundException, SQLException {
 		try {
 			String query = "update customer set name=' " + cname + " ',address=' " + caddr + " ',phonenumber=" + cphno
 					+ " where customerId=" + cid;

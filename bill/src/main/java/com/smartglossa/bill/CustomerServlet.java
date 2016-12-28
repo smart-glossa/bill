@@ -25,7 +25,7 @@ public class CustomerServlet extends HttpServlet {
 			int cid = Integer.parseInt(request.getParameter("cid"));
 			String cname = request.getParameter("cname");
 			String caddr = request.getParameter("caddr");
-			int cphno = Integer.parseInt(request.getParameter("cphno"));
+			String cphno =request.getParameter("cphno");
 			JSONObject result = new JSONObject();
 			try {
 				CustomerClass cus = new CustomerClass();
@@ -40,7 +40,7 @@ public class CustomerServlet extends HttpServlet {
 			int cid = Integer.parseInt(request.getParameter("cid"));
 			String cname = request.getParameter("cname");
 			String caddr = request.getParameter("caddr");
-			int cphno = Integer.parseInt(request.getParameter("cphno"));
+			String cphno =request.getParameter("cphno");
 			JSONObject result = new JSONObject();
 			try {
 				CustomerClass cus = new CustomerClass();
