@@ -18,24 +18,26 @@ public class purchaseClass {
 		openConnection(); 
 }
     
-	public void addPurchase(int purchaseId,String billDate,float vat,float discount,float billTotal) throws SQLException{
-    	JSONObject obj = new JSONObject();
+	public void addPurchase(int purchaseId,String billDate,float vat,float discount,float billTotal,String payDate,float paidAmount) throws SQLException{
 		try{
-    	String query = "insert into purchaseMetaData(purchaseId,billDate,vat,discount,billTotal) values("
+    	    String query = "insert into purchaseMetaData(purchaseId,billDate,vat,discount,billTotal) values("
 				+ purchaseId + ",'" + billDate + "'," + vat + "," + discount + "," + billTotal + ")";
     	stmt.execute(query);
-    	obj.put("status", "success");
+        	String query2 = "insert into purchasePayment(purchaseId,payDate,paidAmount) values("
+    				+ purchaseId + "," + payDate + "," + paidAmount +")";
+        	stmt.execute(query2);
     	}finally {
 			closeConnection();
-		}
-    }
+		
+    	}
+	}
 	public JSONArray getAll() throws ClassNotFoundException,SQLException{
 		JSONArray set = new JSONArray();
 		try {
 		
 			String query = "select * from purchaseMetaData";
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
+			rs = stmt.executeQuery(query);
+     			while (rs.next()) {
 				JSONObject obj = new JSONObject();
 				obj.put("purchaseId", rs.getInt("purchaseId"));
 				obj.put("billDate", rs.getString("billDate"));
@@ -54,19 +56,18 @@ public class purchaseClass {
 	public JSONObject getOne(int purchaseId) throws ClassNotFoundException,SQLException{
 		JSONObject obj = new JSONObject();
 		try{
-			String query = "select * from purchaseMetaData where purchaseId=" + purchaseId;
-			ResultSet rs = stmt.executeQuery(query);
+			String query = "select * from purchaseMetaData where purchaseId="+purchaseId;
+		    rs = stmt.executeQuery(query);
 			if(rs.next()){
 				obj.put("billDate",rs.getString("billDate"));
 				obj.put("vat",rs.getString("vat"));
 				obj.put("discount",rs.getString("discount"));
 				obj.put("billTotal",rs.getString("billTotal"));
-			}
-			
+				obj.put("purchaseId",rs.getString("purchaseId"));
+					}
 		}
 		finally {
 			closeConnection();
-			
 		}          
 		return obj;
 		
@@ -74,19 +75,18 @@ public class purchaseClass {
 	public void update(int purchaseId,String billDate,float vat,float discount,float billTotal) throws SQLException{
 		JSONObject obj = new JSONObject();
 		try{
-			String query = "update purchaseMetaData set billDate='"+ billDate +"',vat="+ vat +",discount="+discount+",billTotal="+billTotal+" where purchaseId="+purchaseId;
+			String query = "update purchaseMetaData set billDate='"+billDate+"',vat="+vat+",discount="+discount+",billTotal="+billTotal+" where purchaseId="+purchaseId;
             stmt.execute(query);
 		}
 		finally {
 			closeConnection();
 		}
 	}
-	
 	private void openConnection() throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
-		conn =  DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-		stmt =  conn.createStatement();
-        
+		 Class.forName("com.mysql.jdbc.Driver");
+	        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
+	                BillConstants.USERNAME, BillConstants.PASSWORD);
+	        stmt = conn.createStatement();
     }
 	private void closeConnection() throws SQLException {
 		 if (conn != null) {

@@ -39,12 +39,8 @@ public class PurchaseMetaServlet extends HttpServlet {
 			float buyPrice = Float.parseFloat(request.getParameter("buyPrice"));
 			float sellPrice = Float.parseFloat(request.getParameter("sellPrice"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "insert into purchaseLineItem(purchaseId,productId,quantity,buyPrice,sellPrice) values("
-						+ purchaseId + "," + productId + "," + quantity + "," + buyPrice + "," + sellPrice + ")";
-				stmt.execute(query);
+				purchaseMetaClass pur = new purchaseMetaClass();
+				pur.addItem(purchaseId, productId, quantity, buyPrice, sellPrice);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -55,86 +51,30 @@ public class PurchaseMetaServlet extends HttpServlet {
 			JSONArray array = new JSONArray();
 			{
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-					Statement stmt = conn.createStatement();
-					String query = "select * from purchaseLineItem";
-					ResultSet rs = stmt.executeQuery(query);
-					while (rs.next()) {
-						JSONObject obj = new JSONObject();
-						obj.put("purchaseId", rs.getInt("purchaseId"));
-						obj.put("productId", rs.getString("productId"));
-						obj.put("quantity", rs.getString("quantity"));
-						obj.put("sellPrice", rs.getString("sellPrice"));
-						obj.put("buyPrice", rs.getString("buyPrice"));
-						array.put(obj);
+					purchaseMetaClass pur = new purchaseMetaClass();
+       				array = pur.getAll();
 					}
-				} catch (Exception e) {
+				 catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				response.getWriter().println(array);
 			}
-		} else if (operation.equals("delete")) {
-			int purchaselineid = Integer.parseInt(request.getParameter("purchaseLineId"));
+			} else if (operation.equals("delete")) {
+			int purchaseLineId = Integer.parseInt(request.getParameter("purchaseLineId"));
 			JSONObject obj = new JSONObject();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "delete from purchaseLineItem where purchaseLineId=" + purchaselineid;
-				stmt.execute(query);
-				obj.put("status", "success");
+              purchaseMetaClass pur = new purchaseMetaClass();
+              pur.delete(purchaseLineId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			response.getWriter().println(obj);
-		}else if(operation.equals("getId")){
-			int productId = Integer.parseInt(request.getParameter("productId"));
-			JSONObject obj = new JSONObject();
-			try {
-				Class.forName("com.mysql.jdbc.Driver"); 
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from purchaseLineItem,product where purchaseLineItem.productId=product.productId";
-                ResultSet rs = stmt.executeQuery(query);
-                while(rs.next());{
-                	obj.put("pName", rs.getDate("pName"));
-					obj.put("buyPrice",rs.getFloat("buyPrice"));
-					obj.put("sellPrice", rs.getFloat("sellPrice"));
-					obj.put("billTottal", rs.getFloat("billTotal"));
-					obj.put("quantity", rs.getFloat("quantity"));
-					obj.put("buyPrice", rs.getFloat("buyPrice"));
-					obj.put("sellPrice", rs.getFloat("sellPrice"));
-                }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else if(operation.equals("getId")){
-				int productId = Integer.getInteger(request.getParameter("productId"));
-				JSONObject obj = new JSONObject();
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
-					Statement stmt = conn.createStatement();
-					String query = "select * from purchaseLineItem,product where purchaseLineItem.productId=product.productId";
-                    ResultSet rs = stmt.executeQuery(query);
-                    while(rs.next());{
-                    	obj.put("pName", rs.getDate("pName"));
-    					obj.put("buyPrice",rs.getFloat("buyPrice"));
-    					obj.put("sellPrice", rs.getFloat("sellPrice"));
-    					obj.put("billTottal", rs.getFloat("billTotal"));
-    					obj.put("quantity", rs.getFloat("quantity"));
-    					obj.put("buyPrice", rs.getFloat("buyPrice"));
-    					obj.put("sellPrice", rs.getFloat("sellPrice"));
-    					obj.put("payDate", rs.getDate("payDate"));
-                    }
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		}
+	}
+	private purchasePayClass purchasePayClass() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
