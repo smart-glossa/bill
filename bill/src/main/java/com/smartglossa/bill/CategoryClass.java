@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 public class CategoryClass {
 	 Connection conn = null;

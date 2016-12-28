@@ -19,6 +19,4 @@ function expense() {
 	exp += "<tr><td>Amount*:<\/td><td><input type=\"text\"id=\"amount\"><\/td><\/tr>";
 	exp += "<\/table>";
 	$('.expense')[0].innerHTML=exp;
-
-	
 }
