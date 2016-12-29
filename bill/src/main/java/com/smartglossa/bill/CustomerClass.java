@@ -54,9 +54,9 @@ public class CustomerClass {
             String query = "select * from customer where customerId=" + id;
             rs = stat.executeQuery(query);
             if (rs.next()) {
-                result.put("name", rs.getString(2));
-                result.put("address", rs.getString(3));
-                result.put("phonenumber", rs.getString(4));
+                result.put("name", rs.getString("name"));
+                result.put("address", rs.getString("address"));
+                result.put("phonenumber", rs.getString("phonenumber"));
             }
         } finally {
             closeConnection();
@@ -71,9 +71,10 @@ public class CustomerClass {
             rs = stat.executeQuery(query);
             while (rs.next()) {
                 JSONObject get = new JSONObject();
-                get.put("name", rs.getString(2));
-                get.put("address", rs.getString(3));
-                get.put("phonenumber", rs.getString(4));
+                get.put("cid", rs.getInt("customerId"));
+                get.put("name", rs.getString("name"));
+                get.put("address", rs.getString("address"));
+                get.put("phonenumber", rs.getString("phonenumber"));
                 result.put(get);
             }
 
