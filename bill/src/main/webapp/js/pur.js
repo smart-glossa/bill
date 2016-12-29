@@ -1,0 +1,85 @@
+function purchaseproduct(){
+	var pur="";
+	pur += "<div class=\"pur\">";
+	pur += "<h2> ADD PURCHASE <\/h2>";
+	pur += "<table>";
+	pur += "<tr>";
+	pur += "<td> Purchase Id <\/td>";
+	pur += "<td><input type = \"text\" id=\"pId\"><\/td>";
+	pur += "<\/tr>";
+	pur += "<tr>";
+	pur += "<td> Bill Date <\/td>";
+	pur += "<td><input type=\"date\" id=\"date\"><\/td>";
+	pur += "<\/tr>";
+	pur += "<tr>";
+	pur += "<td> Value Added Tax <\/td>";
+	pur += "<td><input type=\"text\" id=\"vat\"><\/td>";
+	pur += "<\/tr>";
+	pur += "<tr>";
+	pur += "<td> Discount <\/td>";
+	pur += "<td><input type=\"text\" id=\"discount\"><\/td>";
+	pur += "<\/tr>";
+	pur += "<tr>";
+	pur += "<td> Bill Total <\/td>";
+	pur += "<td><input type=\"text\" id=\"tot\"<\/td>";
+    pur += "<\/tr>";
+    pur += "<\/table>";
+	pur += "<\/div>";
+	$('.pur')[0].innerHTML = pur;
+}
+function purchasePayment(){
+	 pay = "";
+	 pay += "<div class=\"pay\">";
+	 pay += "<h2>Purchase Payment<\/h2>";
+	 pay += "<table>";
+	 pay += "<tr>";
+	 pay += "<td>Payment Date<\/td>";
+	 pay += "<td><input type=\"date\" id=\"Date\"><\/td>";
+	 pay += "<\/tr>";
+	 pay += "<tr>";
+	 pay += "<td>Paid Amount<\/td>";
+	 pay += "<td><input type=\"text\" id=\"amount\"><\/td>";
+	 pay += "<\/tr>";
+	 pay += "<tr>";
+	 pay += "<td><input type=\"submit\" value=\"Add\" id=\"add\">";
+	 pay += "<input type=\"submit\" value=\"Update\" id=\"update\"><\/td>";
+	 pay += "<\/tr>";
+	 pay += "<\/table>";
+	 pay += "<\/div>";
+	 $('.pay')[0].innerHTML = pay;
+	}
+function purchaseLineItem(){
+var purLine="";
+purLine += "<div class=\"purLine\">";
+purLine += "<h2>PurchaseLineItem<\/h2>";
+purLine += "<table>";
+purLine += "<tr>";
+purLine += "<td>Product Id:<\/td>";
+purLine += "<td><input type=\"text\" id=\"productId\"><\/td>";
+purLine += "<\/tr>";
+purLine += "<tr>";
+purLine += "<td>"
+purLine += "<\/tr>";
+purLine += "<td>Purchase Line Id:<\/td>";
+purLine += "<td><input type =\"text\" id=\"LineId\"><\/td>";
+purLine += "<\/tr>";
+purLine += "<tr>";
+purLine += "<td>Quantity :<\/td>";
+purLine += "<td><input type=\"text\" id=\"quantity\"<\/td>";
+purLine += "<\/tr>";
+purLine += "<tr>";
+purLine += "<td>Buy Price:<\/td>";
+purLine += "<td><input type=\"text\" id=\"buy\"<\/td>";
+purLine += "<\/tr>";
+purLine += "<tr>";
+purLine += "<td>Sell Price:<\/td>";
+purLine += "<td><input type=\"text\ id=\"sell\"><\/td>";
+purLine += "<\/tr>";
+purLine += "<tr>";
+purLine += "<td><input type=\"button\" value=\"Add\" id=\"add\">";
+purLine += "<input type=\"button\" value=\"Update\" id=\"update\"><\/td>";
+purLine += "<\/tr>";
+purLine += "<\/table>";
+purLine += "<\/div>";
+$('.purLine')[0].innerHTML = purLine;
+}
