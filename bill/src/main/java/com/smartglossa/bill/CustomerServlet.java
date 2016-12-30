@@ -86,7 +86,26 @@ public class CustomerServlet extends HttpServlet {
                 e.printStackTrace();
             }
             response.getWriter().print(result);
-        } else if (operation.equals("cusale")) {
+        } 
+        else if(operation.equals("customerAdd")){
+        	int cid=Integer.parseInt(request.getParameter("cId"));
+        	int saleId=Integer.parseInt(request.getParameter("saleId"));
+        	JSONObject result=new JSONObject();
+        	try {
+        		CustomerClass cus=new CustomerClass();
+        		cus.customerAdd(cid, saleId);
+        		result.put("status",1);
+				
+			} catch (Exception e) {
+				result.put("status",0);
+				e.printStackTrace();
+				
+			}
+        	response.getWriter().print(result);
+        }
+        	
+        	
+        	else if (operation.equals("cusale")) {
             int cuid = Integer.parseInt(request.getParameter("cId"));
             JSONArray result = new JSONArray();
             try {

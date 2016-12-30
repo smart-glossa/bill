@@ -1,11 +1,11 @@
-function customer(){
-	var cus="";
+function customer() {
+	var cus = "";
 	cus += "<table>";
 	cus += "        <tr>";
-	cus += "			<td>Customer Id<\/td><td><input type=\"text\" id=\"id\"><\/td>";
+	cus += "			<td>customer Id<\/td><td><input type=\"text\" id=\"id\"><\/td>";
 	cus += "		<\/tr>";
 	cus += "		<tr>";
-	cus += "			<td>Customer Name<\/td><td><input type=\"text\" id=\"name\"><\/td>";
+	cus += "			<td>customer Name<\/td><td><input type=\"text\" id=\"name\"><\/td>";
 	cus += "		<\/tr>";
 	cus += "		<tr>";
 	cus += "			<td>Address<\/td><td><textarea id=\"add\"><\/textarea><\/td>";
@@ -21,9 +21,26 @@ function customer(){
 	cus += "				<\/td>";
 	cus += "			<\/tr>";
 	cus += "		<\/table>";
-$('.cus')[0].innerHTML = cus;
-	
+	$('.cus')[0].innerHTML = cus;
+
 }
-function customerBill(){
-	
+function customerBill() {
+	var cusBill = "";
+	cusBill += "<table>";
+	cusBill += "        <tr>";
+	cusBill += "			<td>customer Id<\/td><td><input type=\"text\" id=\"cid\"><\/td>";
+	cusBill += "		<\/tr>";
+	cusBill += "		<tr>";
+	cusBill += "			<td>Sale Id<\/td><td><input type=\"text\" id=\"sid\"><\/td>";
+	cusBill += "		<\/tr>";
+	cusBill += "		<tr>";
+	cusBill += "           <tr>";
+	cusBill += "           <td><\/td>";
+	cusBill += "				<td>";
+	cusBill += "					<input type=\"submit\" id=\"sub\" value=\"Submit\">";
+	cusBill += "				<\/td>";
+	cusBill += "			<\/tr>";
+	cusBill += "		<\/table>";
+	$('.cusBill')[0].innerHTML = cusBill;
+
 }

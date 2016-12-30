@@ -15,7 +15,7 @@ public class CustomerClass {
 
     public CustomerClass() throws ClassNotFoundException, SQLException {
         openConnection();
-
+ 
     }
 
     public void cusAdd(int cid, String cname, String caddr, String cphno) throws ClassNotFoundException, SQLException {
@@ -84,6 +84,21 @@ public class CustomerClass {
         return result;
 
     }
+    public void customerAdd(int cid,int saleId) throws ClassNotFoundException,SQLException {
+    	try {
+    		String query="insert into customerBill(customerId,saleId)values("+cid+","+saleId+")";
+    		stat.execute(query);
+			
+		} finally {
+			
+			closeConnection();
+			
+		}
+	}
+    
+    
+    
+    
 
     public JSONArray cusale(int cuid) throws ClassNotFoundException, SQLException {
         JSONArray result = new JSONArray();

@@ -8,7 +8,7 @@ $(document).ready(function(){
 				alert("Please Enter CustomerId");
 				return;
 		}
-		if(cname=""){
+		if(cname==""){
 			alert("Please Enter CustomerName");
 			return;
 		}
@@ -20,7 +20,7 @@ $(document).ready(function(){
 			alert("Please Enter PhoneNumber");
 			return;
 		}
-		var url="http://localhost:8080/bill/customer?operation=cusAdd&cid="+cid+"&cname="+cname+"&caddr="+caddr+"&cphno="+cphno;
+		var url="/bill/customer?operation=cusAdd&cid="+cid+"&cname="+cname+"&caddr="+caddr+"&cphno="+cphno;
 		$.ajax({
 			url:url,
 			type:'POST'
@@ -53,7 +53,7 @@ $(document).ready(function(){
 			alert("Please Enter PhoneNumber");
 			return;
 		}
-		var url="http://localhost:8080/bill/customer?operation=cusUpdate&cid="+cid+"&cname="+cname+"&caddr="+caddr+"&cphno="+cphno;
+		var url="/bill/customer?operation=cusUpdate&cid="+cid+"&cname="+cname+"&caddr="+caddr+"&cphno="+cphno;
 		$.ajax({
 			url:url,
 			type:'POST'
@@ -80,7 +80,7 @@ $(document).ready(function(){
 		}
 	});
 	$(document).on("click","#getAll",function(){
-		var url="http://localhost:8080/bill/customer?operation=cusAll";
+		var url="/bill/customer?operation=cusAll";
 		$.ajax({
 			url:url,
 			type:'POST'
@@ -102,6 +102,71 @@ $(document).ready(function(){
 			$('.table')[0].innerHTML=table;
 		});
 	});
+	
+	$(document).on("click","#sub",function(){
+		var cid=$("#cid").val();
+		var sid=$("#sid").val();
+		if(cid==""){
+			$("#cid").focus().css("outline-color", "#ff0000");
+			return;
+		}
+		if(sid==""){
+			$("#sid").focus().css("outline-color","#ff0000");
+			return;
+		}
+		var url="/bill/customer?operation=customerAdd&cId="+cid+"&saleId="+sid;
+		$.ajax({
+			url:url,
+			type:'POST'
+		}).done(function(result){
+			alert("Successfully Added");
+		}).fail(function(result){
+			alert("Error Occurs");
+		});
+	});
+	$(document).on("keyup","#cid",function(){
+		var cid=$("#cid").val();
+		if(cid !=="")
+			{
+			var url="/bill/customer?operation=cusale&cId="+cid;
+			$.ajax({
+				url:url,
+				type:'POST'
+			})
+			.done(function(result){
+				var array=JSON.parse(result);
+
+				var table="<table border='2px  ' class='table'><tr><th>BillDate</th><th>VAT</th><th>Discount</th><th>BillTotal</th><th>SaleLineId</th><th>ProductId</th><th>Quantity</th><th>Cost</th><th>PayId</th><th>PayDate</th><th>PaidAmount</th></tr>"
+
+			    for(i=0;i<array.length;i++){
+			    	table+="<tr>"
+			    		
+				 	    table+="<td>"+array[i].billDate+"</td>"
+				 		table+="<td>"+array[i].vat+"</td>"
+				 		table+="<td>"+array[i].discount+"</td>"
+				 		table+="<td>"+array[i].billTotal+"</td>"
+				 		table+="<td>"+array[i].saleLineId+"</td>"
+				 		table+="<td>"+array[i].productId+"</td>"
+				 		table+="<td>"+array[i].quantity+"</td>"
+				 		table+="<td>"+array[i].cost+"</td>"
+				 		table+="<td>"+array[i].payId+"</td>"
+				 		table+="<td>"+array[i].payDate+"</td>"
+				 		table+="<td>"+array[i].paidAmount+"</td>"
+				 		
+				 		
+				 		table+="</tr>";
+				 	}
+				table+="</table>";
+				 	$(".table")[0].innerHTML=table;	
+
+
+			})
+			}
+	})
+	
+
+	
+	
 	
 	
 	
