@@ -1,20 +1,33 @@
 $(document).ready(function(){
-	$('#image').on('click',function(){
+	$(document).on('click','#image',function(){
 		var dropdown="";
 		dropdown += "<ul>";
 		dropdown += "<li>Product<\/li>";
-		dropdown += "<li>Dealer<\/li>";
+		dropdown += "<li id=\"dealer\">Dealer<\/li>";
 		dropdown += "<li>Customer<\/li>";
 		dropdown += "<li>Purchase<\/li>";
 		dropdown += "<li>Sales<\/li>";
 		dropdown += "<li>Expenses<\/li>";
 		dropdown += "<\/ul>";
 		$('.menu')[0].innerHTML=dropdown;
-		
-		$('.menu').css("display","block");
-		
-	},function(){
-		$(".menu").css("display","none");
+		 $(".menu").toggle(); 
+});
+
+	$(document).on('click','#adddealer',function(){
+		var add="";
+		add += "<input type=\"text\" id=\"dealerid\" placeholder=\"DealerId\"\/><\/br><\/br>";
+		add += "<input type=\"text\" id=\"name\" placeholder=\"Name\"\/><\/br><\/br>";
+		add += "<input type=\"text\" id=\"address\" placeholder=\"Address\"\/><\/br><\/br>";
+		add += "<input type=\"text\" id=\"phone\" placeholder=\"PhoneNumber\"\/><\/br><\/br>";
+		add += "<input type=\"text\" id=\"tin\" placeholder=\"TINNumber\"\/><\/br><\/br>";
+		add += "<button id=\"submit\">ADDNOW!<\/button>";
+		add += "<button id=\"update\">UPDATE<\/button>";
+	
+      $('.adddiv')[0].innerHTML=add;
 	});
 	
-});
+	
+	
+	});
+	
+	

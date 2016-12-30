@@ -66,8 +66,9 @@ public class dealerServlet extends HttpServlet {
             try {
                 dealerClass dealer = new dealerClass();
                 dealer.deletedealer(dealerId);
+                delete.put("status",1);      
             } catch (Exception e) {
-                delete.put("status", "0");
+                delete.put("status",0);
                 e.printStackTrace();
             }
             response.getWriter().println(delete);
@@ -77,7 +78,7 @@ public class dealerServlet extends HttpServlet {
             String name = request.getParameter("name");
             String address = request.getParameter("address");
             String phoneNumber = request.getParameter("phoneNumber");
-            String TINNumber = request.getParameter("TINNUmber");
+            String TINNumber = request.getParameter("TINNumber");
             JSONObject update = new JSONObject();
             try {
                 dealerClass dealer = new dealerClass();

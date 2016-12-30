@@ -56,7 +56,7 @@ public class dealerClass {
     public JSONObject getone(int dealerId) throws SQLException, ClassNotFoundException {
         JSONObject one = new JSONObject();
         try {
-            String query = "select * from dealer where dealerId=" + dealerId;
+            String query = "select * from dealer where dealerId="+dealerId;
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 one.put("name", rs.getString("name"));
@@ -88,11 +88,10 @@ public class dealerClass {
     }
 
     public void deletedealer(int dealerId) throws SQLException, ClassNotFoundException {
-        JSONObject delete = new JSONObject();
+       JSONObject delete = new JSONObject();
         try {
-            String query = "delete from dealer where dealerId=" + dealerId;
+            String query = "delete from dealer where dealerId="+dealerId;
             stmt.execute(query);
-            delete.put("status", "1");
         } finally {
             closeConnection();
         }
@@ -100,8 +99,8 @@ public class dealerClass {
 
     public JSONArray dealerbill(int dId) throws SQLException, ClassNotFoundException {
         JSONArray bill = new JSONArray();
-        try {
-            String query = "select purchaseId from dealerBill where dealerId=" + dId;
+        try {	
+            String query = "select purchaseId from dealerBill where dealerId="+dId;
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int pId = rs.getInt("purchaseId");
@@ -135,7 +134,8 @@ public class dealerClass {
 
     private void openConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
+        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
+                BillConstants.USERNAME, BillConstants.PASSWORD);
         stmt = conn.createStatement();
 
     }
