@@ -31,7 +31,7 @@ function purchasePayment(){
 	 pay = "";
 	 pay += "<div class=\"pay\">";
 	 pay += "<h2>Purchase Payment<\/h2>";
-	 pay += "<table>";
+	 pay += "<table>";      
 	 pay += "<tr>";
 	 pay += "<td>Payment Date<\/td>";
 	 pay += "<td><input type=\"date\" id=\"Date\"><\/td>";
