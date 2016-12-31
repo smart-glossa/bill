@@ -24,6 +24,7 @@ public class ExpensesServlet extends HttpServlet {
         if (operation.equals("add")) {
             JSONObject obj = new JSONObject();
             int id = Integer.parseInt(request.getParameter("catid"));
+            String cname=request.getParameter("cname");
             String date = request.getParameter("expDate");
             String des = request.getParameter("description");
             float amount = Float.parseFloat(request.getParameter("amount"));

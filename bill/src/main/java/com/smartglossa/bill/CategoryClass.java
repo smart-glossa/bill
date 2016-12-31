@@ -89,6 +89,26 @@ public class CategoryClass {
         return resu;
 
     }
+    public JSONArray expcat(int catid) throws ClassNotFoundException,SQLException {
+    	JSONArray result=new JSONArray();
+    	try {
+    		String query="select * from expensecategory,expenses where expensecategory.catid="+catid+"and expenses.catid="+catid;
+    		rs.getStatement().executeQuery(query);
+    		while(rs.next()){
+    			JSONObject obj=new JSONObject();
+    			obj.put("cname",rs.getString("cname"));
+    			obj.put("expId",rs.getInt("expId"));
+    			
+    		}
+			
+		} finally {
+			
+		}
+		return null;
+		
+	}
+    
+    
 
     private void openConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");

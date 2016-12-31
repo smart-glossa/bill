@@ -18,7 +18,7 @@ $(document).ready(function(){
 		})
 		.done(function(result){
 			result=JSON.parse(result);
-			if(result.status=="success"){
+			if(result.status=="1"){
 				alert("Successfully Added");
 			}
 		})
@@ -87,6 +87,58 @@ $(document).ready(function(){
 			}
 			table+="</table>";
 			$(".cat")[0].innerHTML=table;
+		});
+	});
+	$(document).on('keyup','#catid',function(){
+		var cid=$('#catid').val();
+		if(cid!=""){
+			var url="/bill/Expense?operation=getOne&catid="+cid;
+			$.ajax({
+				url:url,
+				type:'post'
+			})
+			.done(function(result){
+				result=JSON.parse(result);
+				$("#cname").val(result.cname);
+				
+			});
+		}
+	});
+	$(document).on("click","#sub",function(){
+		var cid=$('#catid').val();
+		var cname=$('#cname').val();
+		var date=$('#expdate').val();
+		var des=$('#description').val();
+		var amount=$('#amount').val();
+		if(cid==""){
+			alert("please enter id");
+		}
+		if(cname==""){
+			alert("plese enter categoryname");
+		}
+		if(date==""){
+			alert("please enter expensedate");
+			
+		}
+		if(des==""){
+			alert("plese enter Some description");
+		}
+		if(amount==""){
+			alert("please enter amount");
+		}
+		var url="http://localhost:8080/bill/Expense?operation=add&catid="+cid+"&cname="+cname+"&expDate="+date+"&description="+des+"&amount="+amount;
+		$('input[type=text]').val();
+		$.ajax({
+			url:url,
+			type:'post'
+		})
+		.done(function(result){
+			
+				alert("Successfully Added");
+			
+		})
+		.fail(function(result){
+			alert("Error Occurs");
 		});
 	});
 });
