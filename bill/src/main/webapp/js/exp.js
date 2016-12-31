@@ -13,6 +13,7 @@ function expense() {
 	var exp="";
 	exp += "<table>";
 	exp += "<tr><th>Expenses<\/th><\/tr>";
+	exp += "<tr><td>ExpenseId*:<\/td><td><input type=\"text\"id=\"expid\"><\/td><\/tr>";
 	exp += "<tr><td>CategoryId*:<\/td><td><input type=\"text\"id=\"catid\"><\/td><\/tr>";
 	exp +="<tr><td>CategoryName*:<\/td><td><input type=\"text\"id=\"cname\"><\/td><\/tr>";
 	exp += "<tr><td>ExpenseDate*:<\/td><td><input type=\"text\"id=\"expdate\"><\/td><\/tr>";
