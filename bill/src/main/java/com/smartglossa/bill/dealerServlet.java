@@ -1,6 +1,7 @@
 package com.smartglossa.bill;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -90,7 +91,22 @@ public class dealerServlet extends HttpServlet {
             }
             response.getWriter().println(update);
 
-        } else if (operation.equals("billadd")) {
+        } else if(operation.equals("billadd")){
+        	JSONObject add = new JSONObject();
+        	int dId = Integer.parseInt(request.getParameter("dealerId"));
+        	int pId = Integer.parseInt(request.getParameter("purchaseId"));
+        	 try {
+				dealerClass dealer = new dealerClass();
+				dealer.addbill(dId, pId);
+				add.put("status", "1");
+				
+			} catch (Exception e) {
+				add.put("status", "0");
+				e.printStackTrace();
+			}
+        	
+        }
+        else if (operation.equals("billget")) {
             int dId = Integer.parseInt(request.getParameter("dealerId"));
             JSONArray bill = new JSONArray();
             try {

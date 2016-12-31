@@ -96,6 +96,17 @@ public class dealerClass {
             closeConnection();
         }
     }
+    public void addbill(int dId,int pId)
+            throws SQLException, ClassNotFoundException {
+        JSONObject add = new JSONObject();
+        try {
+            String query = "insert into dealerbill(dealerId,purchaseId)values(" + dId + ","+pId+")"; 
+            stmt.execute(query);
+            add.put("status", "1");
+        } finally {
+            closeConnection();
+        }
+    }
 
     public JSONArray dealerbill(int dId) throws SQLException, ClassNotFoundException {
         JSONArray bill = new JSONArray();

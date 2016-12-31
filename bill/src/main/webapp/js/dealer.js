@@ -26,6 +26,14 @@ $(document).ready(function(){
       $('.adddiv')[0].innerHTML=add;
 	});
 	
+	$(document).on('click','#dealerbill',function(){
+		var billadd = "";
+		billadd += "<input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/br>";
+		billadd += "<input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><br>";
+		billadd += "<button id=\"billadd\">billadd<\/button>";
+		
+		$('.adddiv')[0].innerHTML=billadd;
+	});
 	
 	
 	});
