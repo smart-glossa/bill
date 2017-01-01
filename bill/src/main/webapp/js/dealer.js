@@ -12,6 +12,17 @@ $(document).ready(function(){
 		$('.menu')[0].innerHTML=dropdown;
 		 $(".menu").toggle(); 
 });
+	
+	$(document).on('click','#dealer',function(){
+		var list="";
+		list += "<ul>";
+		list += "<li>dealerDetails<\/li>";
+		list += "<li>dealerBillDetails<\/li>";
+		list += "<\/ul>";
+		$('.menutwo')[0].innerHTML=list;
+		
+		$('.menutwo').toggle();
+	});
 
 	$(document).on('click','#adddealer',function(){
 		var add="";
@@ -34,6 +45,7 @@ $(document).ready(function(){
 		
 		$('.adddiv')[0].innerHTML=billadd;
 	});
+	
 	
 	
 	});

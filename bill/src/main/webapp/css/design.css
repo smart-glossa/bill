@@ -1,10 +1,29 @@
+
+.image
+{
+position:fixed;	
+}
+
 .menu
 {
 
-	
-	width:300px;
+	float:left;
+	width:200px;
 	height:300px;
 	display:none;
+	position: staic;
+	
+}
+.menutwo
+{
+   
+	width:300px;
+	dispaly:none;
+	height: 200px;
+	margin-top:200px;
+	margin-right:50px;
+
+
 }
 .menu ul
 {
@@ -14,4 +33,8 @@
 {
 	padding-top: 30px;
 	font-size: 22px;
+}
+#buttons
+{
+	float:right;
 }
