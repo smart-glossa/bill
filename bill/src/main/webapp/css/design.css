@@ -16,12 +16,13 @@ position:fixed;
 }
 .menutwo
 {
-   
+    position:fixed;
+    float:right;
 	width:300px;
 	dispaly:none;
 	height: 200px;
-	margin-top:200px;
-	margin-right:50px;
+
+
 
 
 }
