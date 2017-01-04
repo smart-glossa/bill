@@ -19,12 +19,7 @@ position:fixed;
     position:fixed;
     float:right;
 	width:300px;
-	dispaly:none;
 	height: 200px;
-
-
-
-
 }
 .menu ul
 {
@@ -34,6 +29,12 @@ position:fixed;
 {
 	padding-top: 30px;
 	font-size: 22px;
+}
+.menu li:hover
+{
+	padding:14px 10px;
+	background-color:blue;
+	color:white;
 }
 #buttons
 {

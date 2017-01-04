@@ -91,13 +91,14 @@ public class dealerServlet extends HttpServlet {
             }
             response.getWriter().println(update);
 
-        } else if(operation.equals("billadd")){
+        } else if(operation.equals("billAdd")){
         	JSONObject add = new JSONObject();
         	int dId = Integer.parseInt(request.getParameter("dealerId"));
         	int pId = Integer.parseInt(request.getParameter("purchaseId"));
         	 try {
 				dealerClass dealer = new dealerClass();
 				dealer.addbill(dId, pId);
+				
 				add.put("status", "1");
 				
 			} catch (Exception e) {
@@ -106,7 +107,7 @@ public class dealerServlet extends HttpServlet {
 			}
         	
         }
-        else if (operation.equals("billget")) {
+        else if (operation.equals("billGet")) {
             int dId = Integer.parseInt(request.getParameter("dealerId"));
             JSONArray bill = new JSONArray();
             try {

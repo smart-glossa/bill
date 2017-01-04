@@ -5,11 +5,36 @@ $(document).ready(function(){
 		var address = $("#address").val();
 		var phone = $("#phone").val();
 		var tin = $("#tin").val();
-	var url="http://localhost:8080/bill/dealer?operation=deaadd&dealerId="+dealerid+"&name="+name+"&address="+address+"&phoneNumber="+phone+"&TINNumber="+tin;
-	$("input[type=text]").val("");
-	$.ajax({
-		url: url,
-		type: 'POST'
+		if(dealerid == "")
+		{
+		$('#dealerid').css("border-color","red");
+		return;
+		}
+		if(name == "")
+		{
+		$('#name').css("border-color","red");
+		return;
+		}
+		if(address == "")
+		{
+		$('#address').css("border-color","red");
+		return;
+		}
+		if(phone == "")
+		{
+		$('#phone').css("border-color","red");
+		return;
+		}
+		if(phone.length != 10)
+		{
+		$('#phone').after("<p style='color:red';>Only 10 Numbers</p>");
+		return;
+		}
+		if(tin == "")
+		{
+		$('#tin').css("border-color","red");
+		return;
+		}
 	})
 	.done(function(result){
 		alert(result);
@@ -25,6 +50,36 @@ $(document).ready(function(){
 		var address = $("#address").val();
 		var phone = $("#phone").val();
 		var tin = $("#tin").val();
+		if(dealerid == "")
+		{
+		$('#dealerid').css("border-color","red");
+		return;
+		}
+		if(name == "")
+		{
+		$('#name').css("border-color","red");
+		return;
+		}
+		if(address == "")
+		{
+		$('#address').css("border-color","red");
+		return;
+		}
+		if(phone == "")
+		{
+		$('#phone').css("border-color","red");
+		return;
+		}
+		if(phone.length != 10)
+		{
+		$('#phone').after("<p style='color:red';>Only 10 Numbers</p>");
+		return;
+		}
+		if(tin == "")
+		{
+		$('#tin').css("border-color","red");
+		return;
+		}
 	var url="http://localhost:8080/bill/dealer?operation=update&dealerId="+dealerid+"&name="+name+"&address="+address+"&phoneNumber="+phone+"&TINNumber="+tin;
 	$("input[type=text]").val("");
 	$.ajax({
@@ -120,4 +175,3 @@ $(document).ready(function(){
 		
 		
 	});
-});

@@ -3,7 +3,7 @@ $(document).ready(function(){
 		var dropdown="";
 		dropdown += "<ul>";
 		dropdown += "<li>Product<\/li>";
-		dropdown += "<li id=\"dealer\">Dealer<\/li>";
+		dropdown += "<li id=\"dealerli\">Dealer<\/li>";
 		dropdown += "<li>Customer<\/li>";
 		dropdown += "<li>Purchase<\/li>";
 		dropdown += "<li>Sales<\/li>";
@@ -13,7 +13,7 @@ $(document).ready(function(){
 		 $(".menu").toggle(); 
 });
 	
-	$(document).on('click','#dealer',function(){
+	$(document).hover('#dealerli',function(){
 		var list="";
 		list += "<ul>";
 		list += "<li>dealerDetails<\/li>";

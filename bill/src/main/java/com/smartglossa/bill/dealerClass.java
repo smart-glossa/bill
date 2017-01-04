@@ -100,7 +100,7 @@ public class dealerClass {
             throws SQLException, ClassNotFoundException {
         JSONObject add = new JSONObject();
         try {
-            String query = "insert into dealerbill(dealerId,purchaseId)values(" + dId + ","+pId+")"; 
+            String query = "insert into dealerbill(dealerId,purchaseId)values(" + dId + "," + pId + ")"; 
             stmt.execute(query);
             add.put("status", "1");
         } finally {
