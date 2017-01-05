@@ -1,43 +1,133 @@
-$(document).ready(function(){
-	$(document).on("click","#add",function(){
-		var purchaseId = $('#pId').val();
-		var billDate = $('#Date').val();
-		var vat = $('#vat').val();
-		var discount = $('#discount').val();
-		var billTotal = $('#tot').val();
-		var payDate = $('#date').val();
-		var paidAmount = $('#amount').val();
-		var url ="http://localhost:8080/bill/purchase?operation=addPurchase&purchaseId="+purchaseId+"&billDate="+billDate+"&vat="+vat+"&discount="+discount+"&billTotal="+billTotal +"&payDate="+payDate+"&paidAmount="+paidAmount;
-	$.ajax({
-		url:url,
-		type:'POST'
-	})
-	.done(function(result){
-		alert(result);
-	})
-	.fail(function(result){
-		alert(result);
-	});         
-	});
-
-
-		$(document).on('click','#update',function(){
-			var purchaseId = $('#pId').val();
-			var billDate = $('#Date').val();
-			var vat = $('#vat').val();
-			var discount = $('#discount').val();
-			var billTotal = $('#tot').val();
-			var url = "/bill/purchase?operation=update&purchaseId="+purchaseId+"&billDate="+billDate+"&vat="+vat+"&discount="+discount+"&billTotal="+billTotal;
-			$.ajax({
-				url:url,
-				type:'POST'
-			})
-			.done(function(result){
-				alret(result);
-			})
-			.fail(function(result){
-			alert(result);
-		})
-		});
-	});
-	
+$(document).ready(function() {
+    $(document).on("click", "#add", function() {
+        var purchaseId = $('#pId').val();
+        var billDate = $('#Date').val();
+        var vat = $('#vat').val();
+        var discount = $('#discount').val();
+        var billTotal = $('#tot').val();
+        var payDate = $('#date').val();
+        var paidAmount = $('#amount').val();
+        if (purchaseId == "") {
+            $('#pId').focus().css("outline-color", "red");
+            return false;
+        }
+        if (billDate === "") {
+            $("#Date").focus().css("outline-color", "red");
+            return false;
+        }
+        if (vat == "") {
+            $('#vat').focus().css("outline-color", "red");
+            return false;
+        }
+        if (discount == "") {
+            $('#discount').focus().css("outline-color", "red");
+            return false;
+        }
+        if (billTota == "") {
+            $('#tot').focus().css("outline-color", "red");
+            return false;
+        }
+        if (payDate == "") {
+            $('#date').focus().css("outline-color", "red");
+            return false;
+        }
+        if (paidAmount == "") {
+            $('#amount').focus().css("outline-color", "red");
+            return false;
+        }
+        var url = "http://localhost:8080/bill/purchase?operation=addPurchase&purchaseId=" + purchaseId + "&billDate=" + billDate + "&vat=" + vat + "&discount=" + discount + "&billTotal=" + billTotal + "&payDate=" + payDate + "&paidAmount=" + paidAmount;
+        $.ajax({
+                url: url,
+                type: 'POST'
+            })
+            .done(function(result) {
+                alert(result);
+            })
+            .fail(function(result) {
+                alert(result);
+            });
+    });
+    $(document).on('keyup', '#pId', function() {
+        var purchaseId = $('#pId').val();
+        if (purchaseId !== "") {
+            var url = "http://localhost:8080/bill/purchase?operation=getOne&purchaseId=" + purchaseId;
+            $.ajax({
+                    url: url,
+                    type: 'POST'
+                })
+                .done(function(result) {
+                	var res = JSON.parse(result);
+                    $('#pId').val(res.purchaseId);
+                    $('#date').val(res.billDate);
+                    $('#vat').val(res.vat);
+                    $('#discount').val(res.discount);
+                    $('#tot').val(res.billTotal);
+                })
+                .fail(function(result) {
+                    alert(result);
+                });
+        }else{
+        	 $('#pId').val("");
+             $('#date').val("");
+             $('#vat').val("");
+             $('#discount').val("");
+             $('#tot').val("")
+        }
+    });
+    $(document).on('click', '#update', function() {
+        var purchaseId = $('#pId').val();
+        var billDate = $('#Date').val();
+        var vat = $('#vat').val();
+        var discount = $('#discount').val();
+        var billTotal = $('#tot').val();
+        var url = "/bill/purchase?operation=update&purchaseId=" + purchaseId + "&billDate=" + billDate + "&vat=" + vat + "&discount=" + discount + "&billTotal=" + billTotal;
+        $.ajax({
+                url: url,
+                type: 'POST'
+            })
+            .done(function(result) {
+                alert(result);
+            })
+            .fail(function(result) {
+                alert(result);
+            });
+    });
+    $(document).on("click", "#sub", function() {
+    	var purchaseId = $('#pId').val(); 
+    	var productId = $('#proId').val();
+        var quantity = $('#quantity').val();
+        var buyPrice = $('#buy').val();
+        var sellPrice = $('#sel').val();
+        if(purchaseId == ""){
+        	$('#pId').focus().css("outline-color", "red");
+            return false;
+        }
+        if(productId == ""){
+        	$('#proId').focus().css("outline-color", "red");
+            return false;
+        }
+        if(quantity == ""){
+        	$('#quantity').focus().css("outline-color", "red");
+            return false;
+        }
+        if(buyPrice == ""){
+        	$('#buy').focus().css("outline-color", "red");
+            return false;
+        }
+        if(sellPrice == ""){
+        	$('#sel').focus().css("outline-color", "red");
+            return false;
+        }
+        var url ="http://localhost:8080/bill/purchaseMeta?operation=addItem&purchaseId="+purchaseId +"&productId="+ productId+"&quantity="+quantity+"&buyPrice="+buyPrice+"&sellPrice="+sellPrice;
+        $.ajax({
+                url: url,
+                type: 'POST'
+            }).done(function(result) {
+                alert(result);
+            })
+            .fail(function(result) {
+                alert(result);
+            });
+    });
+   
+});

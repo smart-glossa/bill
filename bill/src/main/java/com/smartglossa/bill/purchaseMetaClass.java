@@ -10,78 +10,98 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class purchaseMetaClass {
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+	Connection conn = null;
+	Statement stmt = null;
+	ResultSet rs = null;
 
-    public purchaseMetaClass() throws SQLException, ClassNotFoundException {
-        openConnection();
+	public purchaseMetaClass() throws SQLException, ClassNotFoundException {
+		openConnection();
 
-    }
+	}
 
-    public void addItem(int purchaseId, int productId, float quantity, float buyPrice, float sellPrice)
-            throws SQLException {
-        JSONObject obj = new JSONObject();
-        try {
-            String query = "insert into purchaseLineItem(purchaseId,productId,quantity,buyPrice,sellPrice) values("
-                    + purchaseId + "," + productId + "," + quantity + "," + buyPrice + "," + sellPrice + ")";
-            stmt.execute(query);
-            obj.put("status", "success");
-        } finally {
-            closeConnection();
-        }
+	public void addItem(int purchaseId, int productId, float quantity, float buyPrice, float sellPrice)
+			throws SQLException {
+		JSONObject obj = new JSONObject();
+		try {
+			String query = "insert into purchaseLineItem(purchaseId,productId,quantity,buyPrice,sellPrice) values("
+					+ purchaseId + "," + productId + "," + quantity + "," + buyPrice + "," + sellPrice + ")";
+			stmt.execute(query);
+			obj.put("status", "success");
+		} finally {
+			closeConnection();
+		}
 
-    }
+	}
 
-    public JSONArray getAll() throws SQLException, ClassNotFoundException {
-        JSONArray set = new JSONArray();
-        try {
-            String query = "select * from purchaseLineItem";
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                JSONObject object = new JSONObject();
-                object.put("purchaseId", rs.getInt("purchaseId"));
-                object.put("productId", rs.getInt("productId"));
-                object.put("quantity", rs.getFloat("quantity"));
-                object.put("buyprice", rs.getFloat("buyPrice"));
-                object.put("sellPrice", rs.getFloat("sellPrice"));
-                set.put(object);
-            }
+	public JSONArray getAll() throws SQLException, ClassNotFoundException {
+		JSONArray set = new JSONArray();
+		try {
+			String query = "select * from purchaseLineItem";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				JSONObject object = new JSONObject();
+				object.put("purchaseId", rs.getInt("purchaseId"));
+				object.put("productId", rs.getInt("productId"));
+				object.put("quantity", rs.getFloat("quantity"));
+				object.put("buyprice", rs.getFloat("buyPrice"));
+				object.put("sellPrice", rs.getFloat("sellPrice"));
+				set.put(object);
+			}
 
-        } finally {
-            closeConnection();
-        }
-        return set;
-    }
+		} finally {
+			closeConnection();
+		}
+		return set;
+	}
 
-    public void delete(int purchaseLineId) throws SQLException, ClassNotFoundException {
-        JSONObject obj = new JSONObject();
-        try {
-            String query = "delete from purchaseLineItem where purchaseLineId=" + purchaseLineId;
-            stmt.execute(query);
-            obj.put("status", "success");
-        } finally {
-            // TODO: handle finally clause
-            closeConnection();
-        }
-    }
+	public void delete(int purchaseLineId) throws SQLException, ClassNotFoundException {
+		JSONObject obj = new JSONObject();
+		try {
+			String query = "delete from purchaseLineItem where purchaseLineId=" + purchaseLineId;
+			stmt.execute(query);
+			obj.put("status", "success");
+		} finally {
+			// TODO: handle finally clause
+			closeConnection();
+		}
+	}
 
-    private void openConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
-                BillConstants.USERNAME, BillConstants.PASSWORD);
-        stmt = conn.createStatement();
-    }
+	public JSONObject getId(int purchaseLineId) throws SQLException, ClassNotFoundException {
+		JSONObject obj = new JSONObject();
+		try {
+			String query = "select * from purchaseLineItem where purchaseLineId=" + purchaseLineId;
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				obj.put("purchaseId", rs.getInt("purchaseId"));
+				obj.put("productId", rs.getInt("productId"));
+				obj.put("quantity", rs.getFloat("quantity"));
+				obj.put("buyPrice", rs.getFloat("buyPrice"));
+				obj.put("sellPrice", rs.getFloat("sellPrice"));
+				obj.put("purchaseLineId", rs.getInt("purchaseLineId"));
+			}
+		} finally {
+			// TODO: handle finally clause
+			closeConnection();
+		}
+		return obj;
+	}
 
-    private void closeConnection() throws SQLException {
-        if (conn != null) {
-            conn.close();
-        }
-        if (stmt != null) {
-            stmt.close();
-        }
-        if (rs != null) {
-            rs.close();
-        }
-    }
+	private void openConnection() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+		conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,
+				BillConstants.USERNAME, BillConstants.PASSWORD);
+		stmt = conn.createStatement();
+	}
+
+	private void closeConnection() throws SQLException {
+		if (conn != null) {
+			conn.close();
+		}
+		if (stmt != null) {
+			stmt.close();
+		}
+		if (rs != null) {
+			rs.close();
+		}
+	}
 }
