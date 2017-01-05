@@ -44,11 +44,38 @@ $(document).on('click','#addpay',function(){
 	})
 	.done(function(result){
 		alert("Added Successfully");
+		
 	})
 	.fail(function(result){
 		alert(result);
 	})
 });
+$(document).on('click','.sale', function() {
+	var url = "http://localhost:8080/bill/SaleMetaData?operation=getSaleMetaData";
+    $.ajax({
+            url: url,
+            type: 'POST'
+        })
+        .done(function(result) {
+            var res = JSON.parse(result);
+            var length = res.length;
+            var table = '<table>'
+            table += '<tr><th>SaleId</th><th>BillDate</th><th>ValueAddedTax</th><th>Discount</th><th>BillTotal</th></tr>';
+            for (i = 0; i < length; i++) {
+                table += '<tr class="row">'
+                table += '<td>' + res[i].saleId + '</td>';
+                table += '<td>' + res[i].billDate + '</td>';
+                table += '<td>' + res[i]. vat+ '</td>';
+                table += '<td>' + res[i].discount + '</td>';
+                table += '<td>' + res[i]. billTotal+ '</td>';
+            }
+            table += '</table>';
+            $('.getSaleMetaData')[0].innerHTML = table;
+        })
+        .fail(function(result) {
+            alert(result);
+        });
+})
 $(document).on('keyup','#saleId',function(){
 	var saleId = $('#saleId').val();
 	if(saleId !== "" ){

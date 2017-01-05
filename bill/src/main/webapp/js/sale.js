@@ -24,7 +24,7 @@ function salemeta(){
 	salemeta += "<\/tr>";
 	salemeta += "<\/table>";
 	salemeta += "<\/div>";
-	salemeta += "<div class=\"getAllSaleMetaData\"><\/div>";
+	salemeta += "<div class=\"getSaleMetaData\"><\/div>";
 $('.sale')[0].innerHTML = salemeta;
 }
 function salepay(){
