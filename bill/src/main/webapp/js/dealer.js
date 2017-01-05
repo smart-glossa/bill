@@ -10,20 +10,23 @@ $(document).ready(function(){
 		dropdown += "<li>Expenses<\/li>";
 		dropdown += "<\/ul>";
 		$('.menu')[0].innerHTML=dropdown;
-		 $(".menu").toggle(); 
+		 $('.menu').toggle(); 
+		 $('.menutwo').toggle();
 });
 	
-	$(document).hover('#dealerli',function(){
+	$(document).on('click','#dealerli',function(){
 		var list="";
 		list += "<ul>";
 		list += "<li>dealerDetails<\/li>";
 		list += "<li>dealerBillDetails<\/li>";
 		list += "<\/ul>";
-		$('.menutwo')[0].innerHTML=list;
-		
-		$('.menutwo').toggle();
-	});
+		$(".menutwo")[0].innerHTML=list;
+		 $(".menutwo").toggle();
 
+		 
+	});		 
+		
+		
 	$(document).on('click','#adddealer',function(){
 		var add="";
 		add += "<input type=\"text\" id=\"dealerid\" placeholder=\"DealerId\"\/><\/br><\/br>";

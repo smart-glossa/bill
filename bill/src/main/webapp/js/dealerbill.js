@@ -35,8 +35,12 @@ $(document).ready(function(){
 		$('#tin').css("border-color","red");
 		return;
 		}
-	})
-	.done(function(result){
+		var url="http://localhost:8080/bill/dealer?operation=deaadd&dealerId="+dealerid+"&name="+name+"&address="+address+"&phoneNumber="+phone+"&TINNumber="+tin;
+		$("input[type=text]").val("");
+		$.ajax({
+			url: url,
+			type: 'POST'
+	}) .done(function(result){
 		alert(result);
 	})
 	.fail(function(result){
@@ -152,6 +156,7 @@ $(document).ready(function(){
 				.done(function(result){
 					var array =  JSON.parse(result);
 					var qua = "<table border='2px'>";
+
 					qua += "<tr><th>productId</th><th>BillDate</th><th>Quantity</th><th>Vat</th><th>Discount</th><th>BillTotal</th><th>payId</th><th>payDate</th><th>payAmount</th></tr>";
 					for(i = 0;i < array.length; i++){
 						qua += "<tr>";
@@ -175,3 +180,4 @@ $(document).ready(function(){
 		
 		
 	});
+});

@@ -16,7 +16,10 @@ position:fixed;
 }
 .menutwo
 {
+display:none;
     position:fixed;
+    padding-top:20px;
+    margin-left:70px;
     float:right;
 	width:300px;
 	height: 200px;
@@ -27,12 +30,12 @@ position:fixed;
 }
 .menu li
 {
-	padding-top: 30px;
+	margin-top: 30px;
 	font-size: 22px;
 }
-.menu li:hover
+#dealerli:hover
 {
-	padding:14px 10px;
+	
 	background-color:blue;
 	color:white;
 }
