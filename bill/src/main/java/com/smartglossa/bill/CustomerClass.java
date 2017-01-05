@@ -99,6 +99,7 @@ public class CustomerClass {
     
     
     
+    
 
     public JSONArray cusale(int cuid) throws ClassNotFoundException, SQLException {
         JSONArray result = new JSONArray();
