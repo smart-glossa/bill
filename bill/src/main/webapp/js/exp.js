@@ -16,7 +16,7 @@ function expense() {
 	exp += "<tr><td>ExpenseId*:<\/td><td><input type=\"text\"id=\"expid\"><\/td><\/tr>";
 	exp += "<tr><td>CategoryId*:<\/td><td><input type=\"text\"id=\"catid\"><\/td><\/tr>";
 	exp +="<tr><td>CategoryName*:<\/td><td><input type=\"text\"id=\"cname\"><\/td><\/tr>";
-	exp += "<tr><td>ExpenseDate*:<\/td><td><input type=\"text\"id=\"expdate\"><\/td><\/tr>";
+	exp += "<tr><td>ExpenseDate*:<\/td><td><input type=\"date\"id=\"expdate\"><\/td><\/tr>";
 	exp += "<tr><td>Description*:<\/td><td><input type=\"text\"id=\"description\"><\/td><\/tr>";
 	exp += "<tr><td>Amount*:<\/td><td><input type=\"text\"id=\"amount\"><\/td><\/tr>";
 	exp += "<tr><td><button id=\"sub\">Submit<\/button><\/td><td><button id=\"up\">Update<\/button><\/td><\/tr>";

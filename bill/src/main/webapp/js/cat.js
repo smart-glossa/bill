@@ -4,10 +4,19 @@ $(document).ready(function(){
 		var name=$('#cname').val();
 		if(id==""){
         alert("please enter CategoryId");
+        $("#catid").focus().css(
+        		   "outline-color", "#ff0000");
         return;
 		}
 		if(name==""){
 			alert("please enter your categoryName");
+			 $("#cname").focus().css(
+					   "outline-color", "#ff0000");
+			return;
+		}
+		if(!isNaN(name)){
+			alert("please only characters");
+			name.value="";
 			return;
 		}
 		var url="/bill/cat?operation=add&catid="+id+"&cname="+name;
@@ -17,10 +26,9 @@ $(document).ready(function(){
 			type:'post'
 		})
 		.done(function(result){
-			result=JSON.parse(result);
-			if(result.status=="1"){
+			
 				alert("Successfully Added");
-			}
+			
 		})
 		.fail(function(result){
 			alert("Error Occurs");
@@ -31,10 +39,14 @@ $(document).ready(function(){
 		var name=$('#cname').val();
 		if(id==""){
 			alert("Please Enter CategoryId");
+			 $("#catid").focus().css(
+					   "outline-color", "#ff0000");
 			return;
 		}
 		if(name==""){
 				alert("Please Enter CategoryName");
+				 $("#cname").focus().css(
+						   "outline-color", "#ff0000");
 				return;
 		}
 		var url="/bill/cat?operation=update&catid="+id+"&cname="+name;
@@ -69,7 +81,7 @@ $(document).ready(function(){
 		});
 		}
 	});
-	$(document).on('click','#getall',function(){
+	$(document).on('click','#getallcat',function(){
 		var url="/bill/cat?operation=getAll";
 		$.ajax({
 			url:url,
@@ -215,6 +227,35 @@ $(document).ready(function(){
 			table+="</table>";
 			$(".expcat")[0].innerHTML=table;
 		});
-	});
-	
+		
+});
+	$(document).on('keypress','#expdate',function(press){
+		if(press.which != 8&& press.which != 0&&(press.which < 48 || press.which > 57)) {
+			alert("Numbers Only");
+			return;
+			}
+	})
+	$(document).on('keypress','#amount',function(e){
+		if(e.which!=8&&e.which !=0&&(e.which<48||e.which>57)){
+			alert("Numbers Only");
+			return;
+		}
+	})
+	.on('keypress','#cname',function(key){
+		var inputValue = key.which;
+		if(!(inputValue >= 65 && inputValue != 122) && (inputValue != 32&& inputValue != 0 && inputValue != 13)){
+			alert("Alphabets only");
+			
+		}
+		
+	})
+	.on('keypress','#description',function(event){
+		var inputValue=event.which;
+		if(!(inputValue>=65 &&inputValue!=122)&&(inputValue!=32&& inputValue!=0 &&inputValue !=13)){
+			alert("Alphabets Only");
+			key.preventDefault();
+
+		}
+	})
+		
 });
