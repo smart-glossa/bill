@@ -130,7 +130,7 @@ $(document).ready(function(){
 			var table = "<table border=2px>";
 			table += "<tr><th>dealerId</th><th>Name</th><th>Address</th><th>PhoneNumber</th><th>TINNumber</th></tr>";
 			
-			for ( i = 0;i < result.length; i++){
+			for ( var i = 0;i < result.length; i++){
 				
 				table += "<tr>";
 				table += "<td>"+result[i].dealerId+"</td>";
@@ -142,30 +142,56 @@ $(document).ready(function(){
 			}
 			
 			table += "</table>";
-			$(".table")[0].innerHTML = table;                                   
+			$(".adddiv")[0].innerHTML = table;                                   
 			});
+		
+		$(document).on('click','#billadd',function(){
+			var did = $('#did').val();
+			var pid = $('#pid').val();
+			if(did == "")
+			{
+			$('#did').css("border-color","red");
+			return;
+			}
+			if(pid == "")
+			{
+			$('#pid').css("border-color","red");
+			return;
+			}
+			var url="http://localhost:8080/bill/dealer?operation=dillAdd&dealerId="+did+"&purchaseId="+pid;
+			$("input[type=text]").val("");
+			$.ajax({
+				url: url,
+				type: 'POST'
+		}) .done(function(result){
+			alert(result);
+		})
+		.fail(function(result){
+			 alert(result);
+		});
+			
+		})
 		
 		$(document).on('keyup','#did',function(){
 			var did = $('#did').val();
 			if(did != ""){
-				var url = "http://localhost:8080/bill/dealer?operation=billget&dealerId="+did;
+				var url = "http://localhost:8080/bill/dealer?operation=billGet&dealerId="+did;
 				$.ajax({
 					url: url,
 					type: 'POST'
 				})
 				.done(function(result){
-					var array =  JSON.parse(result);
+					var array =JSON.parse(result);
 					var qua = "<table border='2px'>";
-
 					qua += "<tr><th>productId</th><th>BillDate</th><th>Quantity</th><th>Vat</th><th>Discount</th><th>BillTotal</th><th>payId</th><th>payDate</th><th>payAmount</th></tr>";
-					for(i = 0;i < array.length; i++){
+					for(var i = 0 ;i < array.length; i++){
 						qua += "<tr>";
-						qua+= "<td>"+array[i].productId+"</td>";
+						qua += "<td>"+array[i].productId+"</td>";
 						qua += "<td>"+array[i].billDate+"</td>";
 						qua += "<td>"+array[i].quantity+"</td>";
 						qua += "<td>"+array[i].vat+"</td>";
 						qua += "<td>"+array[i].discount+"</td>";
-						qua+= "<td>"+array[i].billTotal+"</td>";
+						qua += "<td>"+array[i].billTotal+"</td>";
 						qua += "<td>"+array[i].payId+"</td>";
 						qua += "<td>"+array[i].payDate+"</td>";
 						qua += "<td>"+array[i].paidAmount+"</td>";

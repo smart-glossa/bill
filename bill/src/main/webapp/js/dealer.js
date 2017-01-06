@@ -11,10 +11,10 @@ $(document).ready(function(){
 		dropdown += "<\/ul>";
 		$('.menu')[0].innerHTML=dropdown;
 		 $('.menu').toggle(); 
-		 $('.menutwo').toggle();
+		 $('.menutwo').css("display","none");
 });
 	
-	$(document).on('click','#dealerli',function(){
+	$('#dealerli').on('load',function(){
 		var list="";
 		list += "<ul>";
 		list += "<li>dealerDetails<\/li>";

@@ -117,7 +117,7 @@ public class dealerClass {
                 int pId = rs.getInt("purchaseId");
                 String queryy =
                         "select * from purchasemetadata,purchaselineitem,purchasepayment where purchasemetadata.purchaseId="
-                                + pId + " AND purchaselineitem.purchaseId=" + pId + " AND purchasepayment.purchaseId="
+                                + pId + " AND purchaselineitem.purchaseId=" + pId +" AND purchasepayment.purchaseId="
                                 + pId;
                 rs = stmt.executeQuery(queryy);
                 while (rs.next()) {

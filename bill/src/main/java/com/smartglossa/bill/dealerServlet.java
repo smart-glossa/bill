@@ -98,14 +98,13 @@ public class dealerServlet extends HttpServlet {
         	 try {
 				dealerClass dealer = new dealerClass();
 				dealer.addbill(dId, pId);
-				
 				add.put("status", "1");
 				
 			} catch (Exception e) {
 				add.put("status", "0");
 				e.printStackTrace();
 			}
-        	
+        	response.getWriter().print(add);
         }
         else if (operation.equals("billGet")) {
             int dId = Integer.parseInt(request.getParameter("dealerId"));
