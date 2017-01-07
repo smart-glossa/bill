@@ -46,12 +46,14 @@ CREATE TABLE `image` (
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uname`) REFERENCES `user` (`uname`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1
 
-CREATE TABLE `product` (
-  `productId` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(100) DEFAULT NULL,
-  `cost` float DEFAULT NULL,
+ CREATE TABLE `product` (
+  `productId` int(11) NOT NULL,
+  `pName` varchar(50) DEFAULT NULL,
+  `buyPrice` float DEFAULT NULL,
+  `sellPrice` float DEFAULT NULL,
+  `quantity` float DEFAULT NULL,
   PRIMARY KEY (`productId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 
 
 CREATE TABLE `productImage` (
   `imageId` int(11) NOT NULL AUTO_INCREMENT,
