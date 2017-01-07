@@ -191,4 +191,81 @@ $(document).on('click','.saleline', function() {
             alert(result);
         });
 })
-
+$(document).on('click','.salepay', function() {
+	var url = "http://localhost:8080/bill/SalePayment?operation=getSalePayment";
+    $.ajax({
+            url: url,
+            type: 'POST'
+        })
+        .done(function(result) {
+            var res = JSON.parse(result);
+            var length = res.length;
+            var table = '<table>'
+            table += '<tr><th>PayId</th><th>SaleId</th><th>PayDate</th><th>PaidAmount</th></tr>';
+            for (i = 0; i < length; i++) {
+                table += '<tr class="row">'
+                table += '<td>' + res[i].payId + '</td>';
+                table += '<td>' + res[i].saleId + '</td>';
+                table += '<td>' + res[i].payDate+ '</td>';
+                table += '<td>' + res[i].paidAmount + '</td>';
+            }
+            table += '</table>';
+            $('.getsalepay')[0].innerHTML = table;
+        })
+        .fail(function(result) {
+            alert(result);
+        });
+})
+$(document).on('keypress','#saleId',function(key){
+	if(key.which == 13){
+		$('#billdate').focus();
+	}
+})
+$(document).on('keypress','#billdate',function(key){
+	if(key.which == 13){
+		$('#vat').focus();
+	}
+	if(key.which == 38){
+		$('#saleId').focus();
+	}
+})
+$(document).on('keypress','#vat',function(key){
+	if(key.which == 13){
+		$('#discount').focus();
+	}
+	if(key.which == 38){
+		$('#billdate').focus();
+	}
+})
+$(document).on('keypress','#discount',function(key){
+	if(key.which == 13){
+		$('#billtotal').focus();
+	}
+	if(key.which == 38){
+		$('#vat').focus();
+	}
+})
+$(document).on('keypress','#billtotal',function(key){
+	if(key.which == 13){
+		$('#payDate').focus();
+	}
+	if(key.which == 38){
+		$('#discount').focus();
+	}
+})
+$(document).on('keypress','#payDate',function(key){
+	if(key.which == 13){
+		$('#paidAmount').focus();
+	}
+	if(key.which == 38){
+		$('#billtotal').focus();
+	}
+})
+$(document).on('keypress','#paidAmount',function(key){
+	if(key.which == 13){
+		$('#addpay').focus();
+	}
+	if(key.which == 38){
+		$('#billdate').focus();
+	}
+})

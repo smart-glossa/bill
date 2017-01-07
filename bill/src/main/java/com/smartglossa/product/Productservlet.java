@@ -31,7 +31,7 @@ public class Productservlet extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if (operation.equals("addproducts")) {
 			JSONObject obj = new JSONObject();
-			int pId = Integer.parseInt(request.getParameter("pId"));
+			int productId = Integer.parseInt(request.getParameter("productId"));
 			String pname = request.getParameter("pName");
 			float buyprice = Float.parseFloat(request.getParameter("buyPrice"));
 			float sellprice = Float.parseFloat(request.getParameter("sellPrice"));
@@ -40,7 +40,7 @@ public class Productservlet extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bill", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "insert into product(productId,pName,buyPrice,sellPrice,quantity) values(" + pId + ",'"
+				String query = "insert into product(productId,pName,buyPrice,sellPrice,quantity) values(" + productId + ",'"
 						+ pname + "'," + buyprice + "," + sellprice + "," + quantity + ")";
 				stmt.execute(query);
 				obj.put("status", "success");
@@ -50,7 +50,5 @@ public class Productservlet extends HttpServlet {
 			}
 			response.getWriter().print("obj");
 		}
-
 	}
-
 }

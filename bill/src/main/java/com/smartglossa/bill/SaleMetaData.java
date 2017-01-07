@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 public class SaleMetaData extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     public SaleMetaData() {
         super();
     }

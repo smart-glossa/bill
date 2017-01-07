@@ -3,6 +3,7 @@ function salemeta(){
 	salemeta += "<div class=\"salemeta\">";
 	salemeta += "<h2> Add SaleMetaData <\/h2>";
 	salemeta += "<table>";
+	salemeta += "<tr>";
 	salemeta += "<td>Sale Id*:<\/td>";
 	salemeta += "<td><input type=\"text\" id=\"saleId\"><\/td>";
 	salemeta += "<\/tr>";
@@ -40,12 +41,13 @@ function salepay(){
 	salepay += "<td>PaidAmount*:<\/td>";
 	salepay += "<td><input type=\"text\" placeholder=\"PaidAmount\" id=\"paidAmount\"><\/td>";
 	salepay += "<\/tr>";
+	salepay += "<tr>";
 	salepay += "<td><input type=\"button\" value=\"Add\" id=\"addpay\">";
 	salepay += "<input type=\"button\" value=\"Update\" id=\"updateSalePayment\"><\/td>";
 	salepay += "<\/tr>";
 	salepay += "<\/table>";
 	salepay += "<\/div>";
-	salepay += "<div class=\"getAllSalePayment\"><\/div>";
+	salepay += "<div class=\"getsalepay\"><\/div>";
 $('.salepay')[0].innerHTML = salepay;
 }
 function saleline(){
@@ -53,6 +55,7 @@ function saleline(){
 	saleline += "<div class=\"saleline\">";
 	saleline += "<h2> Add SaleLineItem <\/h2>";
 	saleline += "<table>";
+	saleline += "<tr>";
 	saleline += "<td>SaleLineId*:<\/td>";
 	saleline += "<td><input type=\"text\" id=\"saleLineId\"><\/td>";
 	saleline += "<\/tr>";
