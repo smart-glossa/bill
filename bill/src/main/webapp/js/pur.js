@@ -22,8 +22,8 @@ function purchaseproduct(){
 	pur += "<tr>";
 	pur += "<td> Bill Total <\/td>";
 	pur += "<td><input type=\"text\" placeholder=\"Bill Total\" id=\"tot\"<\/td>";
-        pur += "<\/tr>";
-        pur += "<\/table>";
+    pur += "<\/tr>";
+    pur += "<\/table>";
 	pur += "<\/div>";
 	$('.pur')[0].innerHTML = pur;
 }

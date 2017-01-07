@@ -23,7 +23,7 @@ $(document).ready(function() {
             $('#discount').focus().css("outline-color", "red");
             return false;
         }
-        if (billTota == "") {
+        if (billTotal == "") {
             $('#tot').focus().css("outline-color", "red");
             return false;
         }
@@ -45,7 +45,7 @@ $(document).ready(function() {
             })
             .fail(function(result) {
                 alert(result);
-            });
+            })
     });
     $(document).on('keyup', '#pId', function() {
         var purchaseId = $('#pId').val();
@@ -57,7 +57,6 @@ $(document).ready(function() {
                 })
                 .done(function(result) {
                 	var res = JSON.parse(result);
-                    $('#pId').val(res.purchaseId);
                     $('#date').val(res.billDate);
                     $('#vat').val(res.vat);
                     $('#discount').val(res.discount);
@@ -65,9 +64,8 @@ $(document).ready(function() {
                 })
                 .fail(function(result) {
                     alert(result);
-                });
+                })
         }else{
-        	 $('#pId').val("");
              $('#date').val("");
              $('#vat').val("");
              $('#discount').val("");
@@ -129,5 +127,51 @@ $(document).ready(function() {
                 alert(result);
             });
     });
+    $(document).on('keypress','#pId',function(key){
+    	if(key.which==13){
+    		$('#proId').focus();
+    	}
+    	
+    })
+   $(document).on('keypress','#proId',function(key){
+	   if(key.which==13){
+		   $('#quantity').focus();
+	   }
+	   if(key.which==38){
+		   $('#pId').focus();
+	   }
+   })
+   $(document).on('keypress','#quantity',function(key){
+	   if(key.which==13){
+		   $('#buy').focus();
+	   }
+	   if(key.which==38){
+		   $('#proId').focus();
+	   }
+	   
+   })
+   $(document).on('keypress','#buy',function(key){
+	   if(key.which==13){
+		   $('#sel').focus();
+	   }
+	   if(key.which==38){
+		   $('#quantity').focus();
+	   }
+   })
+   $(document).on('keypress','#sel',function(key){
+	   if(key.which==13){
+		   $("#sub").click();
+		   
+	   }
+	   else if(key.which==38){
+		   div.prev().children('#buy').focus();
+	   }
+   })
+   $(document).on('keypress','#pId','#proId','#quantity','#buy','#sel',function(e){
+	   if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		   alert("Numbers Only");
+		   return;
+	   }
+   })
    
 });
