@@ -48,6 +48,33 @@ $(document).ready(function(){
 	});
 		
 });
+	$(document).on('click','#all',function(){
+		var url="http://localhost:8080/bill/dealer?operation=getall";
+		$.ajax({
+			url: url,
+			type: 'POST'
+		})
+		.done(function(result){
+				var result = JSON.parse(result);		
+			var table = "<table border=2px>";
+			table += "<tr><th>dealerId</th><th>Name</th><th>Address</th><th>PhoneNumber</th><th>TINNumber</th></tr>";
+			
+			for ( var i = 0;i < result.length; i++){
+				
+				table += "<tr>";
+				table += "<td>"+result[i].dealerId+"</td>";
+				table += "<td>"+result[i].name+"</td>";
+				table += "<td>"+result[i].address+"</td>";
+				table += "<td>"+result[i].phoneNumber+"</td>";
+				table += "<td>"+result[i].TINNumber+"</td>";
+				table += "</tr>";
+			}
+			
+			table += "</table>";
+			$(".deaall")[0].innerHTML = table;                                   
+			});
+		
+	 
 	$(document).on('click','#update',function(){
 		var dealerid =$("#dealerid").val();
 		var name = $("#name").val();
@@ -98,34 +125,6 @@ $(document).ready(function(){
 	});
 	});
 	
-	$(document).on('click','#dealerall',function(){
-		var url="http://localhost:8080/bill/dealer?operation=getall";
-		$.ajax({
-			url: url,
-			type: 'POST'
-		})
-		.done(function(result){
-				var result = JSON.parse(result);
-				
-				
-			var table = "<table border=2px>";
-			table += "<tr><th>dealerId</th><th>Name</th><th>Address</th><th>PhoneNumber</th><th>TINNumber</th></tr>";
-			
-			for ( var i = 0;i < result.length; i++){
-				
-				table += "<tr>";
-				table += "<td>"+result[i].dealerId+"</td>";
-				table += "<td>"+result[i].name+"</td>";
-				table += "<td>"+result[i].address+"</td>";
-				table += "<td>"+result[i].phoneNumber+"</td>";
-				table += "<td>"+result[i].TINNumber+"</td>";
-				table += "</tr>";
-			}
-			
-			table += "</table>";
-			$(".deaall")[0].innerHTML = table;                                   
-			});
-	
 	$(document).on('keyup','#dealerid',function(){
 		var did = $("#dealerid").val();
 		if(did != ""){
@@ -145,7 +144,6 @@ $(document).ready(function(){
 	});
 	
 	
-		
 		$(document).on('click','#adds',function(){
 			var did = $('#did').val();
 			var pid = $('#pid').val();
@@ -200,7 +198,7 @@ $(document).ready(function(){
 						 
 					}
 					qua += "</table>";
-					$('.deabill')[0].innerHTML=qua;
+					$('#table2')[0].innerHTML=qua;
 				});
 			}
 		});

@@ -44,7 +44,7 @@ $(document).ready(function(){
 		var billadd = "";
 		billadd += "<input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/br>";
 		billadd += "<input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><br>";
-		billadd += "<input type=\"submit\" id=\"adds\" value=\"Add\">";
+		billadd += "<input type=\"submit\" id=\"add\" value=\"Add\">";
 		
 		$('.deabill')[0].innerHTML=billadd;
 	});
