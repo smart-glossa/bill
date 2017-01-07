@@ -112,8 +112,20 @@ CREATE TABLE `salepayment` (
   CONSTRAINT `salepayment_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 
 
- purchaseLineItem | CREATE TABLE purchaseLineItem ( purchaseId int(11) DEFAULT NULL, productId int(11) DEFAULT NULL, purchaseLineId int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (purchaseLineId), KEY purchaseId (purchaseId), KEY productId (productId), CONSTRAINT purchaseLineItem_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE, CONSTRAINT purchaseLineItem_ibfk_2 FOREIGN KEY (productId) REFERENCES product (productId) ON DELETE CASCADE
- 
+ purchaseLineItem | CREATE TABLE `purchaseLineItem` (
+  `purchaseId` int(11) DEFAULT NULL,
+  `productId` int(11) DEFAULT NULL,
+  `purchaseLineId` int(11) NOT NULL AUTO_INCREMENT,
+  `quantity` float DEFAULT NULL,
+  `buyPrice` float DEFAULT NULL,
+  `sellPrice` float DEFAULT NULL,
+  PRIMARY KEY (`purchaseLineId`),
+  KEY `purchaseId` (`purchaseId`),
+  KEY `productId` (`productId`),
+  CONSTRAINT `purchaseLineItem_ibfk_1` FOREIGN KEY (`purchaseId`) REFERENCES `purchaseMetaData` (`purchaseId`) ON DELETE CASCADE,
+  CONSTRAINT `purchaseLineItem_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 |
+
  purchaseMetaData | CREATE TABLE purchaseMetaData ( purchaseId int(11) NOT NULL, billDate date DEFAULT NULL, vat float DEFAULT NULL, discount float DEFAULT NULL, billTotal float DEFAULT NULL, PRIMARY KEY (purchaseId) )
  
  3.purchasePayment | CREATE TABLE purchasePayment ( purchaseId int(11) DEFAULT NULL, payId int(11) NOT NULL AUTO_INCREMENT, payDate date DEFAULT NULL, paidAmount float DEFAULT NULL, PRIMARY KEY (payId), KEY purchaseId (purchaseId), CONSTRAINT purchasePayment_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE )
