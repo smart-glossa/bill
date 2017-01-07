@@ -98,26 +98,7 @@ $(document).ready(function(){
 	});
 	});
 	
-	
-	$(document).on('keyup','#dealerid',function(){
-		var did = $("#dealerid").val();
-		if(did != ""){
-			var url="http://localhost:8080/bill/dealer?operation=getone&dealerId="+did;
-		$.ajax({
-			url: url,
-			type: 'POST'
-		})
-		.done(function(result){
-			result = JSON.parse(result);
-			$("#name").val(result.name);
-			$("#address").val(result.address);
-			$("#phone").val(result.phoneNumber);
-			$("#tin").val(result.TINNumber);
-		});
-		}
-	});
-	
-	$(document).on('click','#getall',function(){
+	$(document).on('click','#dealerall',function(){
 		var url="http://localhost:8080/bill/dealer?operation=getall";
 		$.ajax({
 			url: url,
@@ -142,10 +123,30 @@ $(document).ready(function(){
 			}
 			
 			table += "</table>";
-			$(".adddiv")[0].innerHTML = table;                                   
+			$(".deaall")[0].innerHTML = table;                                   
 			});
+	
+	$(document).on('keyup','#dealerid',function(){
+		var did = $("#dealerid").val();
+		if(did != ""){
+			var url="http://localhost:8080/bill/dealer?operation=getone&dealerId="+did;
+		$.ajax({
+			url: url,
+			type: 'POST'
+		})
+		.done(function(result){
+			result = JSON.parse(result);
+			$("#name").val(result.name);
+			$("#address").val(result.address);
+			$("#phone").val(result.phoneNumber);
+			$("#tin").val(result.TINNumber);
+		});
+		}
+	});
+	
+	
 		
-		$(document).on('click','#billadd',function(){
+		$(document).on('click','#adds',function(){
 			var did = $('#did').val();
 			var pid = $('#pid').val();
 			if(did == "")
@@ -158,7 +159,7 @@ $(document).ready(function(){
 			$('#pid').css("border-color","red");
 			return;
 			}
-			var url="http://localhost:8080/bill/dealer?operation=dillAdd&dealerId="+did+"&purchaseId="+pid;
+			var url="http://localhost:8080/bill/dealer?operation=billAdd&dealerId="+did+"&purchaseId="+pid;
 			$("input[type=text]").val("");
 			$.ajax({
 				url: url,
@@ -170,7 +171,7 @@ $(document).ready(function(){
 			 alert(result);
 		});
 			
-		})
+		});
 		
 		$(document).on('keyup','#did',function(){
 			var did = $('#did').val();
@@ -199,7 +200,7 @@ $(document).ready(function(){
 						 
 					}
 					qua += "</table>";
-					$('#table2')[0].innerHTML=qua;
+					$('.deabill')[0].innerHTML=qua;
 				});
 			}
 		});

@@ -37,20 +37,19 @@ $(document).ready(function(){
 		add += "<button id=\"submit\">ADDNOW!<\/button>";
 		add += "<button id=\"update\">UPDATE<\/button>";
 	
-      $('.adddiv')[0].innerHTML=add;
+      $('.dea')[0].innerHTML=add;
 	});
 	
 	$(document).on('click','#dealerbill',function(){
 		var billadd = "";
 		billadd += "<input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/br>";
 		billadd += "<input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><br>";
-		billadd += "<button id=\"billadd\">billadd<\/button>";
+		billadd += "<input type=\"submit\" id=\"adds\" value=\"Add\">";
 		
-		$('.adddiv')[0].innerHTML=billadd;
+		$('.deabill')[0].innerHTML=billadd;
 	});
 	
-	
+
 	
 	});
-	
 	
