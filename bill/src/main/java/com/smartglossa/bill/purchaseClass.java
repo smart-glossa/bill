@@ -15,7 +15,6 @@ public class purchaseClass {
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
-
     public purchaseClass() throws ClassNotFoundException, SQLException {
         openConnection();
     }
@@ -31,7 +30,6 @@ public class purchaseClass {
             stmt.execute(query2);
         } finally {
             closeConnection();
-
         }
     }
 

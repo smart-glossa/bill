@@ -65,6 +65,17 @@ public class PurchaseMetaServlet extends HttpServlet {
                 e.printStackTrace();
             }
             response.getWriter().println(obj);
+        }else if(operation.equals("getId")){
+        	JSONObject obj = new JSONObject();
+        	int purchaseLineId = Integer.parseInt(request.getParameter("purchaseLineId"));
+        			try {
+        				purchaseMetaClass meta = new purchaseMetaClass();
+        			obj=meta.getId(purchaseLineId);
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+        			response.getWriter().println(obj);
         }
-    }
+        }
 }
