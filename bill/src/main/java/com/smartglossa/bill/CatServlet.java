@@ -1,6 +1,10 @@
 package com.smartglossa.bill;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +30,8 @@ public class CatServlet extends HttpServlet {
         if (operation.equals("add")) {
             int cid = Integer.parseInt(request.getParameter("catid"));
             String cname = request.getParameter("cname");
-            JSONObject obj = new JSONObject();
+
+         JSONObject obj = new JSONObject();
             try {
                 CategoryClass cat = new CategoryClass();
                 cat.add(cid, cname);
@@ -94,7 +99,9 @@ public class CatServlet extends HttpServlet {
             }
             response.getWriter().println(resu);
         }
+        }
+        
 
     }
 
-}
+
