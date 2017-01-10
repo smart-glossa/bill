@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mysql.jdbc.PreparedStatement;
-
+ 
 public class SaleLineItemClass {
     Connection conn = null;
     Statement stmt = null;
@@ -20,7 +20,6 @@ public class SaleLineItemClass {
     public SaleLineItemClass() throws ClassNotFoundException, SQLException {
         openConnection();
     }
-
     public void addSaleLine(int saleId, int productId, float quantity, float cost) throws SQLException {
         JSONObject obj = new JSONObject();
         try {
@@ -63,12 +62,31 @@ public class SaleLineItemClass {
                 obj.put("productId", rs.getInt("productid"));
                 obj.put("quantity", rs.getFloat("quantity"));
                 obj.put("cost", rs.getFloat("cost"));
+                obj.put("saleLineId", rs.getInt("salelineid"));
             }
         } finally {
             closeConnection();
         }
         return obj;
 
+    }
+    public JSONObject getId( int saleLineId)throws SQLException {
+    	JSONObject obj = new JSONObject();
+    	try{
+    	String query = "select * from salelineitems where salelineid="+ saleLineId;
+    	 rs = stmt.executeQuery(query);
+         if(rs.next()) {
+        	  obj.put("saleLineId", rs.getInt("salelineid"));
+        	 obj.put("saleId", rs.getInt("saleid"));
+             obj.put("productId", rs.getInt("productid"));
+             obj.put("quantity", rs.getFloat("quantity"));
+             obj.put("cost", rs.getFloat("cost"));
+    	}
+    	}finally {
+            closeConnection();
+        }
+        return obj;
+    	
     }
 
     public void deleteSaleLineItem(int saleLineId) throws SQLException {
@@ -90,7 +108,6 @@ public class SaleLineItemClass {
             closeConnection();
         }
     }
-
     private void openConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         conn = DriverManager.getConnection("jdbc:mysql://" + BillConstants.MYSQL_SERVER + "/" + BillConstants.DATABASE,

@@ -88,6 +88,16 @@ public class SaleLineItem extends HttpServlet {
             }
             response.getWriter().print(obj);
 
+        }else if(operation.equals("getId")){
+        	JSONObject obj = new JSONObject();
+        	int saleLineId = Integer.parseInt(request.getParameter("salelineid"));
+        	 try {
+                 SaleLineItemClass Saleline = new SaleLineItemClass();
+                 obj = Saleline.getId(saleLineId); 
+                 } catch (Exception e) {
+                 e.printStackTrace();
+             }
+        	 response.getWriter().print(obj);
         }
     }
 }

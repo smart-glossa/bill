@@ -1,45 +1,39 @@
-
-.image
-{
-position:fixed;	
+.image {
+	position: fixed;
 }
 
-.menu
-{
-
-	float:left;
-	width:200px;
-	height:300px;
-	display:none;
+.menu {
+	float: left;
+	width: 200px;
+	height: 300px;
+	display: none;
 	position: staic;
-	
 }
-.menutwo
-{
-display:none;
-    position:fixed;
-    padding-top:20px;
-    margin-left:70px;
-    float:right;
-	width:300px;
+
+.menutwo {
+	display: none;
+	position: fixed;
+	padding-top: 20px;
+	margin-left: 70px;
+	float: right;
+	width: 300px;
 	height: 200px;
 }
-.menu ul
-{
+
+.menu ul {
 	list-style-type: none;
 }
-.menu li
-{
+
+.menu li {
 	margin-top: 30px;
 	font-size: 22px;
 }
-#dealerli:hover
-{
-	
-	background-color:blue;
-	color:white;
+
+#dealerli:hover {
+	background-color: blue;
+	color: white;
 }
-#buttons
-{
-	float:right;
+
+#buttons {
+	float: right;
 }

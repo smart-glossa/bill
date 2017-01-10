@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 public class SaleMetaData extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     public SaleMetaData() {
         super();
     }
@@ -31,15 +30,11 @@ public class SaleMetaData extends HttpServlet {
             float vat = Float.parseFloat(request.getParameter("vat"));
             float discount = Float.parseFloat(request.getParameter("discount"));
             float billTotal = Float.parseFloat(request.getParameter("billtotal"));
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            float quantity = Float.parseFloat(request.getParameter("quantity"));
-            float cost = Float.parseFloat(request.getParameter("cost"));
             String payDate = request.getParameter("paydate");
             float paidAmount = Float.parseFloat(request.getParameter("paidAmount"));
             try {
                 SaleMetaDataClass meta = new SaleMetaDataClass();
-                meta.addSaleMetaData(saleId, billDate, vat, discount, billTotal, productId, quantity, cost, payDate,
-                        paidAmount);
+                meta.addSaleMetaData(saleId, billDate, vat, discount, billTotal, payDate, paidAmount);
                 obj.put("status", "success");
             } catch (Exception e) {
                 obj.put("status", "failure");

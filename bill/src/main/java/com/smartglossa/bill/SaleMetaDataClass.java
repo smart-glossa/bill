@@ -21,18 +21,15 @@ public class SaleMetaDataClass {
         openConnection();
     }
 
-    public void addSaleMetaData(int saleId, String billDate, float vat, float discount, float billTotal, int productId,
-            float quantity, float cost, String payDate, float paidAmount) throws SQLException {
+    public void addSaleMetaData(int saleId, String billDate, float vat, float discount, float billTotal, String payDate, float paidAmount) throws SQLException {
         try {
             String query = "insert into salemetadata(saleId,billDate,vat,discount,billTotal)values(" + saleId + ",'"
                     + billDate + "'," + vat + "," + discount + "," + billTotal + ")";
             stmt.execute(query);
-            String query1 = "insert into salelineitems(saleId,productId,quantity,cost)values(" + saleId + ","
-                    + productId + "," + quantity + "," + cost + ")";
-            stmt.execute(query1);
-            String query2 = "insert into salepayment(saleId,payDate,paidAmount)values(" + saleId + ",'" + payDate + "',"
+           
+            String query1 = "insert into salepayment(saleId,payDate,paidAmount)values(" + saleId + ",'" + payDate + "',"
                     + paidAmount + ")";
-            stmt.execute(query2);
+            stmt.execute(query1);
         } finally {
             closeConnection();
         }
