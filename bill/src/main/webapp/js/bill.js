@@ -33,10 +33,10 @@ $(document).ready(function() {
             $("#sellPrice").focus().css("outline-color", "ff0000");
             return;
         }
-        if(quantity == ""){
-        	alert("Please Enter Quantity");
-        	$("#quantity").focus().css("outline-color","ff0000");
-        	return;
+        if (quantity == "") {
+            alert("Please Enter Quantity");
+            $("#quantity").focus().css("outline-color", "ff0000");
+            return;
         }
         var url = "/bill/bill?operation=addProduct&productId=" + productId + "&pName=" + pName + "&sellPrice=" + sellPrice + "&quantity=" + quantity;
         var request = new FormData();

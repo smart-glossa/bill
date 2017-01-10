@@ -1,39 +1,39 @@
 .image {
-	position: fixed;
+    position: fixed;
 }
 
 .menu {
-	float: left;
-	width: 200px;
-	height: 300px;
-	display: none;
-	position: staic;
+    float: left;
+    width: 200px;
+    height: 300px;
+    display: none;
+    position: staic;
 }
 
 .menutwo {
-	display: none;
-	position: fixed;
-	padding-top: 20px;
-	margin-left: 70px;
-	float: right;
-	width: 300px;
-	height: 200px;
+    display: none;
+    position: fixed;
+    padding-top: 20px;
+    margin-left: 70px;
+    float: right;
+    width: 300px;
+    height: 200px;
 }
 
 .menu ul {
-	list-style-type: none;
+    list-style-type: none;
 }
 
 .menu li {
-	margin-top: 30px;
-	font-size: 22px;
+    margin-top: 30px;
+    font-size: 22px;
 }
 
 #dealerli:hover {
-	background-color: blue;
-	color: white;
+    background-color: blue;
+    color: white;
 }
 
 #buttons {
-	float: right;
+    float: right;
 }

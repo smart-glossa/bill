@@ -6,98 +6,93 @@
         <servlet-class>com.smartglossa.bill.Bill</servlet-class>
     </servlet>
     <servlet>
-    	<servlet-name>CustomerServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.CustomerServlet</servlet-class>
-    </servlet>
-     <servlet>
-    	<servlet-name>PurchaseServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.PurchaseServlet</servlet-class>
-    </servlet>
-      <servlet-mapping>
-    	<servlet-name>PurchaseServlet</servlet-name>
-    	<url-pattern>/purchase</url-pattern>
-    </servlet-mapping>
-    <servlet>
-    	<description>
-    	</description>
-    	<display-name>PurchaseMetaServlet</display-name>
-    	<servlet-name>PurchaseMetaServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.PurchaseMetaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-    	<servlet-name>CustomerServlet</servlet-name>
-    	<url-pattern>/customer</url-pattern>
-    </servlet-mapping>
-    
-     <servlet>
-    	<servlet-name>ExpensesServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.ExpensesServlet</servlet-class>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.CustomerServlet</servlet-class>
     </servlet>
     <servlet>
-    	<display-name>CatServlet</display-name>
-    	<servlet-name>CatServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.CatServlet</servlet-class>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.PurchaseServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-    	<servlet-name>ExpensesServlet</servlet-name>
-    	<url-pattern>/Expense</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>CatServlet</servlet-name>
-    	<url-pattern>/cat</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>PurchaseMetaServlet</servlet-name>
-    	<url-pattern>/PurchaseMetaServlet</url-pattern>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <url-pattern>/purchase</url-pattern>
     </servlet-mapping>
     <servlet>
-    	<description>
-    	</description>
-    	<display-name>dealerServlet</display-name>
-    	<servlet-name>dealerServlet</servlet-name>
-    	<servlet-class>com.smartglossa.bill.dealerServlet</servlet-class>
+        <description></description>
+        <display-name>PurchaseMetaServlet</display-name>
+        <servlet-name>PurchaseMetaServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.PurchaseMetaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExpensesServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.ExpensesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <display-name>CatServlet</display-name>
+        <servlet-name>CatServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.CatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpensesServlet</servlet-name>
+        <url-pattern>/Expense</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CatServlet</servlet-name>
+        <url-pattern>/cat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseMetaServlet</servlet-name>
+        <url-pattern>/PurchaseMetaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>dealerServlet</display-name>
+        <servlet-name>dealerServlet</servlet-name>
+        <servlet-class>com.smartglossa.bill.dealerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/bill</url-pattern>
     </servlet-mapping>
-    
+
     <servlet-mapping>
-    	<servlet-name>dealerServlet</servlet-name>
-    	<url-pattern>/dealer</url-pattern>
+        <servlet-name>dealerServlet</servlet-name>
+        <url-pattern>/dealer</url-pattern>
     </servlet-mapping>
     <servlet>
-    	<description>
-    	</description>
-    	<display-name>SaleLineItem</display-name>
-    	<servlet-name>SaleLineItem</servlet-name>
-    	<servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
+        <description></description>
+        <display-name>SaleLineItem</display-name>
+        <servlet-name>SaleLineItem</servlet-name>
+        <servlet-class>com.smartglossa.bill.SaleLineItem</servlet-class>
     </servlet>
     <servlet>
-    	<description>
-    	</description>
-    	<display-name>SaleMetaData</display-name>
-    	<servlet-name>SaleMetaData</servlet-name>
-    	<servlet-class>com.smartglossa.bill.SaleMetaData</servlet-class>
+        <description></description>
+        <display-name>SaleMetaData</display-name>
+        <servlet-name>SaleMetaData</servlet-name>
+        <servlet-class>com.smartglossa.bill.SaleMetaData</servlet-class>
     </servlet>
     <servlet>
-    	<description>
-    	</description>
-    	<display-name>SalePayment</display-name>
-    	<servlet-name>SalePayment</servlet-name>
-    	<servlet-class>com.smartglossa.bill.SalePayment</servlet-class>
+        <description></description>
+        <display-name>SalePayment</display-name>
+        <servlet-name>SalePayment</servlet-name>
+        <servlet-class>com.smartglossa.bill.SalePayment</servlet-class>
     </servlet>
     <servlet-mapping>
-    	<servlet-name>SaleLineItem</servlet-name>
-    	<url-pattern>/SaleLineItem</url-pattern>
+        <servlet-name>SaleLineItem</servlet-name>
+        <url-pattern>/SaleLineItem</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>SaleMetaData</servlet-name>
-    	<url-pattern>/SaleMetaData</url-pattern>
+        <servlet-name>SaleMetaData</servlet-name>
+        <url-pattern>/SaleMetaData</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>SalePayment</servlet-name>
-    	<url-pattern>/SalePayment</url-pattern>
+        <servlet-name>SalePayment</servlet-name>
+        <url-pattern>/SalePayment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
