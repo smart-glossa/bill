@@ -2,6 +2,7 @@ package com.smartglossa.bill;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,8 +67,9 @@ public class dealerServlet extends HttpServlet {
             try {
                 dealerClass dealer = new dealerClass();
                 dealer.deletedealer(dealerId);
+                delete.put("status",1);      
             } catch (Exception e) {
-                delete.put("status", "0");
+                delete.put("status",0);
                 e.printStackTrace();
             }
             response.getWriter().println(delete);
@@ -77,7 +79,7 @@ public class dealerServlet extends HttpServlet {
             String name = request.getParameter("name");
             String address = request.getParameter("address");
             String phoneNumber = request.getParameter("phoneNumber");
-            String TINNumber = request.getParameter("TINNUmber");
+            String TINNumber = request.getParameter("TINNumber");
             JSONObject update = new JSONObject();
             try {
                 dealerClass dealer = new dealerClass();
@@ -89,7 +91,22 @@ public class dealerServlet extends HttpServlet {
             }
             response.getWriter().println(update);
 
-        } else if (operation.equals("billadd")) {
+        } else if(operation.equals("billAdd")){
+        	JSONObject add = new JSONObject();
+        	int dId = Integer.parseInt(request.getParameter("dealerId"));
+        	int pId = Integer.parseInt(request.getParameter("purchaseId"));
+        	 try {
+				dealerClass dealer = new dealerClass();
+				dealer.addbill(dId, pId);
+				add.put("status", "1");
+				
+			} catch (Exception e) {
+				add.put("status", "0");
+				e.printStackTrace();
+			}
+        	response.getWriter().print(add);
+        }
+        else if (operation.equals("billGet")) {
             int dId = Integer.parseInt(request.getParameter("dealerId"));
             JSONArray bill = new JSONArray();
             try {
