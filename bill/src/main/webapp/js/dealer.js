@@ -22,8 +22,6 @@ $(document).ready(function() {
         list += "<\/ul>";
         $(".menutwo")[0].innerHTML = list;
         $(".menutwo").toggle();
-
-
     });
 
 
