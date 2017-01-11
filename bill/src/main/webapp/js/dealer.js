@@ -14,7 +14,7 @@ $(document).ready(function() {
         $('.menutwo').css("display", "none");
     });
 
-    $('#dealerli').on('load', function() {
+    $('#dealerli').on('hover', function() {
         var list = "";
         list += "<ul>";
         list += "<li>dealerDetails<\/li>";
