@@ -2,26 +2,16 @@ $(document).ready(function() {
     $(document).on('click', '#image', function() {
         var dropdown = "";
         dropdown += "<ul>";
-        dropdown += "<li>Product<\/li>";
+        dropdown += "<li id=\"productli\">Product<\/li>";
         dropdown += "<li id=\"dealerli\">Dealer<\/li>";
-        dropdown += "<li>Customer<\/li>";
-        dropdown += "<li>Purchase<\/li>";
+        dropdown += "<li id=\"customerli\">Customer<\/li>";
+        dropdown += "<li id=\"purchaseli\">Purchase<\/li>";
         dropdown += "<li>Sales<\/li>";
         dropdown += "<li>Expenses<\/li>";
         dropdown += "<\/ul>";
         $('.menu')[0].innerHTML = dropdown;
         $('.menu').toggle();
-        $('.menutwo').css("display", "none");
-    });
-
-    $('#dealerli').on('hover', function() {
-        var list = "";
-        list += "<ul>";
-        list += "<li>dealerDetails<\/li>";
-        list += "<li>dealerBillDetails<\/li>";
-        list += "<\/ul>";
-        $(".menutwo")[0].innerHTML = list;
-        $(".menutwo").toggle();
+        $('.menutwo').css("display","none");
     });
 
 
