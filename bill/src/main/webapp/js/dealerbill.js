@@ -29,6 +29,16 @@ $(document).ready(function() {
             $('#tin').css("border-color", "red");
             return;
         }
+        if (phone.length != 10) {
+            $('#num').focus().css('outline-color', 'red');
+            alert("Enter Phone Number as correct format");
+            return;
+        }
+        if (phone.charAt(0) != "7" && phone.charAt(0) != "8" && phone.charAt(0) != "9") {
+            $('#num').focus().css('outline-color', 'red');
+            alert("Enter Phone Number as correct format");
+            return;
+        }
         var url = "http://localhost:8080/bill/dealer?operation=deaadd&dealerId=" + dealerid + "&name=" + name + "&address=" + address + "&phoneNumber=" + phone + "&TINNumber=" + tin;
         $("input[type=text]").val("");
         $.ajax({

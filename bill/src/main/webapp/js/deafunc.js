@@ -9,8 +9,8 @@ $(document).on('click','#image',function(){
 
 $(document).on('click','#dealerli', function() {
     var list = "";
-    list += "<ul class=\"list1\" >";
-    list += "<li>dealerDetails<\/li>";
+    list += "<ul class=\"uldealer\" >";
+    list += "<li><a href=\"#divdea\">dealerDetails<\/a><\/li>";
     list += "<li>dealerBillDetails<\/li>";
     list += "<\/ul>";
     $(".menutwo")[0].innerHTML = list;
@@ -19,7 +19,7 @@ $(document).on('click','#dealerli', function() {
 
 $(document).on('click','#productli', function() {
     var list = "";
-    list += "<ul class=\"list2\">";
+    list += "<ul class=\"ulproduct\">";
     list += "<li>productDetails<\/li>";
     list += "<li>productBillDetails<\/li>";
     list += "<\/ul>";
@@ -29,8 +29,8 @@ $(document).on('click','#productli', function() {
 
 $(document).on('click','#customerli', function() {
     var list = "";
-    list += "<ul class=\"list3\">";
-    list += "<li>customerDetails<\/li>";
+    list += "<ul class=\"ulcustomer\">";
+    list += "<li><a href=\"customer.html\">customerDetails<\/a><\/li>";
     list += "<li>customerBillDetails<\/li>";
     list += "<\/ul>";
     $(".menutwo")[0].innerHTML = list;
@@ -39,14 +39,34 @@ $(document).on('click','#customerli', function() {
 
 $(document).on('click','#purchaseli', function() {
     var list = "";
-    list += "<ul class=\"list3\">";
-    list += "<li>purchasedeatails<\/li>";
-    list += "<li>BillDetails<\/li>";
+    list += "<ul class=\"ulpurchase\">";
+    list += "<li><a href=\"purchase.html\">purchasemetadata<\/a><\/li>";
+    list += "<li>purchaselineitem<\/li>";
+    list += "<li>purchasepayment<\/li>";
     list += "<\/ul>";
     $(".menutwo")[0].innerHTML = list;
     $(".menutwo").toggle();
 });
 
+$(document).on('click','#salesli', function() {
+    var list = "";
+    list += "<ul class=\"ulsales\">";
+    list += "<li><a href=\"Sale.html\">salesmetadata<\/a><\/li>";
+    list += "<li>saleslineitem<\/li>";
+    list += "<li>salespayment<\/li>";
+    list += "<\/ul>";
+    $(".menutwo")[0].innerHTML = list;
+    $(".menutwo").toggle();
+});
 
+$(document).on('click','#expenseli', function() {
+    var list = "";
+    list += "<ul class=\"ulexpense\">";
+    list += "<li><a href=\"Expense.html\">Expensescategory<\/a><\/li>";
+    list += "<li>Expenses<\/li>";
+    list += "<\/ul>";
+    $(".menutwo")[0].innerHTML = list;
+    $(".menutwo").toggle();
+});
 
 });

@@ -6,8 +6,8 @@ $(document).ready(function() {
         dropdown += "<li id=\"dealerli\">Dealer<\/li>";
         dropdown += "<li id=\"customerli\">Customer<\/li>";
         dropdown += "<li id=\"purchaseli\">Purchase<\/li>";
-        dropdown += "<li>Sales<\/li>";
-        dropdown += "<li>Expenses<\/li>";
+        dropdown += "<li id=\"salesli\">Sales<\/li>";
+        dropdown += "<li id=\"expenseli\">Expenses<\/li>";
         dropdown += "<\/ul>";
         $('.menu')[0].innerHTML = dropdown;
         $('.menu').toggle();
