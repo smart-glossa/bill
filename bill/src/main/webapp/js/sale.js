@@ -26,7 +26,7 @@ function salemeta() {
     salemeta += "<\/table>";
     salemeta += "<\/div>";
     salemeta += "<div class=\"getSaleMetaData\"><\/div>";
-    $('.sale')[0].innerHTML = salemeta;
+    $('#lists')[0].innerHTML = salemeta;
 }
 
 function salepay() {
@@ -49,7 +49,7 @@ function salepay() {
     salepay += "<\/table>";
     salepay += "<\/div>";
     salepay += "<div class=\"getsalepay\"><\/div>";
-    $('.salepay')[0].innerHTML = salepay;
+    $('#lists')[0].innerHTML = salepay;
 }
 
 function saleline() {
@@ -82,5 +82,5 @@ function saleline() {
     saleline += "<\/table>";
     saleline += "<\/div>";
     saleline += "<div class=\"getsaleline\"><\/div>";
-    $('.saleline')[0].innerHTML = saleline;
+    $('#lists')[0].innerHTML = saleline;
 }

@@ -98,7 +98,7 @@ $(document).ready(function() {
                     table += "</tr>";
                 }
                 table += "</table>";
-                $(".cat")[0].innerHTML = table;
+                $("#lists")[0].innerHTML = table;
             });
     });
     $(document).on('keyup', '#catid', function() {
@@ -225,7 +225,7 @@ $(document).ready(function() {
                     table += "</tr>";
                 }
                 table += "</table>";
-                $(".expcat")[0].innerHTML = table;
+                $("#lists")[0].innerHTML = table;
             });
 
     });

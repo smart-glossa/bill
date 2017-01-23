@@ -6,7 +6,7 @@ function expensecat() {
     cat += "<tr><td>CategoryName*:<\/td><td><input type=\"text\" id=\"cname\"  placeholder=\"CategoryName..!\"><\/td><\/tr>";
     cat += "<tr><td><button id=\"submit\">Submit<\/button><\/td><td><button id=\"update\">Update<\/button><\/td><\/tr>";
     cat += "<\/table>";
-    $('.exp')[0].innerHTML = cat;
+    $('#lists')[0].innerHTML = cat;
 
 }
 
@@ -22,5 +22,5 @@ function expense() {
     exp += "<tr><td>Amount*:<\/td><td><input type=\"text\"id=\"amount\"  placeholder=\"Amount..!\"><\/td><\/tr>";
     exp += "<tr><td><button id=\"sub\">Submit<\/button><\/td><td><button id=\"up\">Update<\/button><\/td><\/tr>";
     exp += "<\/table>";
-    $('.expense')[0].innerHTML = exp;
+    $('#lists')[0].innerHTML = exp;
 }

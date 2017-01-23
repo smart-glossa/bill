@@ -169,7 +169,7 @@ $(document).ready(function() {
 
                         }
                         qua += "</table>";
-                        $('#table2')[0].innerHTML = qua;
+                        $('#getalldiv')[0].innerHTML = qua;
                     });
             }
         });
@@ -197,7 +197,7 @@ $(document).ready(function() {
                     }
 
                     table += "</table>";
-                    $(".deaall")[0].innerHTML = table;
+                    $("#lists")[0].innerHTML = table;
                 });
 
 

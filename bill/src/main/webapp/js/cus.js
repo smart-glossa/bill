@@ -117,7 +117,7 @@ $(document).ready(function() {
                     table += "</tr>";
                 }
                 table += "</table>";
-                $('.customer')[0].innerHTML = table;
+                $('#lists')[0].innerHTML = table;
             });
     });
 
@@ -170,7 +170,7 @@ $(document).ready(function() {
                             table += "</tr>";
                         }
                         table += "</table>";
-                        $(".cust")[0].innerHTML = table;
+                        $("#getalldiv")[0].innerHTML = table;
 
                     })
         }

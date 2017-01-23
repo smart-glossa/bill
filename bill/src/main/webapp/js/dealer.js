@@ -17,24 +17,41 @@ $(document).ready(function() {
 
     $(document).on('click', '#adddealer', function() {
         var add = "";
-        add += "<input type=\"text\" id=\"dealerid\" placeholder=\"DealerId\"\/><\/br><\/br>";
-        add += "<input type=\"text\" id=\"name\" placeholder=\"Name\"\/><\/br><\/br>";
-        add += "<input type=\"text\" id=\"address\" placeholder=\"Address\"\/><\/br><\/br>";
-        add += "<input type=\"text\" id=\"phone\" placeholder=\"PhoneNumber\"\/><\/br><\/br>";
-        add += "<input type=\"text\" id=\"tin\" placeholder=\"TINNumber\"\/><\/br><\/br>";
-        add += "<button id=\"submit\">ADDNOW!<\/button>";
-        add += "<button id=\"update\">UPDATE<\/button>";
+        add += "<table>";
+        add += "<tr>";
+        add += "<td>Dealer Id<\/td><td><input type=\"text\" placeholder=\"DealerId..!\" id=\"dealerid\"><\/td>";
+        add += "<\/tr>";
+        add += "<tr>";
+        add += "<td>Dealer Name<\/td><td><input type=\"text\" placeholder=\"DealerName..!\" id=\"name\"><\/td>";
+        add += "<\/tr>";
+        add += "<tr>";
+        add += "<td>Address<\/td><td><textarea placeholder=\"Address..!\" id=\"address\"><\/textarea><\/td>";
+        add += "<\/tr>";
+        add += "<tr>";
+        add += "<td>Phone Number<\/td><td><input type=\"number\" placeholder=\"PhoneNumber..!\" id=\"phone\"><\/td>";
+        add += "<\/tr>";
+        add += "<tr>";
+        add += "<td>TIN Number<\/td><td><input type=\"number\" placeholder=\"TINNumber..!\" id=\"tin\"><\/td><td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
+        add += "<\/tr>";
+        add += "<tr>";
+        add += "<td>";
+        add += "<input type=\"submit\" id=\"submit\" value=\"Submit\">";
+        add += "<input type=\"submit\" id=\"update\"  value=\"Update\">";
+        add += "<\/td>";
+        add += "<\/tr>";
+        add += "<\/table>";
 
-        $('.dea')[0].innerHTML = add;
+        $('#lists')[0].innerHTML = add;
     });
 
     $(document).on('click', '#dealerbill', function() {
         var billadd = "";
-        billadd += "<input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/br>";
-        billadd += "<input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><br>";
-        billadd += "<input type=\"submit\" id=\"add\" value=\"Add\">";
-
-        $('.deabill')[0].innerHTML = billadd;
+        billadd += "<table>";
+        billadd += "<tr><td>dealerId<\/td><td><input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/td><\/tr>";
+        billadd += "<tr><td>purchaseId<\/td><td><input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><\/td><\/tr>";
+        billadd += "<tr><td><input type=\"submit\" id=\"add\" value=\"Add\"><\/td><\/tr>";
+        billadd += "<\/table>";
+        $('#lists')[0].innerHTML = billadd;
     });
 
 

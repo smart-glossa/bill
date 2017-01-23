@@ -21,7 +21,7 @@ function customer() {
     cus += "				<\/td>";
     cus += "			<\/tr>";
     cus += "		<\/table>";
-    $('.cus')[0].innerHTML = cus;
+    $('#lists')[0].innerHTML = cus;
 
 }
 
@@ -42,6 +42,6 @@ function customerBill() {
     cusBill += "				<\/td>";
     cusBill += "			<\/tr>";
     cusBill += "		<\/table>";
-    $('.cusBill')[0].innerHTML = cusBill;
+    $('#lists')[0].innerHTML = cusBill;
 
 }

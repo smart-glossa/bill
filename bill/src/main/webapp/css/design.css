@@ -41,9 +41,6 @@
 	display:none;
 }
 
-buttons {
-    float: right;
-}
 .ulproduct
 {
 	margin-top:-100px;
@@ -60,4 +57,36 @@ buttons {
 }
 .ulexpense{
 	margin-top:180px;
+}
+#lists
+{
+	float:right;
+    margin-right:200px;
+	margin-top:150px;
+	
+	
+}
+#listall li:hover
+{
+	background-color:black;
+	color:white;
+	padding:5px 16px;
+	width:100px;
+}
+#getalldiv
+{
+	float:right;
+    margin-right:200px;
+	margin-top:170px;
+	
+	
+}
+#listall li
+{
+	list-style-type: none;
+}
+#ima
+{
+	width:25px;
+	height:25px;
 }

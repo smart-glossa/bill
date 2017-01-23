@@ -25,7 +25,7 @@ function purchaseproduct() {
     pur += "<\/tr>";
     pur += "<\/table>";
     pur += "<\/div>";
-    $('.pur')[0].innerHTML = pur;
+    $('#lists')[0].innerHTML = pur;
 }
 
 function purchasePayment() {
@@ -47,7 +47,7 @@ function purchasePayment() {
     pay += "<\/tr>";
     pay += "<\/table>";
     pay += "<\/div>";
-    $('.pay')[0].innerHTML = pay;
+    $('#lists')[0].innerHTML = pay;
 }
 
 function purchaseLineItem() {
@@ -85,5 +85,5 @@ function purchaseLineItem() {
     purLine += "<\/tr>";
     purLine += "<\/table>";
     purLine += "<\/div>";
-    $('.purLine')[0].innerHTML = purLine;
+    $('#lists')[0].innerHTML = purLine;
 }

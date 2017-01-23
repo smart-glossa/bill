@@ -185,7 +185,7 @@ $(document).on('click', '.saleline', function() {
                 table += '<td>' + res[i].cost + '</td>';
             }
             table += '</table>';
-            $('.getsaleline')[0].innerHTML = table;
+            $('#getalldiv')[0].innerHTML = table;
         })
         .fail(function(result) {
             alert(result);
@@ -210,7 +210,7 @@ $(document).on('click', '.salepay', function() {
                 table += '<td>' + res[i].paidAmount + '</td>';
             }
             table += '</table>';
-            $('.getsalepay')[0].innerHTML = table;
+            $('#getalldiv')[0].innerHTML = table;
         })
         .fail(function(result) {
             alert(result);
