@@ -27,7 +27,7 @@ Apache Tomcat
 <p>iii)bill.password=root</p>
 <p>iv)bill.database=bill</p>
 3. Create the following tables in the "bill" database.
-
+<p>
 CREATE TABLE `user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -36,7 +36,8 @@ CREATE TABLE `user` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uname` (`uname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1
-
+</p>
+<p>
 CREATE TABLE `image` (
   `imageId` int(11) NOT NULL AUTO_INCREMENT,
   `image` mediumblob,
@@ -45,7 +46,8 @@ CREATE TABLE `image` (
   UNIQUE KEY `username` (`uname`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uname`) REFERENCES `user` (`uname`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1
-
+</p>
+<p>
  CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
   `pName` varchar(50) DEFAULT NULL,
@@ -54,7 +56,8 @@ CREATE TABLE `image` (
   `quantity` float DEFAULT NULL,
   PRIMARY KEY (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 
-
+</p>
+<p>
 CREATE TABLE `productImage` (
   `imageId` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -63,7 +66,8 @@ CREATE TABLE `productImage` (
   KEY `pid` (`pid`),
   CONSTRAINT `productimage_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`productId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
-
+</p>
+<p>
 CREATE TABLE `customer` (
   `customerId` int(11) NOT NULL,
   `name` varchar(100) default NULL,
@@ -71,17 +75,9 @@ CREATE TABLE `customer` (
   `phonenumber` varchar(50) default NULL,
   PRIMARY KEY  (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+</p>
 
-CREATE TABLE `customerbill` (
-  `customerId` int(11) default NULL,
-  `saleId` int(11) default NULL,
-  KEY `customerId` (`customerId`),
-  KEY `saleId` (`saleId`),
-  CONSTRAINT `customerbill_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE CASCADE,
-  CONSTRAINT `customerbill_ibfk_2` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
-
-
+<p>
  CREATE TABLE `salemetadata` (
   `saleId` int(11) NOT NULL,
   `billDate` date default NULL,
@@ -90,7 +86,8 @@ CREATE TABLE `customerbill` (
   `billTotal` float default NULL,
   PRIMARY KEY  (`saleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
-
+</p>
+<p>
  CREATE TABLE `salelineitems` (
   `saleLineId` int(11) NOT NULL auto_increment,
   `saleId` int(11) default NULL,
@@ -103,7 +100,8 @@ CREATE TABLE `customerbill` (
   CONSTRAINT `salelineitems_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE,
   CONSTRAINT `salelineitems_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 
-
+</p>
+<p>
 CREATE TABLE `salepayment` (
   `payId` int(11) NOT NULL auto_increment,
   `saleId` int(11) default NULL,
@@ -113,8 +111,23 @@ CREATE TABLE `salepayment` (
   KEY `saleId` (`saleId`),
   CONSTRAINT `salepayment_ibfk_1` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 
+</p>
 
- purchaseLineItem | CREATE TABLE `purchaseLineItem` (
+<p>
+CREATE TABLE `customerbill` (
+  `customerId` int(11) default NULL,
+  `saleId` int(11) default NULL,
+  KEY `customerId` (`customerId`),
+  KEY `saleId` (`saleId`),
+  CONSTRAINT `customerbill_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE CASCADE,
+  CONSTRAINT `customerbill_ibfk_2` FOREIGN KEY (`saleId`) REFERENCES `salemetadata` (`saleId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+</p>
+<p>
+ CREATE TABLE purchaseMetaData ( purchaseId int(11) NOT NULL, billDate date DEFAULT NULL, vat float DEFAULT NULL, discount float DEFAULT NULL, billTotal float DEFAULT NULL, PRIMARY KEY (purchaseId) )
+ </p>
+ <p>
+ CREATE TABLE `purchaseLineItem` (
   `purchaseId` int(11) DEFAULT NULL,
   `productId` int(11) DEFAULT NULL,
   `purchaseLineId` int(11) NOT NULL AUTO_INCREMENT,
@@ -127,13 +140,12 @@ CREATE TABLE `salepayment` (
   CONSTRAINT `purchaseLineItem_ibfk_1` FOREIGN KEY (`purchaseId`) REFERENCES `purchaseMetaData` (`purchaseId`) ON DELETE CASCADE,
   CONSTRAINT `purchaseLineItem_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 |
-
- purchaseMetaData | CREATE TABLE purchaseMetaData ( purchaseId int(11) NOT NULL, billDate date DEFAULT NULL, vat float DEFAULT NULL, discount float DEFAULT NULL, billTotal float DEFAULT NULL, PRIMARY KEY (purchaseId) )
+</p>
+ <p>
+CREATE TABLE purchasePayment ( purchaseId int(11) DEFAULT NULL, payId int(11) NOT NULL AUTO_INCREMENT, payDate date DEFAULT NULL, paidAmount float DEFAULT NULL, PRIMARY KEY (payId), KEY purchaseId (purchaseId), CONSTRAINT purchasePayment_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE )
  
- 3.purchasePayment | CREATE TABLE purchasePayment ( purchaseId int(11) DEFAULT NULL, payId int(11) NOT NULL AUTO_INCREMENT, payDate date DEFAULT NULL, paidAmount float DEFAULT NULL, PRIMARY KEY (payId), KEY purchaseId (purchaseId), CONSTRAINT purchasePayment_ibfk_1 FOREIGN KEY (purchaseId) REFERENCES purchaseMetaData (purchaseId) ON DELETE CASCADE )
- 
- 
- 
+ </p>
+ <p>
 
 CREATE TABLE `dealer` (
   `dealerId` int(11) NOT NULL,
@@ -143,7 +155,8 @@ CREATE TABLE `dealer` (
   `TINNumber` varchar(20) default NULL,
   PRIMARY KEY  (`dealerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
-
+</p>
+<p>
 CREATE TABLE `dealerbill` (
   `dealerId` int(11) default NULL,
   `purchaseId` int(11) default NULL,
@@ -152,13 +165,15 @@ CREATE TABLE `dealerbill` (
   CONSTRAINT `dealerbill_ibfk_1` FOREIGN KEY (`dealerId`) REFERENCES `dealer` (`dealerId`) ON DELETE CASCADE,
   CONSTRAINT `dealerbill_ibfk_2` FOREIGN KEY (`purchaseId`) REFERENCES `purchasemetadata` (`purchaseId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
-
+</p>
+<p>
 CREATE TABLE `expensecategory` (
   `catid` int(11) NOT NULL,
   `cname` varchar(100) default NULL,
   PRIMARY KEY  (`catid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
-
+</p>
+<p>
 CREATE TABLE `expenses` (
   `expId` int(11) NOT NULL auto_increment,
   `catid` int(11) default NULL,
@@ -169,6 +184,6 @@ CREATE TABLE `expenses` (
   KEY `catid` (`catid`),
   CONSTRAINT `expenses_ibfk_1` FOREIGN KEY (`catid`) REFERENCES `expensecategory` (`catid`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
-
+</p>
 
 
