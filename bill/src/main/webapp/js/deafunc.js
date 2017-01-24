@@ -74,17 +74,5 @@ $(document).on('click','#expenseli', function() {
     $(".menutwo").toggle();
 });
  
-$(document).on('click','#ima',function(){
-	var nextURL = "images/nextButton.png";
-    var div = document.createElement("div");
-    div.className = 'lineProduct';
-    div.innerHTML = "<table>"+
-    "<tr><td>DealerName:<\/td><td><input type=\"text\" placeholder=\"DealerName..!\"><\/td><\/tr>" +
-      "<tr><td>DealerName:<\/td><td><input type=\"text\" placeholder=\"DealerName..!\"><\/td><\/tr>" +
-        "<tr><td>Address:<\/td><td><input type=\"text\" placeholder=\"Address..!\"><\/td><\/tr>" +
-        "<tr><td>PhoneNumber:<\/td><td><input type=\"text\" placeholder=\"Phonenumber..!\"><\/td><\/tr>" +
-        "<tr><td>TINNumber:<\/td><td><input type=\"text\" placeholder=\"TINNumber\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
-        "<\/table>";
-    $("#lists")[0].appendChild(div);
-});
+
 });

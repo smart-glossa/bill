@@ -22,6 +22,7 @@ function purchaseproduct() {
     pur += "<tr>";
     pur += "<td> Bill Total <\/td>";
     pur += "<td><input type=\"text\" placeholder=\"Bill Total\" id=\"tot\"<\/td>";
+    pur += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     pur += "<\/tr>";
     pur += "<\/table>";
     pur += "<\/div>";
