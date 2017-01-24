@@ -215,6 +215,19 @@ $(document).on('click', '.salepay', function() {
         .fail(function(result) {
             alert(result);
         });
+    $(document).on('click','#ima',function(){
+    	var nextURL = "images/nextButton.png";
+        var div = document.createElement("div");
+        div.className = 'lineProduct';
+        div.innerHTML = "<table>"+
+        "<tr><td><input type=\"text\" placeholder=\"SSaleId..!\"><\/td>" +
+          "<td><input type=\"text\" placeholder=\"BillDate..!\"><\/td>" +
+            "<td><input type=\"text\" placeholder=\"Value Added Tax..!\"><\/td>" +
+            "<td><input type=\"text\" placeholder=\"Discount..!\"><\/td>" +
+            "<td><input type=\"text\" placeholder=\"BillTotal..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
+            "<\/table>";
+        $("#getalldiv")[0].appendChild(div);
+    });
 })
 $(document).on('keypress', '#saleId', function(key) {
     if (key.which == 13) {

@@ -22,10 +22,10 @@ function salemeta() {
     salemeta += "<tr>";
     salemeta += "<td>Bill Total*:<\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"billTotal\" id=\"billtotal\"><\/td>";
+    salemeta += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     salemeta += "<\/tr>";
     salemeta += "<\/table>";
     salemeta += "<\/div>";
-    salemeta += "<div class=\"getSaleMetaData\"><\/div>";
     $('#lists ')[0].innerHTML = salemeta;
 }
 
@@ -48,7 +48,6 @@ function salepay() {
     salepay += "<\/tr>";
     salepay += "<\/table>";
     salepay += "<\/div>";
-    salepay += "<div class=\"getsalepay\"><\/div>";
     $('#lists')[0].innerHTML = salepay;
 }
 
@@ -81,6 +80,5 @@ function saleline() {
     saleline += "<\/tr>";
     saleline += "<\/table>";
     saleline += "<\/div>";
-    saleline += "<div class=\"getsaleline\"><\/div>";
     $('#lists')[0].innerHTML = saleline;
 }
