@@ -244,7 +244,7 @@ $(document).on('keypress', '#discount', function(key) {
     if (key.which == 38) {
         $('#vat').focus();
     }
-})
+})   
 $(document).on('keypress', '#billtotal', function(key) {
     if (key.which == 13) {
         $('#payDate').focus();

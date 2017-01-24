@@ -22,5 +22,5 @@ function expense() {
     exp += "<tr><td>Amount*:<\/td><td><input type=\"text\"id=\"amount\"  placeholder=\"Amount..!\"><\/td><\/tr>";
     exp += "<tr><td><button id=\"sub\">Submit<\/button><\/td><td><button id=\"up\">Update<\/button><\/td><\/tr>";
     exp += "<\/table>";
-    $('#lists')[0].innerHTML = exp;
+    $('#lists')[0].innerHTML = exp; 
 }

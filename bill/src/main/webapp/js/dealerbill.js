@@ -178,7 +178,7 @@ $(document).ready(function() {
             var url = "http://localhost:8080/bill/dealer?operation=getall";
             $.ajax({
                     url: url,
-                    type: 'POST'
+                    type: 'POST'   
                 })
                 .done(function(result) {
                     var result = JSON.parse(result);

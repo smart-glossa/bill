@@ -1,4 +1,4 @@
-$(document).ready(function() {
+    $(document).ready(function() {
     $(document).on("click", "#add", function() {
         var purchaseId = $('#pId').val();
         var billDate = $('#Date').val();

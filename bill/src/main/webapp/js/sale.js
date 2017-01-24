@@ -26,7 +26,7 @@ function salemeta() {
     salemeta += "<\/table>";
     salemeta += "<\/div>";
     salemeta += "<div class=\"getSaleMetaData\"><\/div>";
-    $('#lists')[0].innerHTML = salemeta;
+    $('#lists ')[0].innerHTML = salemeta;
 }
 
 function salepay() {

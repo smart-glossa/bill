@@ -86,7 +86,7 @@ $(document).ready(function() {
         $.ajax({
                 url: url,
                 type: 'post'
-            })
+            })  
             .done(function(result) {
                 var array = JSON.parse(result);
                 var table = "<table border=2>"

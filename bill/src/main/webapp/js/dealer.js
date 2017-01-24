@@ -50,7 +50,7 @@ $(document).ready(function() {
         billadd += "<tr><td>dealerId<\/td><td><input type=\"text\" id=\"did\" placeholder=\"dealerId\"\/><\/td><\/tr>";
         billadd += "<tr><td>purchaseId<\/td><td><input type=\"text\" id=\"pid\" placeholder=\"purchaseId\"\/><\/td><\/tr>";
         billadd += "<tr><td><input type=\"submit\" id=\"add\" value=\"Add\"><\/td><\/tr>";
-        billadd += "<\/table>";
+        billadd += "<\/table>";    
         $('#lists')[0].innerHTML = billadd;
     });
 

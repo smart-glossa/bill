@@ -64,7 +64,7 @@ $(document).on('click','#salesli', function() {
 
 $(document).on('click','#expenseli', function() {
     var list = "";
-    list += "<ul class=\"ulexpense\" id=\"listall\">";
+    list += "<ul class=\"ulexpense\" id=\"listall\">";   
     list += "<li onclick=\"expensecat()\">Expensescategory<\/li>";
     list += "<li onclick=\"expense()\">Expenses<\/li>";
     list += "<li id=\"expgetall\">Expensesall<\/a><\/li>";

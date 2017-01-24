@@ -17,7 +17,7 @@ function customer() {
     cus += "           <td><\/td>";
     cus += "				<td>";
     cus += "					<input type=\"submit\" id=\"submit\" value=\"Submit\">";
-    cus += "					<input type=\"submit\" id=\"update\"  value=\"Update\">";
+    cus += "<input type=\"submit\" id=\"update\"  value=\"Update\">";
     cus += "				<\/td>";
     cus += "			<\/tr>";
     cus += "		<\/table>";
