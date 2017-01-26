@@ -1,5 +1,5 @@
  $(document).ready(function(){
-$("#ima").one("click",function(){
-        $(this).off("click");
-    });
+	 $('#ima').on('click', function() {
+		    $(this).prop('disabled', true);
+		});
  });
