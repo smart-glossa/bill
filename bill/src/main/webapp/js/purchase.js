@@ -128,6 +128,16 @@
             });
     });
     
+    $(document).on('click','#paid',function(){
+    	var paid = "";
+    	paid += "<table>";
+    	paid += "<tr><td>Paid Date:<\/td><td><input type=\"date\" id=\"date\"><\/td><\/tr>";
+    	paid +=  "<tr><td>Paid Amount:<\/td><td><input type=\"text\" id=\"amount\"><\/td><\/tr>";
+    	paid +=  "<tr><td><button id=\"add\" >Paid<\/td><\/tr>";
+    	paid +=   "<\/table>";
+        $("#getalldiv")[0].innerHTML=paid;
+    });
+    
     $(document).on('click','#ima',function(){
     	var nextURL = "images/nextButton.png";
         var div = document.createElement("div");
@@ -137,7 +147,9 @@
           "<td><input type=\"date\" placeholder=\"\BillDate..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"Value Added Tax..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"Discount..!\"><\/td>" +
-            "<td><input type=\"text\" placeholder=\"BillTotal..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
+              "<td><input type=\"text\" placeholder=\"BillTotal..!\"><\/td>" +
+              "<td><input type=\"date\" placeholder=\"payDate..!\"></\/td>"+
+            "<td><input type=\"text\" placeholder=\"paidAmount..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
             "<\/table>";
         $("#lists")[0].appendChild(div);
     });

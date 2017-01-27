@@ -4,7 +4,7 @@ function salemeta() {
     salemeta += "<center><h2> Add SaleMetaData <\/h2><\/center>";
     salemeta += "<table>";
     salemeta += "<tr>";
-    salemeta += "<th>Sale Id<\/th><th>Bill Date<\/th><th>ValueAddedTax<\/th><th>Discount<\/th><th>Bill Total<\/th>";
+    salemeta += "<th>Sale Id<\/th><th>Bill Date<\/th><th>ValueAddedTax<\/th><th>Discount<\/th><th>Bill Total<\/th><th>Pay Date<\/th><th>PaidAmount<\/th>";
     salemeta += "<\/tr>";
     salemeta += "<tr>";
     salemeta += "<td><input type=\"text\" id=\"saleId\" placeholder=\"sale Id\"><\/td>";
@@ -12,33 +12,15 @@ function salemeta() {
     salemeta += "<td><input type=\"text\" placeholder=\"VAT\" id=\"vat\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"discount\" id=\"discount\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"billTotal\" id=\"billtotal\"><\/td>";
+    salemeta += "<td><input type=\"date\" placeholder=\"PayDate\" id=\"payDate\"><\/td>";
+    salemeta += "<td><input type=\"text\" placeholder=\"PaidAmount\" id=\"paidAmount\"><\/td>";
+    salemeta += "<td><input type=\"button\" value=\"Add\" id=\"addpay\">";
+    salemeta += "<input type=\"button\" value=\"Update\" id=\"updateSalePayment\"><\/td>";
     salemeta += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     salemeta += "<\/tr>";
     salemeta += "<\/table>";
     salemeta += "<\/div>";
     $('#lists ')[0].innerHTML = salemeta;
-}
-
-function salepay() {
-    var salepay = "";
-    salepay += "<div class=\"salepay\">";
-    salepay += "<h2> Add SalePayment <\/h2>";
-    salepay += "<table>";
-    salepay += "<tr>";
-    salepay += "<td>Pay Date*:<\/td>";
-    salepay += "<td><input type=\"date\" placeholder=\"PayDate\" id=\"payDate\"><\/td>";
-    salepay += "<\/tr>";
-    salepay += "<tr>";
-    salepay += "<td>PaidAmount*:<\/td>";
-    salepay += "<td><input type=\"text\" placeholder=\"PaidAmount\" id=\"paidAmount\"><\/td>";
-    salepay += "<\/tr>";
-    salepay += "<tr>";
-    salepay += "<td><input type=\"button\" value=\"Add\" id=\"addpay\">";
-    salepay += "<input type=\"button\" value=\"Update\" id=\"updateSalePayment\"><\/td>";
-    salepay += "<\/tr>";
-    salepay += "<\/table>";
-    salepay += "<\/div>";
-    $('#lists')[0].innerHTML = salepay;
 }
 
 function saleline() {
