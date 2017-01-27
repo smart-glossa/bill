@@ -220,14 +220,20 @@ $(document).on('click', '.salepay', function() {
         var div = document.createElement("div");
         div.className = 'lineProduct';
         div.innerHTML = "<table>"+
-        "<tr><td><input type=\"text\" placeholder=\"SSaleId..!\"><\/td>" +
+        "<tr><td><input type=\"text\" placeholder=\"SaleId..!\"><\/td>" +
           "<td><input type=\"text\" placeholder=\"BillDate..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"Value Added Tax..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"Discount..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"BillTotal..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
             "<\/table>";
         $("#getalldiv")[0].appendChild(div);
-    });
+	
+	});
+    
+    $(document).one('click','#ima', function() {
+    	  alert('This will be displayed only once.');
+    	});
+
 })
 $(document).on('keypress', '#saleId', function(key) {
     if (key.which == 13) {

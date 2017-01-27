@@ -7,7 +7,7 @@ function salemeta() {
     salemeta += "<th>Sale Id<\/th><th>Bill Date<\/th><th>ValueAddedTax<\/th><th>Discount<\/th><th>Bill Total<\/th>";
     salemeta += "<\/tr>";
     salemeta += "<tr>";
-    salemeta += "<td><input type=\"text\" id=\"saleId\"><\/td>";
+    salemeta += "<td><input type=\"text\" id=\"saleId\" placeholder=\"sale Id\"><\/td>";
     salemeta += "<td><input type=\"date\"id=\"billdate\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"VAT\" id=\"vat\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"discount\" id=\"discount\"><\/td>";
