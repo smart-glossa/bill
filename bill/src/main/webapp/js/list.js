@@ -81,7 +81,7 @@ function calculateLineTotal(div) {
     var a = div.children(".quantity").val();
     var b = div.children(".pcost").val();
     var c = a * b;
-    div.children(".lineTotal").val(c);
+    div.children(".lineTotal").val(c);  
     calculateBillAmount();
     balanceAmount();
 }

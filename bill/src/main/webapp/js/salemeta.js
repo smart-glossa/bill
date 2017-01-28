@@ -226,7 +226,7 @@ $(document).on('click', '.salepay', function() {
         $("#getalldiv")[0].innerHTML=sal;
     });
     
-    $(document).on('click','#salima',function(){
+    $(document).on('click','#ima',function(){
     	var nextURL = "images/nextButton.png";
         var div = document.createElement("div");
         div.className = 'lineProduct';
@@ -239,7 +239,7 @@ $(document).on('click', '.salepay', function() {
              "<td><input type=\"date\" placeholder=\"payDate..!\"></\/td>"+
             "<td><input type=\"text\" placeholder=\"paidAmount..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
             "<\/table>";
-        $("#getalldiv")[0].appendChild(div);
+        $("#lists")[0].appendChild(div);
 	
 	});
     

@@ -51,3 +51,25 @@ function saleline() {
     saleline += "<\/div>";
     $('#lists')[0].innerHTML = saleline;
 }
+function calculateBillAmount() {
+    var count = $("div.lineProduct").length;
+    var sum = 0;
+    for (var i = 0; i < count; i++) {
+        var div = $("div.lineProduct")[i];
+        sum += parseInt($($("div.lineProduct")[i]).find(".lineTotal").val());
+    }
+    $(".billTotal").text(sum);
+}
+
+function balanceAmount() {
+    var sum = $(".billTotal").text();
+    var balance = 0;
+    if ($("#cash").val().trim() == "") {
+        $("#balance").val("");
+    } else {
+        var cash = $("#cash").val();
+        balance = cash - sum;
+        $("#balance").val(balance);
+    }
+
+}
