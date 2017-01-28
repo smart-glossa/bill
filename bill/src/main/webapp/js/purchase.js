@@ -128,7 +128,7 @@
             });
     });
     
-    $(document).on('click','#paid',function(){
+    $(document).on('click','#purpaid',function(){
     	var paid = "";
     	paid += "<table>";
     	paid += "<tr><td>Paid Date:<\/td><td><input type=\"date\" id=\"date\"><\/td><\/tr>";
@@ -148,8 +148,7 @@
             "<td><input type=\"text\" placeholder=\"Value Added Tax..!\"><\/td>" +
             "<td><input type=\"text\" placeholder=\"Discount..!\"><\/td>" +
               "<td><input type=\"text\" placeholder=\"BillTotal..!\"><\/td>" +
-              "<td><input type=\"date\" placeholder=\"payDate..!\"></\/td>"+
-            "<td><input type=\"text\" placeholder=\"paidAmount..!\"><\/td><td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
+             "<td><img class=\"nextLine\" id=\"ima\" alt=\"next\"  src='" + nextURL + "'><\/td><\/tr>"+
             "<\/table>";
         $("#lists")[0].appendChild(div);
     });

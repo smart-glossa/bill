@@ -4,7 +4,7 @@ function salemeta() {
     salemeta += "<center><h2> Add SaleMetaData <\/h2><\/center>";
     salemeta += "<table>";
     salemeta += "<tr>";
-    salemeta += "<th>Sale Id<\/th><th>Bill Date<\/th><th>ValueAddedTax<\/th><th>Discount<\/th><th>Bill Total<\/th><th>Pay Date<\/th><th>PaidAmount<\/th>";
+    salemeta += "<th>Sale Id<\/th><th>Bill Date<\/th><th>ValueAddedTax<\/th><th>Discount<\/th><th>Bill Total<\/th>";
     salemeta += "<\/tr>";
     salemeta += "<tr>";
     salemeta += "<td><input type=\"text\" id=\"saleId\" placeholder=\"sale Id\"><\/td>";
@@ -12,10 +12,7 @@ function salemeta() {
     salemeta += "<td><input type=\"text\" placeholder=\"VAT\" id=\"vat\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"discount\" id=\"discount\"><\/td>";
     salemeta += "<td><input type=\"text\" placeholder=\"billTotal\" id=\"billtotal\"><\/td>";
-    salemeta += "<td><input type=\"date\" placeholder=\"PayDate\" id=\"payDate\"><\/td>";
-    salemeta += "<td><input type=\"text\" placeholder=\"PaidAmount\" id=\"paidAmount\"><\/td>";
-    salemeta += "<td><input type=\"button\" value=\"Add\" id=\"addpay\">";
-    salemeta += "<input type=\"button\" value=\"Update\" id=\"updateSalePayment\"><\/td>";
+    salemeta += "<td><button id=\"salpaid\">AmountPaid<\/button><\/td>";
     salemeta += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     salemeta += "<\/tr>";
     salemeta += "<\/table>";

@@ -215,7 +215,18 @@ $(document).on('click', '.salepay', function() {
         .fail(function(result) {
             alert(result);
         });
-    $(document).on('click','#ima',function(){
+    
+    $(document).on('click','#salpaid',function(){
+    	var sal = "";
+    	sal += "<table>";
+    	sal += "<tr><td>Paid Date:<\/td><td><input type=\"date\" id=\"date\"><\/td><\/tr>";
+    	sal +=  "<tr><td>Paid Amount:<\/td><td><input type=\"text\" id=\"amount\"><\/td><\/tr>";
+    	sal +=  "<tr><td><button id=\"add\" >Paid<\/td><\/tr>";
+    	sal +=   "<\/table>";
+        $("#getalldiv")[0].innerHTML=sal;
+    });
+    
+    $(document).on('click','#salima',function(){
     	var nextURL = "images/nextButton.png";
         var div = document.createElement("div");
         div.className = 'lineProduct';

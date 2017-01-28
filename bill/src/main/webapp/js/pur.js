@@ -4,7 +4,7 @@ function purchaseproduct() {
     pur += "<center><h2> ADD PURCHASE <\/h2><\/center>";
     pur += "<table>";
     pur += "<tr>";
-    pur += "<th>Purchase Id <\/th><th>Bill Date<\/th><th>Value Added Tax<\/th><th> Discount<\/th><th>Bill Total<\/th><th>Payment Date</th><th>Paid Amount</th>";
+    pur += "<th>Purchase Id <\/th><th>Bill Date<\/th><th>Value Added Tax<\/th><th> Discount<\/th><th>Bill Total<\/th>";
     pur += "</tr>";
     pur += "<tr>";
     pur += "<td><input type = \"text\" placeholder=\"purchase Id..!\" id=\"pId\"><\/td>";
@@ -12,8 +12,7 @@ function purchaseproduct() {
     pur += "<td><input type=\"text\" placeholder=\"Value Added Tax..!\" id=\"vat\"><\/td>";
     pur += "<td><input type=\"text\" placeholder=\"Discount..!\" id=\"discount\"><\/td>";
     pur += "<td><input type=\"text\" placeholder=\"Bill Total..!\" id=\"tot\"<\/td>";
-    pur += "<td><button id=\"paid\">AmountPaid<\/button><\/td>";
-    pur += "<td><input type=\"submit\" value=\"Update\" id=\"update\"><\/td>";
+    pur += "<td><button id=\"purpaid\">AmountPaid<\/button><\/td>";
     pur += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     pur += "<\/tr>";
     pur += "<\/table>";
