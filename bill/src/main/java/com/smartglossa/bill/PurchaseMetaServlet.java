@@ -35,7 +35,7 @@ public class PurchaseMetaServlet extends HttpServlet {
             float sellPrice = Float.parseFloat(request.getParameter("sellPrice"));
             try {
                 purchaseMetaClass pur = new purchaseMetaClass();
-                pur.addItem(purchaseId, productId, quantity, buyPrice, sellPrice);
+                pur.addItem(purchaseId, productId,quantity, buyPrice, sellPrice);
                 obj.put("status", "success");
             } catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -77,5 +77,18 @@ public class PurchaseMetaServlet extends HttpServlet {
 					}
         			response.getWriter().println(obj);
         }
+        else if(operation.equals("getOne")){
+        	JSONObject object=new JSONObject();
+        	int productId=Integer.parseInt(request.getParameter("productId"));
+        	try {
+				purchaseMetaClass res=new purchaseMetaClass();
+				object=res.getOne(productId);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+        	response.getWriter().println(object);
         }
+        }
+  
 }

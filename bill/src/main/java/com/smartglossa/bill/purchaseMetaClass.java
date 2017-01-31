@@ -19,7 +19,7 @@ public class purchaseMetaClass {
 
 	}
 
-	public void addItem(int purchaseId, int productId, float quantity, float buyPrice, float sellPrice)
+	public void addItem(int purchaseId, int productId,float quantity, float buyPrice, float sellPrice)
 			throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
@@ -84,6 +84,19 @@ public class purchaseMetaClass {
 			closeConnection();
 		}
 		return obj;
+	}
+	public JSONObject getOne( int productId)throws SQLException,ClassNotFoundException{
+		JSONObject object=new JSONObject();
+		try{
+			String query="select * from purchaseLineItem where productId="+productId;
+			rs=stmt.executeQuery(query);
+			while(rs.next()){
+				object.put("productId",rs.getInt("productId"));
+			}
+		}finally{
+			closeConnection();
+		}
+		return object;
 	}
 
 	private void openConnection() throws SQLException, ClassNotFoundException {

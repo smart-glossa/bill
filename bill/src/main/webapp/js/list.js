@@ -1,4 +1,4 @@
-function addNewLine() {
+ function addNewLine() {
     var nextURL = "images/nextButton.png";
     var div = document.createElement("div");
     div.className = 'lineProduct';

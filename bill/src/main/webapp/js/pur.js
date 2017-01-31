@@ -4,47 +4,21 @@ function purchaseproduct() {
     pur += "<center><h2> ADD PURCHASE <\/h2><\/center>";
     pur += "<table>";
     pur += "<tr>";
-    pur += "<th>Purchase Id <\/th><th>Bill Date<\/th><th>Value Added Tax<\/th><th> Discount<\/th><th>Bill Total<\/th>";
+    pur += "<th>Product Id</th><th>Purchase Id <\/th><th>ProductName<\/th><th>Buy Price<\/th><th>Sell Price<\/th><th>Quantity<\/th><th>Amount</th>";
     pur += "</tr>";
     pur += "<tr>";
+    pur += "<td><input type=\"text\" placeholder=\"ProductId..!\" id=\"pro\"<\/td>"
     pur += "<td><input type = \"text\" placeholder=\"purchase Id..!\" id=\"pId\"><\/td>";
-    pur += "<td><input type=\"date\" placeholder=\"Bill Date..!\" id=\"date\"><\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Value Added Tax..!\" id=\"vat\"><\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Discount..!\" id=\"discount\"><\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Bill Total..!\" id=\"tot\"<\/td>";
+    pur +="<td><input type=\"text\"placeholder=\"ProductName..!\"id=\"pur\"><\/td>";
+    pur += "<td><input type=\"text\" placeholder=\"Buy Price..!\" id=\"buy\"><\/td>";
+    pur += "<td><input type=\"text\" placeholder=\"Sell Price..!\" id=\"sel\"<\/td>"
+    pur += "<td><input type=\"text\" placeholder=\"Quantity..!\" id=\"quantity\"<\/td>"
+    pur += "<td><input type=\"text\" placeholder=\"Total..!\" id=\"amu\"<\/td>";
     pur += "<td><button id=\"purpaid\">AmountPaid<\/button><\/td>";
     pur += "<td><img src=\"images/nextButton.png\" id=\"ima\"><\/td>";
     pur += "<\/tr>";
     pur += "<\/table>";
     pur += "<\/div>";
-    pur += "<div class=\"purLine\">";
-    pur += "<h2>PurchaseLineItem<\/h2>";
-    pur += "<table>";
-    pur += "<tr>";
-    pur += "<td>Purchase Id:<\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Purchase Id\" id=\"pId\"><\/td>";
-    pur += "<\/tr>";
-    pur += "<tr>";
-    pur += "<td>Product Id:<\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"product Id\" id=\"proId\"><\/td>";
-    pur += "<\/tr>";
-    pur += "<tr>";
-    pur += "<td>Quantity :<\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"quantity\" id=\"quantity\"<\/td>";
-    pur += "<\/tr>";
-    pur += "<tr>";
-    pur += "<td>Buy Price:<\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Buy Price\" id=\"buy\"<\/td>";
-    pur += "<\/tr>";
-    pur += "<tr>";
-    pur += "<td>Sell Price:<\/td>";
-    pur += "<td><input type=\"text\" placeholder=\"Sell Price\" id=\"sel\"><\/td>";
-    pur += "<\/tr>";
-    pur += "<tr>";
-    pur += "<td><input type=\"submit\"  id=\"sub\">";
-    pur += "<input type=\"button\" value=\"Update\" id=\"up\"><\/td>";
-    pur += "<\/tr>";
-    pur += "<\/table>";
-    pur += "<\/div>";
+   
     $('#lists')[0].innerHTML = pur;
 }

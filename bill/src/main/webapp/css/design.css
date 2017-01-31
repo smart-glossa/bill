@@ -58,14 +58,7 @@
 .ulexpense{
 	margin-top:180px;
 }
-#lists
-{
-	float:right;
-    margin-right:100px;
-	margin-top:150px;
-	
-	
-}
+
 #listall li:hover
 {
 	background-color:black;
@@ -77,7 +70,7 @@
 {
 	float:right;
     margin-right:200px;
-	margin-top:130px;
+	margin-top:530px;
 	position:static;
 	
 	
